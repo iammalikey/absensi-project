@@ -2,7 +2,7 @@ import React from "react";
 
 const index = ({ children }) => {
     return (
-        <div className="max-w-sm mx-auto">
+        <div className="!overflow-x-hidden mx-auto max-w-sm h-screen relative">
             <main>{children}</main>
         </div>
     );
