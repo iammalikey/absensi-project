@@ -20,11 +20,12 @@ const LandingPage = () => {
     return (
         <MainLayout>
             {/* semacam amplop */}
-            <section className="absolute top-0 left-0 to-top w-full h-screen z-50">
+            <header className="fixed max-w-sm to-top w-full h-full z-50">
+                <h1 className="hidden">FEAST POP</h1>
                 <div className="w-full h-full">
                     <img
                         src={coverImage}
-                        alt=""
+                        alt="FEAST POP"
                         className="w-full h-full object-cover"
                     />
                 </div>
@@ -38,21 +39,52 @@ const LandingPage = () => {
                         </p>
                     </Button>
                 </div>
-            </section>
+            </header>
             {/* ------ */}
 
             {/* banner */}
-            <section className="w-full h-full relative overflow-y-hidden">
+            <div className="w-full h-full relative overflow-y-hidden">
                 <div className="w-full !overflow-hidden">
                     <img src={banner} alt="" className="w-full h-full" />
                 </div>
+            </div>
 
-                <div className="absolute bottom-0">
-                    <div className="w-11/12 mx-auto border-[10px] border-white bg-white rounded-t-lg">
-                        <img src={rectangle} alt="" />
+            {/* score */}
+            <main className="mx-3 p-3 -translate-y-10 relative shadow-lg bg-white shadow-slate-200 rounded-xl">
+                <div className="w-full mx-auto">
+                    <img src={rectangle} alt="" />
+                </div>
+                <h2 className="uppercase text-center font-semibold my-4">
+                    update klasemen
+                </h2>
+                <div className="grid grid-cols-2 justify-center text-center gap-5">
+                    <div className="">
+                        <div className="bg-slate-200 py-5 px-4 rounded-lg shadow-slate-300">
+                            <p className="uppercase font-semibold text-xl text-yellow-500">
+                                tim niat
+                            </p>
+                            <p className="text-6xl font-semibold text-yellow-500">
+                                143
+                            </p>
+                            <p className="text-xl">orang</p>
+                        </div>
+                        <p className="opacity-70">telah bergabung <br /> Tim Niat</p>
+                    </div>
+
+                    <div className="">
+                        <div className="bg-slate-200 py-5 px-4 rounded-lg shadow-slate-300">
+                            <p className="uppercase font-semibold text-xl text-blue-500">
+                                tim satset
+                            </p>
+                            <p className="text-6xl font-semibold text-blue-500">
+                                120
+                            </p>
+                            <p className="text-xl">orang</p>
+                        </div>
+                        <p className="opacity-70">telah bergabung <br /> Tim Satset</p>
                     </div>
                 </div>
-            </section>
+            </main>
         </MainLayout>
     );
 };
