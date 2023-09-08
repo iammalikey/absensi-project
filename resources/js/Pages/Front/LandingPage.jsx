@@ -1,46 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MainLayout from "../../Layouts/MainLayout";
+import Envelope from "@/Components/Envelope";
 import { Button } from "@mui/material";
-import anime from "animejs";
 
 // images
-const coverImage = "/assets/images/cover-image.png";
 const banner = "/assets/images/banner.png";
 const rectangle = "/assets/images/rectangle.png";
 
 const LandingPage = () => {
-    const buttonHandler = () => {
-        anime({
-            targets: ".to-top",
-            translateY: -100 + "%",
-            duration: 1800,
-        });
-    };
+    useEffect(() => {
+        window.onbeforeunload = function () {
+            window.scrollTo(0, 0);
+        };
+    }, []);
 
     return (
         <MainLayout>
-            {/* semacam amplop */}
-            <header className="fixed max-w-sm to-top w-full h-full z-50">
-                <h1 className="hidden">FEAST POP</h1>
-                <div className="w-full h-full">
-                    <img
-                        src={coverImage}
-                        alt="FEAST POP"
-                        className="w-full h-full object-cover"
-                    />
-                </div>
-                <div className="absolute bottom-12 w-full flex justify-center">
-                    <Button
-                        onClick={buttonHandler}
-                        className="button-animation bg-gradient-to-b from-[rgba(242,225,194,1)] from-1% to-[rgba(246,184,76,1)] to-90% rounded-md shadow-lg"
-                    >
-                        <p className="uppercase text-white px-[40px] py-[10px] leading-none font-extrabold text-lg">
-                            tap to start
-                        </p>
-                    </Button>
-                </div>
-            </header>
-            {/* ------ */}
+            <Envelope />
 
             {/* banner */}
             <div className="w-full h-full relative overflow-y-hidden">
@@ -68,7 +44,9 @@ const LandingPage = () => {
                             </p>
                             <p className="text-xl">orang</p>
                         </div>
-                        <p className="opacity-70">telah bergabung <br /> Tim Niat</p>
+                        <p className="opacity-70">
+                            telah bergabung <br /> Tim Niat
+                        </p>
                     </div>
 
                     <div className="">
@@ -81,10 +59,31 @@ const LandingPage = () => {
                             </p>
                             <p className="text-xl">orang</p>
                         </div>
-                        <p className="opacity-70">telah bergabung <br /> Tim Satset</p>
+                        <p className="opacity-70">
+                            telah bergabung <br /> Tim Satset
+                        </p>
                     </div>
                 </div>
             </main>
+
+            <section className="mx-3 mb-6">
+                <h2 className="uppercase text-center font-semibold mb-4">
+                    kalo kamu masuk tim mana?
+                </h2>
+                <div className="grid grid-cols-2 gap-1.5 gap-y-5">
+                    <Button className="!text-white !bg-orange-400 !rounded-lg shadow-md !text-lg">
+                        gabung <br />
+                        niat
+                    </Button>
+                    <Button className="!text-white !bg-orange-400 !rounded-lg shadow-md !text-lg">
+                        gabung <br />
+                        satset
+                    </Button>
+                    <Button className="col-span-2 !text-white !bg-blue-400 !rounded-lg shadow-md !text-lg">
+                        ikuti challenge
+                    </Button>
+                </div>
+            </section>
         </MainLayout>
     );
 };
