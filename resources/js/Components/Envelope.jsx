@@ -15,7 +15,7 @@ const Envelope = () => {
         anime({
             targets: ".to-top",
             translateY: -100 + "%",
-            duration: 1800,
+            duration: 2800,
         });
         setOpen(false);
         document.body.style.overflow = "auto";
