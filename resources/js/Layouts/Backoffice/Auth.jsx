@@ -8,7 +8,7 @@ import Notification from "@/Components/Backoffice/Shared/Notification.jsx";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import { SnackbarProvider } from "notistack";
 
-export default function Backend({ children, title = null }) {
+export default function Auth({ children, title = null }) {
     const [theme, colorMode] = useMode();
 
     return (

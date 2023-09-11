@@ -13,7 +13,8 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['FilsonProBook', ...defaultTheme.fontFamily.sans],
+                'FilsonProBold': ['FilsonProBold', 'sans-serif']
             },
         },
     },

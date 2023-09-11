@@ -69,7 +69,7 @@ const LandingPage = () => {
             </div>
 
             {/* score */}
-            <main className="mx-3 p-3 -translate-y-10 relative shadow-lg bg-white shadow-slate-200 rounded-xl">
+            <main className="mx-3 p-3 -translate-y-10 relative shadow-lg bg-white shadow-slate-200 rounded-xl font-FilsonProBold">
                 <div className="w-full mx-auto mb-4">
                     <div className="w-full h-6 bg-[#99b3ff] rounded-full overflow-hidden">
                         <div
@@ -115,25 +115,25 @@ const LandingPage = () => {
             </main>
 
             <section className="mx-3 mb-6">
-                <h2 className="uppercase text-center font-semibold mb-4">
+                <h2 className="uppercase text-center font-semibold mb-4 font-FilsonProBold">
                     kalo kamu masuk tim mana?
                 </h2>
                 <div className="grid grid-cols-2 gap-1.5 gap-y-5">
                     <Button
                         onClick={handleNiat}
-                        className="!text-white !bg-orange-400 !rounded-lg shadow-md !text-lg"
+                        className="!text-white !bg-orange-400 !rounded-lg shadow-md !text-lg !font-FilsonProBold"
                     >
                         gabung <br />
                         niat
                     </Button>
                     <Button
                         onClick={handleSatset}
-                        className="!text-white !bg-orange-400 !rounded-lg shadow-md !text-lg"
+                        className="!text-white !bg-orange-400 !rounded-lg shadow-md !text-lg !font-FilsonProBold"
                     >
                         gabung <br />
                         satset
                     </Button>
-                    <Button className="col-span-2 !text-white !bg-blue-400 !rounded-lg shadow-md !text-lg">
+                    <Button className="col-span-2 !text-white !bg-blue-400 !rounded-lg shadow-md !text-lg !font-FilsonProBold">
                         ikuti challenge
                     </Button>
                 </div>

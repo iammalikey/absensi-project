@@ -36,7 +36,7 @@ const Envelope = () => {
                     onClick={buttonHandler}
                     className="button-animation bg-gradient-to-b from-[rgba(242,225,194,1)] from-1% to-[rgba(246,184,76,1)] to-90% rounded-md shadow-lg"
                 >
-                    <p className="uppercase text-white px-[40px] py-[10px] leading-none font-extrabold text-lg">
+                    <p className="uppercase text-white px-[40px] py-[10px] leading-none font-extrabold text-lg font-FilsonProBlack">
                         tap to start
                     </p>
                 </Button>

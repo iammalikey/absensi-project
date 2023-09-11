@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: "FilsonProBook";
+    src: url(/assets/fonts/FilsonProBook.otf);
+}
+@font-face {
+    font-family: "FilsonProBold";
+    src: url("/assets/fonts/FilsonProBold.otf");
+}
 html {
     scroll-behavior: smooth;
 }
