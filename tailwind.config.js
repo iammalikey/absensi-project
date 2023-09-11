@@ -16,6 +16,10 @@ export default {
                 sans: ['FilsonProBook', ...defaultTheme.fontFamily.sans],
                 'FilsonProBold': ['FilsonProBold', 'sans-serif']
             },
+            colors: {
+                defaultOrange: '#efaf1d',
+                defaultBlue: '#1a89c2',
+            }
         },
     },
 

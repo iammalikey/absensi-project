@@ -55,7 +55,7 @@ const LandingPage = () => {
             <Envelope />
 
             {/* banner */}
-            <div className="w-full h-full relative overflow-y-hidden">
+            <div className="w-full h-full relative">
                 <div className="w-full !overflow-hidden">
                     <img src={banner} alt="" className="w-full h-full" />
                 </div>
@@ -71,9 +71,9 @@ const LandingPage = () => {
             {/* score */}
             <main className="mx-3 p-3 -translate-y-10 relative shadow-lg bg-white shadow-slate-200 rounded-xl font-FilsonProBold">
                 <div className="w-full mx-auto mb-4">
-                    <div className="w-full h-6 bg-[#99b3ff] rounded-full overflow-hidden">
+                    <div className="w-full h-6 bg-defaultBlue rounded-full overflow-hidden">
                         <div
-                            className="h-6 bg-[#ffdf80] rounded-tl-full rounded-bl-full"
+                            className="h-6 bg-defaultOrange rounded-tl-full rounded-bl-full"
                             style={{ width: score.score + "%" }}
                         ></div>
                     </div>
@@ -83,11 +83,11 @@ const LandingPage = () => {
                 </h2>
                 <div className="grid grid-cols-2 justify-center text-center gap-5">
                     <div className="">
-                        <div className="bg-slate-200 py-5 px-4 rounded-lg shadow-slate-300 mb-4">
-                            <p className="uppercase font-semibold text-xl text-yellow-500">
+                        <div className="bg-gradient-to-b from-white to-slate-200 shadow-sm py-5 px-4 rounded-2xl shadow-slate-300 mb-4">
+                            <p className="uppercase font-semibold text-xl text-defaultOrange">
                                 tim niat
                             </p>
-                            <p className="text-6xl font-semibold text-yellow-500">
+                            <p className="text-6xl font-semibold text-defaultOrange">
                                 {score.score}
                             </p>
                             <p className="text-xl">orang</p>
@@ -98,11 +98,11 @@ const LandingPage = () => {
                     </div>
 
                     <div className="">
-                        <div className="bg-slate-200 py-5 px-4 rounded-lg shadow-slate-300 mb-4">
-                            <p className="uppercase font-semibold text-xl text-blue-500">
+                        <div className="bg-gradient-to-b from-white to-slate-200 shadow-sm py-5 px-4 rounded-2xl shadow-slate-300 mb-4">
+                            <p className="uppercase font-semibold text-xl text-defaultBlue">
                                 tim satset
                             </p>
-                            <p className="text-6xl font-semibold text-blue-500">
+                            <p className="text-6xl font-semibold text-defaultBlue">
                                 {score.score}
                             </p>
                             <p className="text-xl">orang</p>
@@ -121,19 +121,19 @@ const LandingPage = () => {
                 <div className="grid grid-cols-2 gap-1.5 gap-y-5">
                     <Button
                         onClick={handleNiat}
-                        className="!text-white !bg-orange-400 !rounded-lg shadow-md !text-lg !font-FilsonProBold"
+                        className="!text-white !bg-gradient-to-b !from-[#f3c558] !to-defaultOrange !rounded-lg !shadow-md !shadow-defaultOrange !text-lg !font-FilsonProBold"
                     >
                         gabung <br />
                         niat
                     </Button>
                     <Button
                         onClick={handleSatset}
-                        className="!text-white !bg-orange-400 !rounded-lg shadow-md !text-lg !font-FilsonProBold"
+                        className="!text-white !bg-gradient-to-b !from-[#f3c558] !to-defaultOrange !rounded-lg !shadow-md !shadow-defaultOrange !text-lg !font-FilsonProBold"
                     >
                         gabung <br />
                         satset
                     </Button>
-                    <Button className="col-span-2 !text-white !bg-blue-400 !rounded-lg shadow-md !text-lg !font-FilsonProBold">
+                    <Button className="col-span-2 !text-white !bg-defaultBlue !rounded-lg !shadow-sm !shadow-defaultBlue !text-lg !font-FilsonProBold">
                         ikuti challenge
                     </Button>
                 </div>

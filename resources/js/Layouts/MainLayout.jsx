@@ -2,8 +2,8 @@ import React from "react";
 
 const index = ({ children }) => {
     return (
-        <div className="bg-image-blur">
-            <div className="!overflow-x-hidden mx-auto max-w-sm relative shadow-2xl bg-white">
+        <div className="bg-image-blur relative min-h-screen">
+            <div className="min-w-[320px] max-w-[400px] min-h-screen mx-auto bg-white relative shadow-2xl pb-5">
                 <main>{children}</main>
             </div>
         </div>
