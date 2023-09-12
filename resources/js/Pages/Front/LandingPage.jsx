@@ -9,12 +9,13 @@ const rectangle = "/assets/images/rectangle.png";
 
 // icons
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import anime from "animejs";
 
 const LandingPage = () => {
     const [score, setScore] = useState({
         score: 50,
-        niat: 20,
-        satset: 10,
+        niat: 0,
+        satset: 0,
     });
 
     useEffect(() => {
@@ -25,12 +26,6 @@ const LandingPage = () => {
 
     const handleNiat = (e) => {
         e.preventDefault();
-        // alert("niat");
-
-        // if (score.score === 100) {
-        //     // alert("100");
-        //     return;
-        // }
 
         setScore({
             ...score,
@@ -40,12 +35,6 @@ const LandingPage = () => {
     };
     const handleSatset = (e) => {
         e.preventDefault();
-        // alert("satset");
-
-        // if (score.score === 0) {
-        //     // alert("100");
-        //     return;
-        // }
 
         setScore({
             ...score,
@@ -53,7 +42,19 @@ const LandingPage = () => {
             satset: score.satset + 1,
         });
     };
-    const handleBack = () => {};
+
+    const handleBack = (e) => {
+        e.preventDefault();
+
+        window.scrollTo(0, 0);
+
+        anime({
+            targets: ".to-bottom",
+            translateY: 0 + "%",
+            duration: 1800,
+        });
+        document.body.style.overflow = "hidden";
+    };
 
     return (
         <MainLayout>
