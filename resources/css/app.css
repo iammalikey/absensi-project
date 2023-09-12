@@ -15,7 +15,7 @@ html {
 }
 
 .bg-image-blur {
-    background-image: url("./assets/images/blur-main.webp");
+    background-image: url("/assets/images/blur-main.webp");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
