@@ -1,32 +1,34 @@
-import React, { useEffect, useState } from "react";
-import Backend from "@/Layouts/Backoffice/Backend";
+import { tokens } from "@/theme";
+import { Link, usePage } from "@inertiajs/react";
 import {
     Box,
     Button,
     Card,
-    CardActions,
     CardContent,
-    CardHeader,
     Stack,
     Typography,
     useMediaQuery,
     useTheme,
 } from "@mui/material";
-import Header from "@/components/Backoffice/Header";
-import { Link, router, usePage } from "@inertiajs/react";
+import React, { useEffect, useState } from "react";
+
+// BE
+import Header from "@/Components/Backoffice/Header";
+import { hasAnyPermission } from "@/Utils/helper.js";
+
+// icons
 import MapsHomeWorkOutlinedIcon from "@mui/icons-material/MapsHomeWorkOutlined";
 import MarginOutlinedIcon from "@mui/icons-material/MarginOutlined";
 import FestivalRoundedIcon from "@mui/icons-material/FestivalRounded";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import BadgeIcon from "@mui/icons-material/Badge";
 import EditOffIcon from "@mui/icons-material/EditOff";
-import { tokens } from "@/theme";
-import { hasAnyPermission } from "@/Utils/helper.js";
+import Backend from "@/Layouts/Backoffice/Backend";
 
-export default function Index(props) {
+const Index = (props) => {
+    const isNonMobile = useMediaQuery("(min-width:600px)");
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const isNonMobile = useMediaQuery("(min-width:600px)");
 
     const [count, setCount] = useState({
         users_count: props.users_count,
@@ -62,11 +64,11 @@ export default function Index(props) {
                 title={`Welcome Back ${user.name}`}
                 subtitle={`Your Role ${user.role.map(
                     (role, index) => role.name + " "
-                )} `}
-            />
+                )}`}
+            ></Header>
 
             <Typography variant="h2" sx={{ fontSize: 25 }} gutterBottom>
-                Dashboard
+                Dashbboard
             </Typography>
 
             {hasAnyPermission([
@@ -92,7 +94,7 @@ export default function Index(props) {
                         <Stack
                             direction={"row"}
                             spacing={2}
-                            flexWrap={isNonMobile ? "no-wrap" : "wrap"}
+                            flex={isNonMobile ? "no-wrap" : "wrap"}
                             useFlexGap
                         >
                             <Stack
@@ -100,137 +102,116 @@ export default function Index(props) {
                                 spacing={2}
                                 flexGrow={1}
                             >
-                                {hasAnyPermission(["user management"]) && (
-                                    <Card
-                                        sx={{
-                                            minWidth: 275,
-                                            backgroundColor:
-                                                colors.primary[400],
-                                            flexGrow: 1,
-                                        }}
-                                    >
-                                        <Link
-                                            href={route(
-                                                "cms.access.user.index"
-                                            )}
+                                <Card
+                                    sx={{
+                                        minWidth: 275,
+                                        backgroundColor: colors.primary[400],
+                                        flexGrow: 1,
+                                    }}
+                                >
+                                    <Link href={route("cms.access.user.index")}>
+                                        <Button
+                                            sx={{
+                                                width: "100%",
+                                                height: "100%",
+                                            }}
                                         >
-                                            <Button
-                                                sx={{
-                                                    width: "100%",
-                                                    height: "100%",
-                                                }}
-                                            >
-                                                <CardContent>
-                                                    <Typography
-                                                        sx={{ fontSize: 20 }}
-                                                        color="text.secondary"
-                                                    >
-                                                        <ManageAccountsIcon />{" "}
-                                                        <span>Users</span>
-                                                    </Typography>
-                                                    <Typography
-                                                        sx={{ fontSize: 20 }}
-                                                        color="text.secondary"
-                                                        align="center"
-                                                    >
-                                                        {count.users_count}
-                                                    </Typography>
-                                                </CardContent>
-                                            </Button>
-                                        </Link>
-                                    </Card>
-                                )}
-                                {hasAnyPermission(["role management"]) && (
-                                    <Card
-                                        sx={{
-                                            minWidth: 275,
-                                            backgroundColor:
-                                                colors.primary[400],
-                                            flexGrow: 1,
-                                        }}
-                                    >
-                                        <Link
-                                            href={route(
-                                                "cms.access.role.index"
-                                            )}
+                                            <CardContent>
+                                                <Typography
+                                                    sx={{ fontSize: 20 }}
+                                                    color="text.secondary"
+                                                >
+                                                    <ManageAccountsIcon />{" "}
+                                                    <span>Users</span>
+                                                </Typography>
+                                                <Typography
+                                                    sx={{ fontSize: 20 }}
+                                                    color="text.secondary"
+                                                    align="center"
+                                                >
+                                                    {count.users_count}
+                                                </Typography>
+                                            </CardContent>
+                                        </Button>
+                                    </Link>
+                                </Card>
+                                <Card
+                                    sx={{
+                                        minWidth: 275,
+                                        backgroundColor: colors.primary[400],
+                                        flexGrow: 1,
+                                    }}
+                                >
+                                    <Link href={route("cms.access.role.index")}>
+                                        <Button
+                                            sx={{
+                                                width: "100%",
+                                                height: "100%",
+                                            }}
                                         >
-                                            <Button
-                                                sx={{
-                                                    width: "100%",
-                                                    height: "100%",
-                                                }}
-                                            >
-                                                <CardContent>
-                                                    <Typography
-                                                        sx={{ fontSize: 20 }}
-                                                        color="text.secondary"
-                                                    >
-                                                        <BadgeIcon />{" "}
-                                                        <span>Roles</span>
-                                                    </Typography>
-                                                    <Typography
-                                                        sx={{ fontSize: 20 }}
-                                                        color="text.secondary"
-                                                        align="center"
-                                                    >
-                                                        {count.roles_count}
-                                                    </Typography>
-                                                </CardContent>
-                                            </Button>
-                                        </Link>
-                                    </Card>
-                                )}
+                                            <CardContent>
+                                                <Typography
+                                                    sx={{ fontSize: 20 }}
+                                                    color="text.secondary"
+                                                >
+                                                    <BadgeIcon />{" "}
+                                                    <span>Roles</span>
+                                                </Typography>
+                                                <Typography
+                                                    sx={{ fontSize: 20 }}
+                                                    color="text.secondary"
+                                                    align="center"
+                                                >
+                                                    {count.roles_count}
+                                                </Typography>
+                                            </CardContent>
+                                        </Button>
+                                    </Link>
+                                </Card>
                             </Stack>
                             <Box sx={{ flexGrow: 1 }}>
-                                {hasAnyPermission([
-                                    "permission management",
-                                ]) && (
-                                    <Card
-                                        sx={{
-                                            minWidth: 275,
-                                            height: "100%",
-                                            backgroundColor:
-                                                colors.primary[400],
-                                            flexGrow: 1,
-                                        }}
+                                <Card
+                                    sx={{
+                                        minWidth: 275,
+                                        height: "100%",
+                                        backgroundColor: colors.primary[400],
+                                        flexGrow: 1,
+                                    }}
+                                >
+                                    <Link
+                                        href={route(
+                                            "cms.access.permission.index"
+                                        )}
                                     >
-                                        <Link
-                                            href={route(
-                                                "cms.access.permission.index"
-                                            )}
+                                        <Button
+                                            sx={{
+                                                width: "100%",
+                                                height: "100%",
+                                            }}
                                         >
-                                            <Button
-                                                sx={{
-                                                    width: "100%",
-                                                    height: "100%",
-                                                }}
-                                            >
-                                                <CardContent>
-                                                    <Typography
-                                                        sx={{ fontSize: 20 }}
-                                                        color="text.secondary"
-                                                    >
-                                                        <EditOffIcon />{" "}
-                                                        <span>Permissions</span>
-                                                    </Typography>
-                                                    <Typography
-                                                        sx={{
-                                                            fontSize: 50,
-                                                            mt: 4,
-                                                        }}
-                                                        color="text.secondary"
-                                                        align="center"
-                                                        gutterBottom
-                                                    >
-                                                        {
-                                                            count.permissions_count
-                                                        }
-                                                    </Typography>
-                                                </CardContent>
-                                            </Button>
-                                        </Link>
-                                    </Card>
-                                )}
+                                            <CardContent>
+                                                <Typography
+                                                    sx={{ fontSize: 20 }}
+                                                    color="text.secondary"
+                                                >
+                                                    <EditOffIcon />{" "}
+                                                    <span>Permissions</span>
+                                                </Typography>
+                                                <Typography
+                                                    sx={{
+                                                        fontSize: 50,
+                                                        mt: 4,
+                                                    }}
+                                                    color="text.secondary"
+                                                    align="center"
+                                                    gutterBottom
+                                                >
+                                                    {count.permissions_count}
+                                                </Typography>
+                                            </CardContent>
+                                        </Button>
+                                    </Link>
+                                </Card>
                             </Box>
                         </Stack>
                     </Box>
@@ -251,6 +232,8 @@ export default function Index(props) {
             )}
         </Box>
     );
-}
+};
+
+export default Index;
 
 Index.layout = (page) => <Backend children={page} title="Dashboard CMS" />;

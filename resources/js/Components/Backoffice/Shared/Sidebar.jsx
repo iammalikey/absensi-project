@@ -15,7 +15,6 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import BadgeIcon from "@mui/icons-material/Badge";
 import EditOffIcon from "@mui/icons-material/EditOff";
-import NewspaperIcon from "@mui/icons-material/Newspaper";
 import { hasAnyPermission } from "@/Utils/helper";
 
 const Item = ({ title, to, icon, url }) => {
@@ -137,7 +136,6 @@ const Sidebar = () => {
                                 >
                                     Access
                                 </Typography>
-
                                 {hasAnyPermission(["user management"]) && (
                                     <Item
                                         title="User"
@@ -146,7 +144,6 @@ const Sidebar = () => {
                                         url={url}
                                     />
                                 )}
-
                                 {hasAnyPermission(["role management"]) && (
                                     <Item
                                         title="Role"
@@ -155,7 +152,6 @@ const Sidebar = () => {
                                         url={url}
                                     />
                                 )}
-
                                 {hasAnyPermission([
                                     "permission management",
                                 ]) && (
@@ -168,22 +164,15 @@ const Sidebar = () => {
                                         url={url}
                                     />
                                 )}
-
-                                <Typography
-                                    variant="h6"
-                                    color={colors.grey[300]}
-                                    sx={{ m: "15px 0 5px 20px" }}
-                                >
-                                    Sewing
-                                </Typography>
-
                                 {hasAnyPermission([
                                     "permission management",
                                 ]) && (
                                     <Item
-                                        title="Post"
-                                        to={route("cms.sewing.post.index")}
-                                        icon={<NewspaperIcon />}
+                                        title="Permission"
+                                        to={route(
+                                            "cms.access.permission.index"
+                                        )}
+                                        icon={<EditOffIcon />}
                                         url={url}
                                     />
                                 )}

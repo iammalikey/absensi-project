@@ -61,6 +61,7 @@ if (config("cms.enable") && config("cms.path")) {
         Route::put('/', [ProfileController::class, 'update'])->name('update');
       });
 
+      // create root sidemenu
       Route::group(['as' => 'access.', 'prefix' => 'access',], function () {
         Route::group(['as' => 'user.', 'prefix' => 'user', 'middleware' => ['role_or_permission:Super Admin|user management',]], function () {
           /**
@@ -159,6 +160,51 @@ if (config("cms.enable") && config("cms.path")) {
          * middleware: [auth:cms, role_or_permission:Super Admin|permission management]
          */
         Route::get('/permission', [PermissionController::class, 'index'])->name('permission.index')->middleware(['role_or_permission:Super Admin|permission management',]);
+
+        Route::group(['as' => 'klasemen.', 'prefix' => 'klasemen', 'middleware' => ['role_or_permission:Super Admin|role management',]], function () {
+          /**
+           * role index
+           * route: CMS_PATH/access/role
+           * name: cms.access.role.index
+           * middleware: [auth:cms, role_or_permission:Super Admin|role management]
+           */
+          Route::get('/', [RoleController::class, 'index'])->name('index');
+          /**
+           * role index
+           * route: CMS_PATH/access/role/create
+           * name: cms.access.role.create
+           * middleware: [auth:cms, role_or_permission:Super Admin|role management]
+           */
+          Route::get('/create', [RoleController::class, 'create'])->name('create');
+          /**
+           * role store
+           * route: CMS_PATH/access/role
+           * name: cms.access.role.store
+           * middleware: [auth:cms, role_or_permission:Super Admin|role management]
+           */
+          Route::post('/', [RoleController::class, 'store'])->name('store');
+          /**
+           * role edit
+           * route: CMS_PATH/access/role/edit/{role}
+           * name: cms.access.role.edit
+           * middleware: [auth:cms, role_or_permission:Super Admin|role management]
+           */
+          Route::get('/edit/{role}', [RoleController::class, 'edit'])->name('edit');
+          /**
+           * role update
+           * route: CMS_PATH/access/role/edit/{role}
+           * name: cms.access.role.update
+           * middleware: [auth:cms, role_or_permission:Super Admin|role management]
+           */
+          Route::put('/edit/{role}', [RoleController::class, 'update'])->name('update');
+          /**
+           * role delete
+           * route: CMS_PATH/access/role/{role}
+           * name: cms.access.role.delete
+           * middleware: [auth:cms, role_or_permission:Super Admin|role management]
+           */
+          Route::delete('/{role}', [RoleController::class, 'destroy'])->name('delete');
+        });
       });
 
       Route::group(['as' => 'sewing.', 'prefix' => 'sewing'], function () {

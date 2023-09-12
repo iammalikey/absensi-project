@@ -14,11 +14,13 @@ class AuthenticateSessionController extends Controller
     {
         return inertia('Backoffice/Auth/Login', []);
     }
-
+    
     public function store(LoginRequest $request): RedirectResponse
     {
+        // var_dump('sampai');
+        // die();
         $request->authenticate();
-
+        
         $request->session()->regenerate();
 
         return redirect()->intended(route('cms.dashboard'));
