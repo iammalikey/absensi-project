@@ -13,6 +13,8 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 const LandingPage = () => {
     const [score, setScore] = useState({
         score: 50,
+        niat: 20,
+        satset: 10,
     });
 
     useEffect(() => {
@@ -25,27 +27,30 @@ const LandingPage = () => {
         e.preventDefault();
         // alert("niat");
 
-        if (score.score === 100) {
-            // alert("100");
-            return;
-        }
+        // if (score.score === 100) {
+        //     // alert("100");
+        //     return;
+        // }
 
         setScore({
             ...score,
             score: score.score + 1,
+            niat: score.niat + 1,
         });
     };
     const handleSatset = (e) => {
         e.preventDefault();
         // alert("satset");
-        if (score.score === 0) {
-            // alert("100");
-            return;
-        }
+
+        // if (score.score === 0) {
+        //     // alert("100");
+        //     return;
+        // }
 
         setScore({
             ...score,
             score: score.score - 1,
+            satset: score.satset + 1,
         });
     };
     const handleBack = () => {};
@@ -61,9 +66,14 @@ const LandingPage = () => {
                 </div>
                 <div className="absolute top-3 left-3" onClick={handleBack}>
                     <ArrowBackIcon
+                        onClick={handleBack}
                         color="action"
                         fontSize="large"
-                        sx={{ color: "white", fontWeight: "900" }}
+                        sx={{
+                            color: "white",
+                            fontWeight: "900",
+                            cursor: "pointer",
+                        }}
                     />
                 </div>
             </div>
@@ -88,7 +98,7 @@ const LandingPage = () => {
                                 tim niat
                             </p>
                             <p className="text-6xl font-semibold text-defaultOrange">
-                                {score.score}
+                                {score.niat}
                             </p>
                             <p className="text-xl">orang</p>
                         </div>
@@ -103,7 +113,7 @@ const LandingPage = () => {
                                 tim satset
                             </p>
                             <p className="text-6xl font-semibold text-defaultBlue">
-                                {score.score}
+                                {score.satset}
                             </p>
                             <p className="text-xl">orang</p>
                         </div>
