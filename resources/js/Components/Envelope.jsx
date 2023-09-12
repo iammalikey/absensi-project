@@ -39,7 +39,7 @@ const Envelope = () => {
                 <div className="absolute bottom-44">
                     <img src={teamsBanner} alt="" />
                 </div> 
-                <div className="absolute bottom-12 w-full flex justify-center">
+                <div className="absolute lg:bottom-8 bottom-16 w-full flex justify-center">
                     <Button
                         onClick={buttonHandler}
                         className="button-animation bg-gradient-to-b from-[rgba(242,225,194,1)] from-1% to-[rgba(246,184,76,1)] to-90% rounded-md shadow-lg"
