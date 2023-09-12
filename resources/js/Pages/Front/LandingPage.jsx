@@ -144,7 +144,7 @@ const LandingPage = () => {
                         gabung <br />
                         satset
                     </Button>
-                    <Button className="col-span-2 !text-white !bg-defaultBlue !rounded-lg !shadow-sm !shadow-defaultBlue !text-lg !font-FilsonProBold">
+                    <Button className="col-span-2 !text-white !bg-gradient-to-b !from-[#6cb4d8] !to-defaultBlue !rounded-lg !shadow-sm !shadow-defaultBlue !text-lg !font-FilsonProBold">
                         ikuti challenge
                     </Button>
                 </div>
