@@ -33,19 +33,19 @@ const Envelope = () => {
                     <img src={wallsLogo} alt="" className="w-12 h-auto" />
                 </div>
                 {/* campaign banner */}
-                <div className="absolute top-20 mx-auto">
-                    <img src={campaignBanner} alt="" className="w-72"/>
+                <div className="absolute lg:top-16 top-40 mx-auto">
+                    <img src={campaignBanner} alt="" className="lg:w-72 w-80"/>
                 </div>
                 {/* vindes image */}
-                <div className="absolute bottom-0 mx-auto">
+                <div className="absolute lg:bottom-0 bottom-10 mx-auto">
                     <img src={vindesImage} alt="" className="w-full"/>
                 </div>
                 {/* teams banner */}
-                <div className="absolute bottom-20 mx-auto">
+                <div className="absolute lg:bottom-24 bottom-32 mx-auto">
                     <img src={teamsBanner} alt="" className="w-full"/>
                 </div>
                 {/* cta */}
-                <div className="absolute mx-auto my-0 bottom-10 flex items-center justify-center w-full">
+                <div className="absolute mx-auto my-0 lg:bottom-10 bottom-24 flex items-center justify-center w-full">
                     <Button
                         onClick={buttonHandler}
                         className="button-animation bg-gradient-to-b from-[rgba(242,225,194,1)] 
