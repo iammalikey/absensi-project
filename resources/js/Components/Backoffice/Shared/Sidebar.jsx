@@ -165,12 +165,12 @@ const Sidebar = () => {
                                     />
                                 )}
                                 {hasAnyPermission([
-                                    "permission management",
+                                    "klasemen management",
                                 ]) && (
                                     <Item
-                                        title="Permission"
+                                        title="Klasemen"
                                         to={route(
-                                            "cms.access.permission.index"
+                                            "cms.access.klasemen.index"
                                         )}
                                         icon={<EditOffIcon />}
                                         url={url}

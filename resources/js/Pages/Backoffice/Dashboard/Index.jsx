@@ -38,19 +38,19 @@ const Index = (props) => {
 
     const user = usePage().props.auth.user;
 
-    useEffect(() => {
-        const fetchData = async () => {
-            // Make an API call to fetch updated data from the server
-            const updatedData = await fetchUpdatedData();
-            setCount(updatedData.data);
-        };
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         // Make an API call to fetch updated data from the server
+    //         const updatedData = await fetchUpdatedData();
+    //         setCount(updatedData.data);
+    //     };
 
-        const pollingInterval = setInterval(fetchData, 5000); // Polling interval of 5 seconds (adjust as needed)
+    //     const pollingInterval = setInterval(fetchData, 5000); // Polling interval of 5 seconds (adjust as needed)
 
-        return () => {
-            clearInterval(pollingInterval); // Clean up the interval on component unmount
-        };
-    }, []);
+    //     return () => {
+    //         clearInterval(pollingInterval); // Clean up the interval on component unmount
+    //     };
+    // }, []);
 
     const fetchUpdatedData = async () => {
         const response = await fetch(route("cms.dashboard", { p: props.pol }));
@@ -63,7 +63,7 @@ const Index = (props) => {
             <Header
                 title={`Welcome Back ${user.name}`}
                 subtitle={`Your Role ${user.role.map(
-                    (role, index) => role.name + " "
+                    (role, index) => role.name
                 )}`}
             ></Header>
 
@@ -75,6 +75,7 @@ const Index = (props) => {
                 "user management",
                 "role management",
                 "permission management",
+                "klasemen management",
             ]) && (
                 <Stack
                     sx={{ mt: 2 }}

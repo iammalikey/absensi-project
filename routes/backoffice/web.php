@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backoffice\Access\KlasemenController;
 use App\Http\Controllers\Backoffice\Access\PermissionController;
 use App\Http\Controllers\Backoffice\Access\RoleController;
 use App\Http\Controllers\Backoffice\Access\UserController;
@@ -164,11 +165,11 @@ if (config("cms.enable") && config("cms.path")) {
         Route::group(['as' => 'klasemen.', 'prefix' => 'klasemen', 'middleware' => ['role_or_permission:Super Admin|role management',]], function () {
           /**
            * role index
-           * route: CMS_PATH/access/role
-           * name: cms.access.role.index
-           * middleware: [auth:cms, role_or_permission:Super Admin|role management]
+           * route: CMS_PATH/access/klasemen
+           * name: cms.access.klasemen.index
+           * middleware: [auth:cms, role_or_permission:Super Admin|klasemen management]
            */
-          Route::get('/', [RoleController::class, 'index'])->name('index');
+          Route::get('/', [KlasemenController::class, 'index'])->name('index');
           /**
            * role index
            * route: CMS_PATH/access/role/create
@@ -197,13 +198,6 @@ if (config("cms.enable") && config("cms.path")) {
            * middleware: [auth:cms, role_or_permission:Super Admin|role management]
            */
           Route::put('/edit/{role}', [RoleController::class, 'update'])->name('update');
-          /**
-           * role delete
-           * route: CMS_PATH/access/role/{role}
-           * name: cms.access.role.delete
-           * middleware: [auth:cms, role_or_permission:Super Admin|role management]
-           */
-          Route::delete('/{role}', [RoleController::class, 'destroy'])->name('delete');
         });
       });
 
