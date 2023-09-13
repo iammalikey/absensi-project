@@ -5,7 +5,7 @@ import anime from "animejs";
 // images
 const coverImage = "/assets/images/bg-landing.png";
 const teamsBanner = "/assets/images/tim-versus.png";
-const vindesImage = "/assets/images/vindes-landing.png";
+const vindesImage = "/assets/images/vindes-image.png";
 const campaignBanner = "/assets/images/campaign-banner.png";
 const wallsLogo = "/assets/images/walls-logo.png";
 
