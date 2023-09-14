@@ -5,7 +5,7 @@ import { Box, TextField, Typography } from "@mui/material";
 import React from "react";
 
 const Edit = ({ klasemen }) => {
-    console.log(klasemen);
+    // console.log(klasemen);
     const user = usePage().props.auth.user;
 
     return (
