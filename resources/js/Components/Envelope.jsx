@@ -3,8 +3,11 @@ import { Button } from "@mui/material";
 import anime from "animejs";
 
 // images
-const coverImage = "/assets/images/cover-image.png";
-const teamsBanner = "/assets/images/teams-banner.png";
+const coverImage = "/assets/images/bg-landing.png";
+const teamsBanner = "/assets/images/tim-versus.png";
+const vindesImage = "/assets/images/vindes-image.png";
+const campaignBanner = "/assets/images/campaign-banner.png";
+const wallsLogo = "/assets/images/walls-logo.png";
 
 const Envelope = () => {
     useEffect(() => {
@@ -23,24 +26,33 @@ const Envelope = () => {
 
     return (
         <>
-            <header className="absolute left-0 w-full h-screen top-0 to-top to-bottom z-50">
-                <h1 className="hidden">FEAST POP</h1>
-                <div className="w-full h-full">
-                    <img
-                        src={coverImage}
-                        alt="FEAST POP"
-                        className="w-full h-full object-cover"
-                    />
+            <header className="absolute left-0 w-full h-screen top-0 to-top to-bottom z-50 bg-cover" 
+            style={{ backgroundImage: "url(/assets/images/bg-landing.png)" }}>
+                {/* logo walls */}
+                <div className="absolute z-30 top-4 right-4">
+                    <img src={wallsLogo} alt="" className="w-12 h-auto" />
                 </div>
-                <div className="absolute bottom-44">
-                    <img src={teamsBanner} alt="" />
+                {/* campaign banner */}
+                <div className="absolute lg:top-16 top-40 mx-auto">
+                    <img src={campaignBanner} alt="" className="lg:w-72 w-80"/>
                 </div>
-                <div className="absolute bottom-12 w-full flex justify-center">
+                {/* vindes image */}
+                <div className="absolute lg:bottom-0 bottom-10 mx-auto">
+                    <img src={vindesImage} alt="" className="w-full"/>
+                </div>
+                {/* teams banner */}
+                <div className="absolute lg:bottom-24 bottom-32 mx-auto">
+                    <img src={teamsBanner} alt="" className="w-full"/>
+                </div>
+                {/* cta */}
+                <div className="absolute mx-auto my-0 lg:bottom-10 bottom-24 flex items-center justify-center w-full">
                     <Button
                         onClick={buttonHandler}
-                        className="button-animation bg-gradient-to-b from-[rgba(242,225,194,1)] from-1% to-[rgba(246,184,76,1)] to-90% rounded-md shadow-lg"
+                        className="button-animation bg-gradient-to-b from-[rgba(242,225,194,1)] 
+                        from-1% to-[rgba(246,184,76,1)] to-90% rounded-md shadow-lg"
                     >
-                        <p className="uppercase text-white px-[40px] py-[10px] leading-none font-extrabold text-lg font-FilsonProBlack">
+                        <p className="uppercase text-white px-10 py-2 leading-none font-extrabold 
+                        text-lg font-FilsonProBold">
                             ketuk untuk main
                         </p>
                     </Button>
