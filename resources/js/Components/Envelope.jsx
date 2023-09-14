@@ -37,7 +37,7 @@ const Envelope = () => {
                     <img src={campaignBanner} alt="" className="lg:w-72 w-80"/>
                 </div>
                 {/* vindes image */}
-                <div className="absolute lg:bottom-0 bottom-10 mx-auto">
+                <div className="absolute lg:bottom-0 bottom-0 mx-auto">
                     <img src={vindesImage} alt="" className="w-full"/>
                 </div>
                 {/* teams banner */}
