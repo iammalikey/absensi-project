@@ -22,10 +22,9 @@ import {
     useTheme,
 } from "@mui/material";
 import Header from "@/Components/Backoffice/Header";
-import { usePage } from "@inertiajs/react";
+import { Link, router, usePage } from "@inertiajs/react";
 
 // icons
-import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import { blue, pink } from "@mui/material/colors";
@@ -33,6 +32,11 @@ import { blue, pink } from "@mui/material/colors";
 const Index = ({ klasemen }) => {
     // console.log(klasemen);
     const user = usePage().props.auth.user;
+
+    const handleEdit = (id) => {
+        // console.log(id);
+        router.get(route("cms.access.klasemen.edit", { klasemen: id }));
+    };
 
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
@@ -103,7 +107,10 @@ const Index = ({ klasemen }) => {
                                 </StyledTableCell>
                                 <StyledTableCell align="right">
                                     <Tooltip title="Edit">
-                                        <IconButton aria-label="EditIcon">
+                                        <IconButton
+                                            onClick={(e) => handleEdit(row.id)}
+                                            aria-label="EditIcon"
+                                        >
                                             <EditIcon
                                                 sx={{ color: blue[500] }}
                                             />

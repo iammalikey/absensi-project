@@ -23,9 +23,4 @@ class LandingController extends Controller
             'setting' => Setting::get(),
         ]);
     }
-
-    // public function edit()
-    // {
-
-    // }
 }
