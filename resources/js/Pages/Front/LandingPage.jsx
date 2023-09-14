@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 import anime from "animejs";
 
 // images
-const banner = "/assets/images/banner.png";
+const banner = "/assets/images/banner-2.png";
 const rectangle = "/assets/images/rectangle.png";
 
 // icons
