@@ -3,6 +3,8 @@
 use App\Http\Controllers\Backoffice\Access\KlasemenController;
 use App\Http\Controllers\Backoffice\Access\PermissionController;
 use App\Http\Controllers\Backoffice\Access\RoleController;
+use App\Http\Controllers\Backoffice\Access\SettingController;
+use App\Http\Controllers\Backoffice\Access\SettingsController;
 use App\Http\Controllers\Backoffice\Access\UserController;
 use App\Http\Controllers\Backoffice\Auth\AuthenticateSessionController;
 use App\Http\Controllers\Backoffice\Dashboard\DashboardController;
@@ -164,40 +166,78 @@ if (config("cms.enable") && config("cms.path")) {
 
         Route::group(['as' => 'klasemen.', 'prefix' => 'klasemen', 'middleware' => ['role_or_permission:Super Admin|role management',]], function () {
           /**
-           * role index
+           * klasemen index
            * route: CMS_PATH/access/klasemen
            * name: cms.access.klasemen.index
            * middleware: [auth:cms, role_or_permission:Super Admin|klasemen management]
            */
           Route::get('/', [KlasemenController::class, 'index'])->name('index');
           /**
-           * role index
-           * route: CMS_PATH/access/role/create
-           * name: cms.access.role.create
-           * middleware: [auth:cms, role_or_permission:Super Admin|role management]
+           * klasemen index
+           * route: CMS_PATH/access/klasemen/create
+           * name: cms.access.klasemen.create
+           * middleware: [auth:cms, role_or_permission:Super Admin|klasemen management]
            */
-          Route::get('/create', [RoleController::class, 'create'])->name('create');
+          Route::get('/create', [KlasemenController::class, 'create'])->name('create');
           /**
-           * role store
-           * route: CMS_PATH/access/role
-           * name: cms.access.role.store
-           * middleware: [auth:cms, role_or_permission:Super Admin|role management]
+           * klasemen store
+           * route: CMS_PATH/access/klasemen
+           * name: cms.access.klasemen.store
+           * middleware: [auth:cms, role_or_permission:Super Admin|klasemen management]
            */
-          Route::post('/', [RoleController::class, 'store'])->name('store');
+          Route::post('/', [KlasemenController::class, 'store'])->name('store');
           /**
-           * role edit
-           * route: CMS_PATH/access/role/edit/{role}
-           * name: cms.access.role.edit
-           * middleware: [auth:cms, role_or_permission:Super Admin|role management]
+           * klasemen edit
+           * route: CMS_PATH/access/klasemen/edit/{klasemen}
+           * name: cms.access.klasemen.edit
+           * middleware: [auth:cms, role_or_permission:Super Admin|klasemen management]
            */
-          Route::get('/edit/{role}', [RoleController::class, 'edit'])->name('edit');
+          Route::get('/edit/{klasemen}', [KlasemenController::class, 'edit'])->name('edit');
           /**
-           * role update
-           * route: CMS_PATH/access/role/edit/{role}
-           * name: cms.access.role.update
-           * middleware: [auth:cms, role_or_permission:Super Admin|role management]
+           * klasemen update
+           * route: CMS_PATH/access/klasemen/edit/{klasemen}
+           * name: cms.access.klasemen.update
+           * middleware: [auth:cms, role_or_permission:Super Admin|klasemen management]
            */
-          Route::put('/edit/{role}', [RoleController::class, 'update'])->name('update');
+          Route::put('/edit/{klasemen}', [KlasemenController::class, 'update'])->name('update');
+        });
+
+        Route::group(['as' => 'setting.', 'prefix' => 'setting', 'middleware' => ['role_or_permission:Super Admin|setting management',]], function () {
+          /**
+           * setting index
+           * route: CMS_PATH/access/setting
+           * name: cms.access.setting.index
+           * middleware: [auth:cms, role_or_permission:Super Admin|setting management]
+           */
+          Route::get('/', [SettingController::class, 'index'])->name('index');
+          /**
+           * setting index
+           * route: CMS_PATH/access/setting/create
+           * name: cms.access.setting.create
+           * middleware: [auth:cms, role_or_permission:Super Admin|setting management]
+           */
+          Route::get('/create', [SettingController::class, 'create'])->name('create');
+          /**
+           * setting store
+           * route: CMS_PATH/access/setting
+           * name: cms.access.setting.store
+           * middleware: [auth:cms, role_or_permission:Super Admin|setting management]
+           */
+          Route::post('/', [SettingController::class, 'store'])->name('store');
+          /**
+           * setting edit
+           * route: CMS_PATH/access/setting/edit/{setting}
+           * name: cms.access.setting.edit
+           * middleware: [auth:cms, role_or_permission:Super Admin|setting management]
+           */
+          Route::get('/edit/{setting}', [SettingController::class, 'edit'])->name('edit');
+          /**
+           * setting update
+           * route: CMS_PATH/access/setting/edit/{setting}
+           * name: cms.access.setting.update
+           * middleware: [auth:cms, role_or_permission:Super Admin|setting management]
+           */
+          Route::put('/edit/{setting}', [SettingController::class, 'update'])->name('update');
         });
       });
 

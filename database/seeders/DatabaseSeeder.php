@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             UserCmsSeeder::class,
 
             KlasemenSeeder::class,
+            SettingSeeder::class,
             // CategorySeeder::class,
             // TagSeeder::class,
             // PostSeeder::class,

@@ -10,9 +10,10 @@ const rectangle = "/assets/images/rectangle.png";
 
 // icons
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Link } from "@inertiajs/react";
 
-const LandingPage = ({ tim_niat, tim_satset }) => {
-    // console.log(title_satset);
+const LandingPage = ({ tim_niat, tim_satset, setting }) => {
+    // console.log(setting.cta_title[0]);
 
     const [score, setScore] = useState({
         score: 50,
@@ -29,11 +30,11 @@ const LandingPage = ({ tim_niat, tim_satset }) => {
     const handleNiat = (e) => {
         e.preventDefault();
 
-        setScore({
-            ...score,
-            score: score.score + 1,
-            niat: score.niat + 1,
-        });
+        // setScore({
+        //     ...score,
+        //     score: score.score + 1,
+        //     niat: score.niat + 1,
+        // });
     };
     const handleSatset = (e) => {
         e.preventDefault();
@@ -166,9 +167,22 @@ const LandingPage = ({ tim_niat, tim_satset }) => {
                     >
                         {tim_satset.cta_title}
                     </Button>
-                    <Button className="col-span-2 !text-white !bg-defaultBlue !rounded-lg !shadow-sm !shadow-defaultBlue !text-lg !font-FilsonProBold">
-                        ikuti challenge
-                    </Button>
+
+                    {setting.map((row) => {
+                        return (
+                            <Link
+                                href="#"
+                                className="col-span-2 w-full bg-red-400 !rounded-lg"
+                            >
+                                <Button
+                                    key={row.cta_title}
+                                    className="!w-full !text-white !bg-defaultBlue !shadow-sm !shadow-defaultBlue !text-lg !font-FilsonProBold"
+                                >
+                                    {row.cta_title}
+                                </Button>
+                            </Link>
+                        );
+                    })}
                 </div>
             </section>
         </MainLayout>

@@ -15,4 +15,9 @@ class KlasemenController extends Controller
             'klasemen' => Klasemen::latest()->get(),
         ]);
     }
+
+    public function create()
+    {
+        return inertia('Backoffice/Klasemen/Create');
+    }
 }

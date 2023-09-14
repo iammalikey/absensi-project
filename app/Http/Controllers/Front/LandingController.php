@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Klasemen;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
@@ -19,6 +20,12 @@ class LandingController extends Controller
         return inertia('Front/LandingPage', [
             'tim_niat' => $tim_niat,
             'tim_satset' => $tim_satset,
+            'setting' => Setting::get(),
         ]);
     }
+
+    // public function edit()
+    // {
+
+    // }
 }

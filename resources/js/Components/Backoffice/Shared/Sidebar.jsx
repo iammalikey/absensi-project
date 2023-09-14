@@ -176,6 +176,18 @@ const Sidebar = () => {
                                         url={url}
                                     />
                                 )}
+                                {hasAnyPermission([
+                                    "setting management",
+                                ]) && (
+                                    <Item
+                                        title="Setting"
+                                        to={route(
+                                            "cms.access.setting.index"
+                                        )}
+                                        icon={<EditOffIcon />}
+                                        url={url}
+                                    />
+                                )}
                             </>
                         )}
                     </Box>
