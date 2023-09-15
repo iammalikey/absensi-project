@@ -6,11 +6,8 @@ import anime from "animejs";
 
 // images
 const banner = "/assets/images/banner-2.png";
-const rectangle = "/assets/images/rectangle.png";
-
 // icons
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Link } from "@inertiajs/react";
 
 const LandingPage = ({ tim_niat, tim_satset, challenge }) => {
     const [score, setScore] = useState({
@@ -133,12 +130,12 @@ const LandingPage = ({ tim_niat, tim_satset, challenge }) => {
                 </h2>
                 <div className="grid grid-cols-2 gap-1.5 gap-y-5">
                     <a href={tim_niat.cta_link}>
-                        <Button className="!text-white !px-8 !bg-gradient-to-b !from-[#f3c558] !to-defaultOrange !rounded-lg !shadow-md !shadow-defaultOrange !text-lg !font-FilsonProBold">
+                        <Button className="!text-white !h-full !px-8 !bg-gradient-to-b !from-[#f3c558] !to-defaultOrange !rounded-lg !shadow-md !shadow-defaultOrange !text-lg !font-FilsonProBold">
                             {tim_niat.cta_title}
                         </Button>
                     </a>
                     <a href={tim_satset.cta_link}>
-                        <Button className="!text-white !px-8 !bg-gradient-to-b !from-[#f3c558] !to-defaultOrange !rounded-lg !shadow-md !shadow-defaultOrange !text-lg !font-FilsonProBold">
+                        <Button className="!text-white !h-full !px-8 !bg-gradient-to-b !from-[#f3c558] !to-defaultOrange !rounded-lg !shadow-md !shadow-defaultOrange !text-lg !font-FilsonProBold">
                             {tim_satset.cta_title}
                         </Button>
                     </a>
