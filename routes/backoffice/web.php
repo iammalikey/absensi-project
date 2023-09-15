@@ -8,6 +8,7 @@ use App\Http\Controllers\Backoffice\KlasemenController;
 use App\Http\Controllers\Backoffice\Profile\ChangePasswordController;
 use App\Http\Controllers\Backoffice\Profile\ProfileController;
 use App\Http\Controllers\Backoffice\SettingController;
+use App\Http\Middleware\VerifyRecaptchaToken;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Route;
 
@@ -220,7 +221,7 @@ if (config("cms.enable") && config("cms.path")) {
        * name: cms.login.process
        * middleware: [RedirectIfAuthenticatedCms]
        */
-      Route::post('/login', [AuthenticateSessionController::class, 'store'])->name('login.process');
+      Route::post('/login', [AuthenticateSessionController::class, 'store'])->name('login.process')->middleware(VerifyRecaptchaToken::class);;
     });
   });
 }

@@ -21,7 +21,7 @@ class LandingController extends Controller
             'tim_satset' => $tim_satset,
             'challenge' => Setting::where('slug', Setting::CHALLENGE_SLUG)->first(['cta_title', 'cta_link']),
         ])->withViewData([
-            'title' => env('APP_NAME'),
+            'title' => null,
             'tag' => 'walls, unilever, feast, ice cream, es krim, vindes, vincent desta, tim niat, tim satset, challenge',
             'description' => "Jelajahi perjalanan seru tim 'Niat' dan tim 'Satset' dalam tantangan Wall's Feast Pop Unilever. Temukan rasa unik dari makanan lezat kami dalam petualangan yang penuh kegembiraan. Ikuti perjalanan mereka dan nikmati momen Wall's Feast Pop yang tak terlupakan.",
             'keywords' => null,
