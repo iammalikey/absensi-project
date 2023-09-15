@@ -16,14 +16,14 @@ class KlasemenSeeder extends Seeder
     {
         Klasemen::create([
             'title' => 'Tim Niat',
-            'slug' => Str::slug('Tim Niat'),
+            'slug' => 'tim-niat',
             'score' => '0',
             'cta_title' => 'Gabung Niat',
             'cta_link' => null,
         ]);
         Klasemen::create([
             'title' => 'Tim Satset',
-            'slug' => Str::slug('Tim Satset'),
+            'slug' => 'tim-satset',
             'score' => '0',
             'cta_title' => 'Gabung Satset',
             'cta_link' => null,

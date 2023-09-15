@@ -39,6 +39,10 @@ class UserCmsSeeder extends Seeder
         $role_admin->givePermissionTo([
             'user management',
             'permission management',
+            'klasemen management',
+            'klasemen management link',
+            'klasemen management score',
+            'setting management',
         ]);
 
         $user_admin = User::create([

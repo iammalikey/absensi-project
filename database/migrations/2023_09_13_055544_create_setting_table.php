@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('setting', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('slug')->unique();
             $table->text('cta_title');
             $table->text('cta_link')->nullable();
             $table->timestamps();

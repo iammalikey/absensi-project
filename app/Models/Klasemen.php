@@ -19,4 +19,9 @@ class Klasemen extends Model
     protected $fillable = [
         'title', 'slug', 'score', 'cta_title', 'cta_link'
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

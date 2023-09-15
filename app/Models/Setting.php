@@ -10,10 +10,14 @@ class Setting extends Model
     use HasFactory;
 
     const TABLE = 'setting';
+    const CHALLENGE_SLUG = 'challenge';
     
     protected $table = self::TABLE;
 
     protected $fillable = [
-        'cta_title', 'cta_link'
+        'name',
+        'slug',
+        'cta_title',
+        'cta_link',
     ];
 }

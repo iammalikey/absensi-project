@@ -12,9 +12,7 @@ const rectangle = "/assets/images/rectangle.png";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Link } from "@inertiajs/react";
 
-const LandingPage = ({ tim_niat, tim_satset, setting }) => {
-    // console.log(setting.cta_title[0]);
-
+const LandingPage = ({ tim_niat, tim_satset, challenge }) => {
     const [score, setScore] = useState({
         score: 50,
         niat: tim_niat.score,
@@ -26,25 +24,6 @@ const LandingPage = ({ tim_niat, tim_satset, setting }) => {
             window.scrollTo(0, 0);
         };
     }, []);
-
-    const handleNiat = (e) => {
-        e.preventDefault();
-
-        // setScore({
-        //     ...score,
-        //     score: score.score + 1,
-        //     niat: score.niat + 1,
-        // });
-    };
-    const handleSatset = (e) => {
-        e.preventDefault();
-
-        setScore({
-            ...score,
-            score: score.score - 1,
-            satset: score.satset + 1,
-        });
-    };
 
     const handleBack = (e) => {
         e.preventDefault();
@@ -89,12 +68,10 @@ const LandingPage = ({ tim_niat, tim_satset, setting }) => {
                             className="h-6 bg-defaultOrange rounded-tl-full rounded-bl-full"
                             style={{
                                 width:
-                                    Math.round(
-                                        (tim_niat.score /
-                                            (tim_niat.score +
-                                                tim_satset.score)) *
-                                            100
-                                    ) + "%",
+                                    (tim_niat.score === 0 && tim_satset.score === 0) ?
+                                    '50%'
+                                    :
+                                    Math.round((tim_niat.score /(tim_niat.score + tim_satset.score)) * 100) + "%",
                             }}
                         ></div>
                     </div>
@@ -155,34 +132,21 @@ const LandingPage = ({ tim_niat, tim_satset, setting }) => {
                     kalo kamu masuk tim mana?
                 </h2>
                 <div className="grid grid-cols-2 gap-1.5 gap-y-5">
-                    <Button
-                        onClick={handleNiat}
-                        className="!text-white !px-8 !bg-gradient-to-b !from-[#f3c558] !to-defaultOrange !rounded-lg !shadow-md !shadow-defaultOrange !text-lg !font-FilsonProBold"
-                    >
-                        {tim_niat.cta_title}
-                    </Button>
-                    <Button
-                        onClick={handleSatset}
-                        className="!text-white !px-8 !bg-gradient-to-b !from-[#f3c558] !to-defaultOrange !rounded-lg !shadow-md !shadow-defaultOrange !text-lg !font-FilsonProBold"
-                    >
-                        {tim_satset.cta_title}
-                    </Button>
-
-                    {setting.map((row) => {
-                        return (
-                            <Link
-                                href="#"
-                                className="col-span-2 w-full bg-red-400 !rounded-lg"
-                            >
-                                <Button
-                                    key={row.cta_title}
-                                    className="!w-full !text-white !bg-defaultBlue !shadow-sm !shadow-defaultBlue !text-lg !font-FilsonProBold"
-                                >
-                                    {row.cta_title}
-                                </Button>
-                            </Link>
-                        );
-                    })}
+                    <a href={tim_niat.cta_link}>
+                        <Button className="!text-white !px-8 !bg-gradient-to-b !from-[#f3c558] !to-defaultOrange !rounded-lg !shadow-md !shadow-defaultOrange !text-lg !font-FilsonProBold">
+                            {tim_niat.cta_title}
+                        </Button>
+                    </a>
+                    <a href={tim_satset.cta_link}>
+                        <Button className="!text-white !px-8 !bg-gradient-to-b !from-[#f3c558] !to-defaultOrange !rounded-lg !shadow-md !shadow-defaultOrange !text-lg !font-FilsonProBold">
+                            {tim_satset.cta_title}
+                        </Button>
+                    </a>
+                    <a href={challenge.cta_link} className="col-span-2 w-full bg-red-400 !rounded-lg">
+                        <Button className="!w-full !text-white !bg-defaultBlue !shadow-sm !shadow-defaultBlue !text-lg !font-FilsonProBold">
+                            {challenge.cta_title}
+                        </Button>
+                    </a>
                 </div>
             </section>
         </MainLayout>

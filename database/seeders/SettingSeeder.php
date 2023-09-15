@@ -15,6 +15,8 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         Setting::create([
+            'name' => 'Challenge',
+            'slug' => 'challenge',
             'cta_title' => 'ikuti challenge',
             'cta_link' => null,
         ]);

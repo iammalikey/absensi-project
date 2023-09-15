@@ -25,5 +25,25 @@ class PermissionSeeder extends Seeder
             'name' => 'role management',
             'guard_name' => 'cms'
         ]);
+
+        Permission::create([
+            'name' => 'klasemen management',
+            'guard_name' => 'cms',
+        ]);
+
+        Permission::create([
+            'name' => 'klasemen management link',
+            'guard_name' => 'cms',
+        ]);
+
+        Permission::create([
+            'name' => 'klasemen management score',
+            'guard_name' => 'cms',
+        ]);
+
+        Permission::create([
+            'name' => 'setting management',
+            'guard_name' => 'cms',
+        ]);
     }
 }

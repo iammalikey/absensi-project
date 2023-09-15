@@ -1,16 +1,14 @@
 <?php
 
-use App\Http\Controllers\Backoffice\Access\KlasemenController;
-use App\Http\Controllers\Backoffice\Access\PermissionController;
 use App\Http\Controllers\Backoffice\Access\RoleController;
-use App\Http\Controllers\Backoffice\Access\SettingController;
-use App\Http\Controllers\Backoffice\Access\SettingsController;
 use App\Http\Controllers\Backoffice\Access\UserController;
 use App\Http\Controllers\Backoffice\Auth\AuthenticateSessionController;
 use App\Http\Controllers\Backoffice\Dashboard\DashboardController;
+use App\Http\Controllers\Backoffice\KlasemenController;
 use App\Http\Controllers\Backoffice\Profile\ChangePasswordController;
 use App\Http\Controllers\Backoffice\Profile\ProfileController;
-use App\Http\Controllers\Backoffice\Sewing\MakeNewsController;
+use App\Http\Controllers\Backoffice\SettingController;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Route;
 
 if (config("cms.enable") && config("cms.path")) {
@@ -64,7 +62,6 @@ if (config("cms.enable") && config("cms.path")) {
         Route::put('/', [ProfileController::class, 'update'])->name('update');
       });
 
-      // create root sidemenu
       Route::group(['as' => 'access.', 'prefix' => 'access',], function () {
         Route::group(['as' => 'user.', 'prefix' => 'user', 'middleware' => ['role_or_permission:Super Admin|user management',]], function () {
           /**
@@ -164,100 +161,47 @@ if (config("cms.enable") && config("cms.path")) {
          */
         Route::get('/permission', [PermissionController::class, 'index'])->name('permission.index')->middleware(['role_or_permission:Super Admin|permission management',]);
 
-        Route::group(['as' => 'klasemen.', 'prefix' => 'klasemen', 'middleware' => ['role_or_permission:Super Admin|role management',]], function () {
-          /**
-           * klasemen index
-           * route: CMS_PATH/access/klasemen
-           * name: cms.access.klasemen.index
-           * middleware: [auth:cms, role_or_permission:Super Admin|klasemen management]
-           */
-          Route::get('/', [KlasemenController::class, 'index'])->name('index');
-          /**
-           * klasemen index
-           * route: CMS_PATH/access/klasemen/create
-           * name: cms.access.klasemen.create
-           * middleware: [auth:cms, role_or_permission:Super Admin|klasemen management]
-           */
-          Route::get('/create', [KlasemenController::class, 'create'])->name('create');
-          /**
-           * klasemen store
-           * route: CMS_PATH/access/klasemen
-           * name: cms.access.klasemen.store
-           * middleware: [auth:cms, role_or_permission:Super Admin|klasemen management]
-           */
-          Route::post('/', [KlasemenController::class, 'store'])->name('store');
-          /**
-           * klasemen edit
-           * route: CMS_PATH/access/klasemen/edit/{klasemen}
-           * name: cms.access.klasemen.edit
-           * middleware: [auth:cms, role_or_permission:Super Admin|klasemen management]
-           */
-          Route::get('/edit/{klasemen}', [KlasemenController::class, 'edit'])->name('edit');
-          /**
-           * klasemen update
-           * route: CMS_PATH/access/klasemen/edit/{klasemen}
-           * name: cms.access.klasemen.update
-           * middleware: [auth:cms, role_or_permission:Super Admin|klasemen management]
-           */
-          Route::put('/edit/{klasemen}', [KlasemenController::class, 'update'])->name('update');
-        });
-
-        Route::group(['as' => 'setting.', 'prefix' => 'setting', 'middleware' => ['role_or_permission:Super Admin|setting management',]], function () {
-          /**
-           * setting index
-           * route: CMS_PATH/access/setting
-           * name: cms.access.setting.index
-           * middleware: [auth:cms, role_or_permission:Super Admin|setting management]
-           */
-          Route::get('/', [SettingController::class, 'index'])->name('index');
-          /**
-           * setting index
-           * route: CMS_PATH/access/setting/create
-           * name: cms.access.setting.create
-           * middleware: [auth:cms, role_or_permission:Super Admin|setting management]
-           */
-          Route::get('/create', [SettingController::class, 'create'])->name('create');
-          /**
-           * setting store
-           * route: CMS_PATH/access/setting
-           * name: cms.access.setting.store
-           * middleware: [auth:cms, role_or_permission:Super Admin|setting management]
-           */
-          Route::post('/', [SettingController::class, 'store'])->name('store');
-          /**
-           * setting edit
-           * route: CMS_PATH/access/setting/edit/{setting}
-           * name: cms.access.setting.edit
-           * middleware: [auth:cms, role_or_permission:Super Admin|setting management]
-           */
-          Route::get('/edit/{setting}', [SettingController::class, 'edit'])->name('edit');
-          /**
-           * setting update
-           * route: CMS_PATH/access/setting/edit/{setting}
-           * name: cms.access.setting.update
-           * middleware: [auth:cms, role_or_permission:Super Admin|setting management]
-           */
-          Route::put('/edit/{setting}', [SettingController::class, 'update'])->name('update');
-        });
       });
 
-      Route::group(['as' => 'sewing.', 'prefix' => 'sewing'], function () {
-        Route::group(['as' => 'post.', 'prefix' => 'post', 'middleware' => ['role_or_permission:Super Admin|post management',]], function () {
-          /**
-           * post index
-           * route: CMS_PATH/sewing/post
-           * name: cms.sewing.post.index
-           * middleware: [auth:cms, role_or_permission:Super Admin|role management]
-           */
-          Route::get('/', [MakeNewsController::class, 'index'])->name('index');
-          /**
-           * index create
-           * route: CMS_PATH/sewing/create
-           * name: cms.sewing.post.create
-           * middleware: [auth:cms, role_or_permission:Super Admin|role management]
-           */
-          Route::get('/create', [MakeNewsController::class, 'create'])->name('create');
-        });
+      Route::group(['as' => 'klasemen.', 'prefix' => 'klasemen', 'middleware' => ['role_or_permission:Super Admin|klasemen management',]], function () {
+        /**
+         * klasemen index
+         * route: CMS_PATH/access/klasemen
+         * name: cms.klasemen.index
+         * middleware: [auth:cms, role_or_permission:Super Admin|klasemen management]
+         */
+        Route::get('/', [KlasemenController::class, 'index'])->name('index');
+        /**
+         * klasemen edit
+         * route: CMS_PATH/access/klasemen/edit/{klasemen}
+         * name: cms.klasemen.edit
+         * middleware: [auth:cms, role_or_permission:Super Admin|klasemen management]
+         */
+        Route::get('/edit/{klasemen}', [KlasemenController::class, 'edit'])->name('edit');
+        /**
+         * klasemen update
+         * route: CMS_PATH/access/klasemen/edit/{klasemen}
+         * name: cms.klasemen.update
+         * middleware: [auth:cms, role_or_permission:Super Admin|klasemen management]
+         */
+        Route::put('/edit/{klasemen}', [KlasemenController::class, 'update'])->name('update');
+      });
+
+      Route::group(['as' => 'setting.', 'prefix' => 'setting', 'middleware' => ['role_or_permission:Super Admin|setting management',]], function () {
+        /**
+         * setting edit
+         * route: CMS_PATH/access/setting/edit/Setting::CHALLENGE_SLUG
+         * name: cms.setting.edit.challenge
+         * middleware: [auth:cms, role_or_permission:Super Admin|setting management]
+         */
+        Route::get("/edit/".Setting::CHALLENGE_SLUG, [SettingController::class, 'edit'])->name('edit.challenge');
+        /**
+         * setting update
+         * route: CMS_PATH/access/setting/edit/Setting::CHALLENGE_SLUG
+         * name: cms.setting.update.challenge
+         * middleware: [auth:cms, role_or_permission:Super Admin|setting management]
+         */
+        Route::put('/'.Setting::CHALLENGE_SLUG, [SettingController::class, 'update'])->name('update.challenge');
       });
     });
 

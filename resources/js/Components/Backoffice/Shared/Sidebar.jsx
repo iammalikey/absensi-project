@@ -1,12 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
-import {
-    Box,
-    IconButton,
-    Typography,
-    useMediaQuery,
-    useTheme,
-} from "@mui/material";
+import { Box, IconButton, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { Link, usePage, router } from "@inertiajs/react";
 import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "@/theme.js";
@@ -15,6 +9,8 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import BadgeIcon from "@mui/icons-material/Badge";
 import EditOffIcon from "@mui/icons-material/EditOff";
+import ScoreboardIcon from '@mui/icons-material/Scoreboard';
+import VideoSettingsIcon from '@mui/icons-material/VideoSettings';
 import { hasAnyPermission } from "@/Utils/helper";
 
 const Item = ({ title, to, icon, url }) => {
@@ -24,9 +20,7 @@ const Item = ({ title, to, icon, url }) => {
     return (
         <MenuItem
             active={url.startsWith(new URL(to).pathname)}
-            style={{
-                color: colors.grey[100],
-            }}
+            style={{color: colors.grey[100],}}
             icon={icon}
         >
             <Typography>{title}</Typography>
@@ -51,30 +45,14 @@ const Sidebar = () => {
         <Box
             sx={{
                 flexShrink: 0,
-                width: `${
-                    isNonMobile ? (isCollapsed ? "80px" : "270px") : "80px"
-                }`,
+                width: `${isNonMobile ? (isCollapsed ? "80px" : "270px") : "80px"}`,
                 transition: "width .4s",
-                "& .pro-sidebar": {
-                    position: "fixed",
-                },
-                "& .pro-sidebar-inner": {
-                    background: `${colors.primary[400]} !important`,
-                },
-                "& .pro-icon-wrapper": {
-                    backgroundColor: "transparent !important",
-                },
-                "& .pro-inner-item": {
-                    padding: `5px ${
-                        isCollapsed ? "35px" : "5px"
-                    } 5px 20px !important`,
-                },
-                "& .pro-inner-item:hover": {
-                    color: `${colors.danamonAccent[400]} !important`,
-                },
-                "& .pro-menu-item.active": {
-                    color: `${colors.danamonAccent[400]} !important`,
-                },
+                "& .pro-sidebar": {position: "fixed",},
+                "& .pro-sidebar-inner": {background: `${colors.primary[400]} !important`,},
+                "& .pro-icon-wrapper": {backgroundColor: "transparent !important",},
+                "& .pro-inner-item": {padding: `5px ${isCollapsed ? "35px" : "5px"} 5px 20px !important`,},
+                "& .pro-inner-item:hover": {color: `${colors.danamonAccent[400]} !important`,},
+                "& .pro-menu-item.active": {color: `${colors.danamonAccent[400]} !important`,},
             }}
         >
             <ProSidebar collapsed={isCollapsed}>
@@ -90,23 +68,9 @@ const Sidebar = () => {
                         }}
                     >
                         {!isCollapsed && (
-                            <Box
-                                display="flex"
-                                justifyContent="space-between"
-                                alignItems="center"
-                                ml="15px"
-                            >
-                                <div
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        router.get(route("home"));
-                                    }}
-                                    className="w-max aspect-[11/4] bg-white p-1 rounded-md"
-                                >
-                                    {/* <img src="/assets/logo/Danamon.png" alt="danamon logo" className='object-contain w-full h-full'/> */}
-                                    <span className="text-black">
-                                        Logo Perusahaan
-                                    </span>
+                            <Box display="flex" justifyContent="space-between" alignItems="center" ml="15px">
+                                <div onClick={(e) => {e.stopPropagation();router.get(route("landing"));}} className="w-max aspect-[11/4] bg-white p-1 rounded-md">
+                                    <img src="/assets/images/walls-logo.png" alt="walls logo" className='object-contain w-full h-full'/>
                                 </div>
                                 <IconButton>
                                     <MenuOutlinedIcon />
@@ -123,17 +87,26 @@ const Sidebar = () => {
                             url={url}
                         />
 
-                        {hasAnyPermission([
-                            "user management",
-                            "role management",
-                            "permission management",
-                        ]) && (
+                        {hasAnyPermission(["klasemen management"]) && (
+                            <Item
+                                title="Klasemen"
+                                to={route("cms.klasemen.index")}
+                                icon={<ScoreboardIcon />}
+                                url={url}
+                            />
+                        )}
+                        {hasAnyPermission(["setting management"]) && (
+                            <Item
+                                title="Setting"
+                                to={route("cms.setting.edit.challenge")}
+                                icon={<VideoSettingsIcon />}
+                                url={url}
+                            />
+                        )}
+
+                        {hasAnyPermission(["user management","role management","permission management",]) && (
                             <>
-                                <Typography
-                                    variant="h6"
-                                    color={colors.grey[300]}
-                                    sx={{ m: "15px 0 5px 20px" }}
-                                >
+                                <Typography variant="h6" color={colors.grey[300]} sx={{ m: "15px 0 5px 20px" }}>
                                     Access
                                 </Typography>
                                 {hasAnyPermission(["user management"]) && (
@@ -152,38 +125,10 @@ const Sidebar = () => {
                                         url={url}
                                     />
                                 )}
-                                {hasAnyPermission([
-                                    "permission management",
-                                ]) && (
+                                {hasAnyPermission(["permission management"]) && (
                                     <Item
                                         title="Permission"
-                                        to={route(
-                                            "cms.access.permission.index"
-                                        )}
-                                        icon={<EditOffIcon />}
-                                        url={url}
-                                    />
-                                )}
-                                {hasAnyPermission([
-                                    "klasemen management",
-                                ]) && (
-                                    <Item
-                                        title="Klasemen"
-                                        to={route(
-                                            "cms.access.klasemen.index"
-                                        )}
-                                        icon={<EditOffIcon />}
-                                        url={url}
-                                    />
-                                )}
-                                {hasAnyPermission([
-                                    "setting management",
-                                ]) && (
-                                    <Item
-                                        title="Setting"
-                                        to={route(
-                                            "cms.access.setting.index"
-                                        )}
+                                        to={route("cms.access.permission.index")}
                                         icon={<EditOffIcon />}
                                         url={url}
                                     />
