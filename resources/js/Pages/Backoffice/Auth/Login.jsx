@@ -68,11 +68,9 @@ function Login({ nama }) {
                         // href={route("home")}
                         className="block w-36 aspect-[11/4] bg-white p-1 rounded-md"
                     >
-                        {/* <img src="/assets/logo/Danamon.png" alt="danamon logo" className='object-contain w-full h-full'/> */}
-                        <span className="text-black">Logo Perusahaan</span>
+                        <img src="/assets/images/walls-logo.png" alt="walls logo" className='object-contain w-full h-full'/>
                     </Link>
                     <p className="mt-1 text-white">Content Management System</p>
-                    {/* <button type="submit" className="block py-2 mt-4 mb-2 font-bold text-indigo-800 bg-white w-28 rounded-2xl">Read More</button> */}
                 </div>
             </div>
             <div className="flex items-center justify-center w-full lg:w-1/2">
