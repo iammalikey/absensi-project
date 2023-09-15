@@ -38,8 +38,8 @@ const Envelope = () => {
                 </div>
 
                 {/* campaign banner */}
-                <div className="absolute lg:top-16 top-40 mx-auto">
-                    <img src={campaignBanner} alt="" className="lg:w-72 w-80" />
+                <div className="absolute lg:top-8 top-28 sm:top-40 md:top-80 mx-auto">
+                    <img src={campaignBanner} alt="" className="lg:w-[22rem] w-80 sm:w-80 md:w-[22rem]" />
                 </div>
 
                 {/* vindes image */}
@@ -48,12 +48,12 @@ const Envelope = () => {
                 </div>
 
                 {/* teams banner */}
-                <div className="absolute lg:bottom-24 bottom-32 mx-auto">
+                <div className="absolute lg:bottom-24 bottom-36 mx-auto">
                     <img src={teamsBanner} alt="" className="w-full" />
                 </div>
 
                 {/* cta */}
-                <div className="absolute mx-auto my-0 lg:bottom-10 bottom-24 flex items-center justify-center w-full">
+                <div className="absolute mx-auto my-0 lg:bottom-10 bottom-[6.5rem] flex items-center justify-center w-full">
                     <Button
                         onClick={buttonHandler}
                         className="button-animation bg-gradient-to-b from-[rgba(242,225,194,1)] 
