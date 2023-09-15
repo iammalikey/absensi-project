@@ -23,9 +23,9 @@ class KlasemenUpdateRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:256'],
-            'score' => ['required', 'numeric', 'min:0'],
+            'score' => auth('cms')->user()->hasPermissionTo('klasemen management score') ? ['required', 'numeric', 'min:0'] : [],
             'cta_title' => ['required', 'string'],
-            'cta_link' => ['nullable', 'url'],
+            'cta_link' => auth('cms')->user()->hasPermissionTo('klasemen management link') ? ['nullable', 'url'] : [],
         ];
     }
 }

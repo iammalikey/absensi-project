@@ -38,19 +38,19 @@ const Index = (props) => {
 
     const user = usePage().props.auth.user;
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         // Make an API call to fetch updated data from the server
-    //         const updatedData = await fetchUpdatedData();
-    //         setCount(updatedData.data);
-    //     };
+    useEffect(() => {
+        const fetchData = async () => {
+            // Make an API call to fetch updated data from the server
+            const updatedData = await fetchUpdatedData();
+            setCount(updatedData.data);
+        };
 
-    //     const pollingInterval = setInterval(fetchData, 5000); // Polling interval of 5 seconds (adjust as needed)
+        const pollingInterval = setInterval(fetchData, 5000); // Polling interval of 5 seconds (adjust as needed)
 
-    //     return () => {
-    //         clearInterval(pollingInterval); // Clean up the interval on component unmount
-    //     };
-    // }, []);
+        return () => {
+            clearInterval(pollingInterval); // Clean up the interval on component unmount
+        };
+    }, []);
 
     const fetchUpdatedData = async () => {
         const response = await fetch(route("cms.dashboard", { p: props.pol }));
@@ -220,15 +220,22 @@ const Index = (props) => {
             )}
 
             {/* Jika Belum Memiliki Permission */}
-            {!hasAnyPermission() && (
+            {!hasAnyPermission([
+                'user management',
+                'permission management',
+                'role management',
+                'klasemen management',
+                'klasemen management link',
+                'klasemen management score',
+                'setting management',
+            ]) && (
                 <Typography
                     color={colors.redAccent[500]}
                     variant="h3"
                     sx={{ fontSize: 22 }}
                     align="center"
                 >
-                    Anda Belum Memiliki Permission Untuk Management Pada System
-                    CMS Ini.
+                    Anda Belum Memiliki Permission Untuk Management Pada System CMS Ini.
                 </Typography>
             )}
         </Box>

@@ -28,7 +28,7 @@ class UserController extends Controller
     public function create()
     {
         return inertia('Backoffice/Access/User/Create', [
-            'roles' => Role::get(['id', 'name'])
+            'roles' => Role::where('name', Role::SUPER_ADMIN)->get(['id', 'name'])
         ]);
     }
 
@@ -68,7 +68,7 @@ class UserController extends Controller
 
         return inertia('Backoffice/Access/User/Edit', [
             'user' => new UserEditResource($user->load('roles')),
-            'roles' => Role::get(['id', 'name'])
+            'roles' => Role::whereNot('name', Role::SUPER_ADMIN)->get(['id', 'name'])
         ]);
     }
 

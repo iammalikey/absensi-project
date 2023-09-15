@@ -33,9 +33,9 @@ class KlasemenController extends Controller
         try {
             DB::beginTransaction();
             $klasemen->title = $request->title;
-            $klasemen->score = $request->score;
+            if( auth('cms')->user()->hasPermissionTo('klasemen management score') ) $klasemen->score = $request->score;
             $klasemen->cta_title = $request->cta_title;
-            $klasemen->cta_link = $request->cta_link;
+            if( auth('cms')->user()->hasPermissionTo('klasemen management link') ) $klasemen->cta_link = $request->cta_link;
             $klasemen->save();
             DB::commit();
 

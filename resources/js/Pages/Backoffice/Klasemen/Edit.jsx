@@ -3,6 +3,7 @@ import { Avatar, Box, Button, Chip, FormControl, FormHelperText, InputLabel, Men
 import React from "react";
 import Backend from "@/Layouts/Backoffice/Backend";
 import Header from "@/components/Backoffice/Header";
+import { hasAnyPermission } from "@/Utils/helper";
 
 export default function Edit({ klasemen }) {
     const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -56,6 +57,7 @@ export default function Edit({ klasemen }) {
                         sx={{ gridColumn: "span 4" }}
                     />
                     <TextField
+                        disabled={!hasAnyPermission(["klasemen management score"])}
                         fullWidth
                         variant="filled"
                         type="number"
@@ -80,6 +82,7 @@ export default function Edit({ klasemen }) {
                         sx={{ gridColumn: "span 2" }}
                     />
                     <TextField
+                        disabled={!hasAnyPermission(["klasemen management link"])}
                         fullWidth
                         variant="filled"
                         type="text"

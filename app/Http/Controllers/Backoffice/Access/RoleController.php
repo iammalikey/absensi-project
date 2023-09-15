@@ -43,7 +43,10 @@ class RoleController extends Controller
             $role->givePermissionTo($request->permissions);
             DB::commit();
 
-            return redirect()->route('cms.access.role.index')->with('alert', ['type' => AlertHelper::ALERT_SUCCESS, 'message' => trans('success.crud_create', ['type' => "Role $role->name"])]);
+            if( auth('cms')->user()->hasRole(Role::SUPER_ADMIN) || auth('cms')->user()->hasPermissionTo('role management') )
+                return redirect()->route('cms.access.role.index')->with('alert', ['type' => AlertHelper::ALERT_SUCCESS, 'message' => trans('success.crud_create', ['type' => "Role $role->name"])]);
+            else
+                return redirect()->route('cms.dashboard')->with('alert', ['type' => AlertHelper::ALERT_SUCCESS, 'message' => trans('success.crud_create', ['type' => "Role $role->name"])]);
         } catch (\Throwable $th) {
             DB::rollBack();
             // throw $th;
@@ -74,8 +77,10 @@ class RoleController extends Controller
 
             $role->syncPermissions($request->permissions);
             DB::commit();
-
-            return redirect()->route('cms.access.role.index')->with('alert', ['type' => AlertHelper::ALERT_SUCCESS, 'message' => trans('success.crud_update', ['type' => "Role $role->name"])]);
+            if( auth('cms')->user()->hasRole(Role::SUPER_ADMIN) || auth('cms')->user()->hasPermissionTo('role management') )
+                return redirect()->route('cms.access.role.index')->with('alert', ['type' => AlertHelper::ALERT_SUCCESS, 'message' => trans('success.crud_update', ['type' => "Role $role->name"])]);
+            else
+                return redirect()->route('cms.dashboard')->with('alert', ['type' => AlertHelper::ALERT_SUCCESS, 'message' => trans('success.crud_update', ['type' => "Role $role->name"])]);
         } catch (\Throwable $th) {
             DB::rollBack();
             // throw $th;
@@ -94,7 +99,10 @@ class RoleController extends Controller
             $role->delete();
             DB::commit();
 
-            return redirect()->route('cms.access.role.index')->with('alert', ['type' => AlertHelper::ALERT_SUCCESS, 'message' => trans('success.crud_delete', ['type' => "Role $role->name"])]);
+            if( auth('cms')->user()->hasRole(Role::SUPER_ADMIN) || auth('cms')->user()->hasPermissionTo('role management') )
+                return redirect()->route('cms.access.role.index')->with('alert', ['type' => AlertHelper::ALERT_SUCCESS, 'message' => trans('success.crud_delete', ['type' => "Role $role->name"])]);
+            else
+                return redirect()->route('cms.dashboard')->with('alert', ['type' => AlertHelper::ALERT_SUCCESS, 'message' => trans('success.crud_delete', ['type' => "Role $role->name"])]);
         } catch (\Throwable $th) {
             DB::rollBack();
             // throw $th;

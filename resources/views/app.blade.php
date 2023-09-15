@@ -5,9 +5,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
         @if (isset($title))
-        <title>{{ $title }} - {{ config('app.name', 'Laravel') }}</title>
+        <title inertia>{{ $title }} - {{ config('app.name', 'Laravel') }}</title>
         @else
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title inertia>{{ config('app.name', 'Laravel') }}</title>
         @endif
         @if (env('APP_ENV') == 'production')
         <meta name="robots" content="index, follow" />
@@ -15,7 +15,7 @@
         <meta name="robots" content="noindex, nofollow" />
         @endif
         @if (isset($description))
-        <meta name="description" content="{{ $description }}" />
+        <meta name="description" content="{{ $description }}"/>
         @endif
         @if (isset($tag))
         <meta name="tag" content="{{ $tag }}" />

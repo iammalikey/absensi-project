@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backoffice\Access\PermissionController;
 use App\Http\Controllers\Backoffice\Access\RoleController;
 use App\Http\Controllers\Backoffice\Access\UserController;
 use App\Http\Controllers\Backoffice\Auth\AuthenticateSessionController;

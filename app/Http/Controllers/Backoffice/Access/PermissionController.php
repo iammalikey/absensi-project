@@ -11,8 +11,7 @@ class PermissionController extends Controller
     public function index()
     {
         return inertia('Backoffice/Access/Permission/Index', [
-            'permissions' => PermissionIndexResource::collection(Permission::latest()
-                                ->paginate(request()->size ?? 10))
+            'permissions' => PermissionIndexResource::collection(Permission::latest()->paginate(request()->size ?? 10))
         ]);
     }
 }

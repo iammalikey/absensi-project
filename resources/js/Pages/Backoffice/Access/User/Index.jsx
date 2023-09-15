@@ -83,7 +83,7 @@ export default function Index({ users }) {
                             <TableCell>Name</TableCell>
                             <TableCell>Email</TableCell>
                             <TableCell>Username</TableCell>
-                            <TableCell>Role</TableCell>
+                            <TableCell align="center">Role</TableCell>
                             <TableCell align="right">Action</TableCell>
                         </TableRow>
                     </TableHead>
@@ -110,7 +110,14 @@ export default function Index({ users }) {
                                 <TableCell>{user.name}</TableCell>
                                 <TableCell>{user.email}</TableCell>
                                 <TableCell>{user.username}</TableCell>
-                                <TableCell>{user.role}</TableCell>
+                                <TableCell align="center">
+                                    {user.role.map((role) =>
+                                    <>
+                                        <span key={role}>{role}</span>
+                                        <br />
+                                    </>
+                                    )}
+                                </TableCell>
                                 <TableCell align="right" className="!space-x-2">
                                     <Button
                                         color="neutral"
