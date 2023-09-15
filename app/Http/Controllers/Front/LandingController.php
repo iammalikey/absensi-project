@@ -40,7 +40,7 @@ class LandingController extends Controller
             'twitter_title' => env('APP_NAME'),
             'twitter_description' => "Jelajahi perjalanan seru tim 'Niat' dan tim 'Satset' dalam tantangan Wall's Feast Pop Unilever. Temukan rasa unik dari makanan lezat kami dalam petualangan yang penuh kegembiraan. Ikuti perjalanan mereka dan nikmati momen Wall's Feast Pop yang tak terlupakan.",
             'twitter_card' => 'summary_large_image',
-            'twitter_image' => env('APP_URL') . '/assets/images/banner-2-seo.png',
+            'twitter_image' => env('APP_URL') . '/assets/images/banner-2-seo.webp',
             'twitter_widgets_new_embed_design' => null,
             'apple_mobile_web_app_title' => null,
             'application_name' => env('APP_NAME'),
