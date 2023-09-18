@@ -74,10 +74,6 @@ const LandingPage = ({ tim_niat, tim_satset, challenge }) => {
                     </div>
                 </div>
 
-                <h2 className="uppercase text-center font-semibold mb-4">
-                    update klasemen
-                </h2>
-
                 <div className="grid grid-cols-2 justify-center text-center gap-5">
                     <div className="">
                         <div className="overflow-auto no-scrollbar bg-gradient-to-b from-white to-slate-200 shadow-sm py-5 px-4 rounded-2xl shadow-slate-300 mb-4 h-[10rem] flex flex-col justify-between">
