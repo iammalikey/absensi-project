@@ -16,8 +16,10 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->integer('score');
-            $table->text('cta_title');
-            $table->text('cta_link')->nullable();
+            $table->text('cta_title_instagram');
+            $table->text('cta_link_instagram')->nullable();
+            $table->text('cta_title_tiktok');
+            $table->text('cta_link_tiktok')->nullable();
             $table->timestamps();
         });
     }

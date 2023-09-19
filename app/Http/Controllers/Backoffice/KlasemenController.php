@@ -8,6 +8,7 @@ use App\Http\Requests\Backoffice\Klasemen\KlasemenUpdateRequest;
 use App\Http\Resources\Backoffice\Klasemen\KlasemenEditResource;
 use App\Http\Resources\Backoffice\Klasemen\KlasemenIndexResource;
 use App\Models\Klasemen;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -33,9 +34,14 @@ class KlasemenController extends Controller
         try {
             DB::beginTransaction();
             $klasemen->title = $request->title;
-            if( auth('cms')->user()->hasPermissionTo('klasemen management score') ) $klasemen->score = $request->score;
-            $klasemen->cta_title = $request->cta_title;
-            if( auth('cms')->user()->hasPermissionTo('klasemen management link') ) $klasemen->cta_link = $request->cta_link;
+            if( auth('cms')->user()->hasRole(Role::SUPER_ADMIN) || auth('cms')->user()->hasPermissionTo('klasemen management score') ) $klasemen->score = $request->score;
+
+            $klasemen->cta_title_instagram = $request->cta_title_instagram;
+            if( auth('cms')->user()->hasRole(Role::SUPER_ADMIN) || auth('cms')->user()->hasPermissionTo('klasemen management link') ) $klasemen->cta_link_instagram = $request->cta_link_instagram;
+
+            $klasemen->cta_title_tiktok = $request->cta_title_tiktok;
+            if( auth('cms')->user()->hasRole(Role::SUPER_ADMIN) || auth('cms')->user()->hasPermissionTo('klasemen management link') ) $klasemen->cta_link_tiktok = $request->cta_link_tiktok;
+            
             $klasemen->save();
             DB::commit();
 

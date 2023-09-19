@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MainLayout from "../../Layouts/MainLayout";
 import Envelope from "@/Components/Envelope";
-import { Button } from "@mui/material";
+import { Box, Button, Tab, Tabs } from "@mui/material";
 import anime from "animejs";
 
 // images
@@ -35,12 +35,18 @@ const LandingPage = ({ tim_niat, tim_satset, challenge }) => {
         document.body.style.overflow = "hidden";
     };
 
+    // tab action
+    const [value, setValue] = useState(0);
+    const handleChangeTab = (event, newValue) => {
+        setValue(newValue);
+    };
+
     return (
         <MainLayout>
             <Envelope />
 
             {/* banner */}
-            <div className="w-full h-full relative">
+            <div className="relative w-full h-full">
                 <div className="w-full !overflow-hidden">
                     <img src={banner} alt="" className="w-full h-full" />
                 </div>
@@ -58,11 +64,11 @@ const LandingPage = ({ tim_niat, tim_satset, challenge }) => {
                 </div>
             </div>
 
-            <main className="mx-3 p-3 -translate-y-10 relative shadow-lg bg-white shadow-slate-200 rounded-xl font-FilsonProBold">
+            <main className="relative p-3 mx-3 -translate-y-10 bg-white shadow-lg shadow-slate-200 rounded-xl font-FilsonProBold">
                 <div className="w-full mx-auto mb-4">
-                    <div className="w-full h-6 bg-defaultBlue rounded-full overflow-hidden">
+                    <div className="w-full h-6 overflow-hidden rounded-full bg-defaultBlue">
                         <div
-                            className="h-6 bg-defaultOrange rounded-tl-full rounded-bl-full"
+                            className="h-6 rounded-tl-full rounded-bl-full bg-defaultOrange"
                             style={{
                                 width:
                                     (tim_niat.score === 0 && tim_satset.score === 0) ?
@@ -74,14 +80,14 @@ const LandingPage = ({ tim_niat, tim_satset, challenge }) => {
                     </div>
                 </div>
 
-                <h2 className="uppercase text-center font-semibold mb-4">
+                <h2 className="mb-4 font-semibold text-center uppercase">
                     update klasemen
                 </h2>
 
-                <div className="grid grid-cols-2 justify-center text-center gap-5">
+                <div className="grid justify-center grid-cols-2 gap-5 text-center">
                     <div className="">
                         <div className="overflow-auto no-scrollbar bg-gradient-to-b from-white to-slate-200 shadow-sm py-5 px-4 rounded-2xl shadow-slate-300 mb-4 h-[10rem] flex flex-col justify-between">
-                            <p className="uppercase font-semibold text-xl text-defaultOrange">
+                            <p className="text-xl font-semibold uppercase text-defaultOrange">
                                 {tim_niat.title}
                             </p>
                             <p
@@ -96,14 +102,14 @@ const LandingPage = ({ tim_niat, tim_satset, challenge }) => {
 
                             <p className="text-xl">orang</p>
                         </div>
-                        <p className="opacity-70 text-xs">
+                        <p className="text-xs opacity-70">
                             telah bergabung <br /> Tim Niat
                         </p>
                     </div>
 
                     <div className="">
                         <div className="overflow-auto no-scrollbar bg-gradient-to-b from-white to-slate-200 shadow-sm py-5 px-4 rounded-2xl shadow-slate-300 mb-4 h-[10rem] flex flex-col justify-between">
-                            <p className="uppercase font-semibold text-xl text-defaultBlue">
+                            <p className="text-xl font-semibold uppercase text-defaultBlue">
                                 {tim_satset.title}
                             </p>
                             <p
@@ -117,29 +123,79 @@ const LandingPage = ({ tim_niat, tim_satset, challenge }) => {
                             </p>
                             <p className="text-xl">orang</p>
                         </div>
-                        <p className="opacity-70 text-xs">
+                        <p className="text-xs opacity-70">
                             telah bergabung <br /> Tim Satset
                         </p>
                     </div>
                 </div>
             </main>
 
-            <section className="mx-3 mb-6">
-                <h2 className="uppercase text-center font-semibold mb-4 font-FilsonProBold">
-                    kalo kamu masuk tim mana?
+            <section className="px-3 mb-6">
+                <h2 className="font-semibold text-center uppercase font-FilsonProBold">
+                    kamu masuk tim mana?
                 </h2>
-                <div className="grid grid-cols-2 gap-1.5 gap-y-5">
-                    <a href={tim_niat.cta_link}>
-                        <Button className="!text-white !h-full !px-8 !bg-gradient-to-b !from-[#f3c558] !to-defaultOrange !rounded-lg !shadow-md !shadow-defaultOrange !text-lg !font-FilsonProBold">
-                            {tim_niat.cta_title}
-                        </Button>
-                    </a>
-                    <a href={tim_satset.cta_link}>
-                        <Button className="!text-white !h-full !px-8 !bg-gradient-to-b !from-[#f3c558] !to-defaultOrange !rounded-lg !shadow-md !shadow-defaultOrange !text-lg !font-FilsonProBold">
-                            {tim_satset.cta_title}
-                        </Button>
-                    </a>
-                    <a href={challenge.cta_link} className="col-span-2 w-full bg-red-400 !rounded-lg">
+                <Box sx={{ borderBottom: 2, borderColor: 'divider', mb: 2 }}>
+                    <Tabs
+                    value={value}
+                    onChange={handleChangeTab}
+                    aria-label="basic tabs example"
+                    centered
+                    sx={{
+                        '& div': {
+                            overflow: 'auto',
+                            display: 'flex',
+                            width: '100%',
+                            pt:1,
+                        }
+                    }}>
+                        <Tab label="Ikut Di Instagram" id="tab-0" aria-controls="tabpanel-0" className={`${value === 0 && '!bg-white !rounded-tr-lg tab-shadow-ff !text-gray-700'} !w-1/2 !grow !font-bold !text-gray-300`} />
+                        <Tab label="Ikut Di Tiktok" id="tab-1" aria-controls="tabpanel-1" className={`${value === 1 && '!bg-white !rounded-tl-lg tab-shadow-ff !text-gray-700'} !w-1/2 !grow !font-bold !text-gray-300`} />
+                    </Tabs>
+                </Box>
+                <div
+                    role="tabpanel"
+                    hidden={value !== 0}
+                    id={`tabpanel-${0}`}
+                    aria-labelledby={`tab-${0}`}
+                >
+                    {value === 0 && (        
+                        <div className="grid grid-cols-2 gap-1.5 gap-y-5">
+                            <a href={tim_niat.cta_link_instagram} tabIndex={-1}>
+                                <Button className="!text-white !w-full !h-full !px-8 !bg-gradient-to-b !from-[#f3c558] !to-defaultOrange !rounded-lg !shadow-md !shadow-defaultOrange !text-lg !font-FilsonProBold">
+                                    {tim_niat.cta_title_instagram}
+                                </Button>
+                            </a>
+                            <a href={tim_satset.cta_link_instagram} tabIndex={-1}>
+                                <Button className="!text-white !w-full !h-full !px-8 !bg-gradient-to-b !from-[#f3c558] !to-defaultOrange !rounded-lg !shadow-md !shadow-defaultOrange !text-lg !font-FilsonProBold">
+                                    {tim_satset.cta_title_instagram}
+                                </Button>
+                            </a>
+                        </div>
+                    )}
+                </div>
+                <div
+                    role="tabpanel"
+                    hidden={value !== 1}
+                    id={`tabpanel-${1}`}
+                    aria-labelledby={`tab-${1}`}
+                >
+                    {value === 1 && (        
+                        <div className="grid grid-cols-2 gap-1.5 gap-y-5">
+                            <a href={tim_niat.cta_link_tiktok} tabIndex={-1}>
+                                <Button className="!text-white !w-full !h-full !px-8 !bg-gradient-to-b !from-[#f3c558] !to-defaultOrange !rounded-lg !shadow-md !shadow-defaultOrange !text-lg !font-FilsonProBold">
+                                    {tim_niat.cta_title_tiktok}
+                                </Button>
+                            </a>
+                            <a href={tim_satset.cta_link_tiktok} tabIndex={-1}>
+                                <Button className="!text-white !w-full !h-full !px-8 !bg-gradient-to-b !from-[#f3c558] !to-defaultOrange !rounded-lg !shadow-md !shadow-defaultOrange !text-lg !font-FilsonProBold">
+                                    {tim_satset.cta_title_tiktok}
+                                </Button>
+                            </a>
+                        </div>
+                    )}
+                </div>
+                <div className="mt-5">
+                    <a href={challenge.cta_link} className="w-full bg-red-400 !rounded-lg" tabIndex={-1}>
                         <Button className="!w-full !text-white !bg-defaultBlue !shadow-sm !shadow-defaultBlue !text-lg !font-FilsonProBold">
                             {challenge.cta_title}
                         </Button>

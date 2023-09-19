@@ -65,8 +65,14 @@ export default function Index({ klasemens }) {
               >
                 <TableCell>{item.title}</TableCell>
                 <TableCell>{item.score}</TableCell>
-                <TableCell>{item.cta_title}</TableCell>
-                <TableCell>{item.cta_link?? '-'}</TableCell>
+                <TableCell>
+                  <span className="block">Instagram : {item.cta_title_instagram}</span>
+                  <span className="block">Tiktok : {item.cta_title_tiktok}</span>
+                </TableCell>
+                <TableCell>
+                  <span className="block">Instagram: {item.cta_link_instagram?? '-'}</span>
+                  <span className="block">Tiktok: {item.cta_link_tiktok?? '-'}</span>
+                </TableCell>
                 <TableCell align="right" className="!space-x-2">
                   <Button onClick={() => handleEdit(item.slug)} color="neutral" variant="contained" className="mt-2">
                     Edit

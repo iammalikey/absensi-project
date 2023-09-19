@@ -18,15 +18,19 @@ class KlasemenSeeder extends Seeder
             'title' => 'Tim Niat',
             'slug' => 'tim-niat',
             'score' => '0',
-            'cta_title' => 'Gabung Niat',
-            'cta_link' => null,
+            'cta_title_instagram' => 'Gabung Niat',
+            'cta_link_instagram' => null,
+            'cta_title_tiktok' => 'Gabung Niat',
+            'cta_link_tiktok' => null,
         ]);
         Klasemen::create([
             'title' => 'Tim Satset',
             'slug' => 'tim-satset',
             'score' => '0',
-            'cta_title' => 'Gabung Satset',
-            'cta_link' => null,
+            'cta_title_instagram' => 'Gabung Satset',
+            'cta_link_instagram' => null,
+            'cta_title_tiktok' => 'Gabung Satset',
+            'cta_link_tiktok' => null,
         ]);
     }
 }

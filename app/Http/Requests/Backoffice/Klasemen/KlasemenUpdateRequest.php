@@ -24,8 +24,10 @@ class KlasemenUpdateRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:256'],
             'score' => auth('cms')->user()->hasPermissionTo('klasemen management score') ? ['required', 'numeric', 'min:0'] : [],
-            'cta_title' => ['required', 'string'],
-            'cta_link' => auth('cms')->user()->hasPermissionTo('klasemen management link') ? ['nullable', 'url'] : [],
+            'cta_title_instagram' => ['required', 'string'],
+            'cta_title_tiktok' => ['required', 'string'],
+            'cta_link_instagram' => auth('cms')->user()->hasPermissionTo('klasemen management link') ? ['nullable', 'url'] : [],
+            'cta_link_tiktok' => auth('cms')->user()->hasPermissionTo('klasemen management link') ? ['nullable', 'url'] : [],
         ];
     }
 }

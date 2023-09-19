@@ -10,7 +10,7 @@ class LandingController extends Controller
 {
     public function index()
     {
-        $all_klasemen_data = Klasemen::get(['title', 'slug', 'score', 'cta_title', 'cta_link',]);
+        $all_klasemen_data = Klasemen::get(['title', 'slug', 'score', 'cta_title_instagram', 'cta_link_instagram', 'cta_title_tiktok', 'cta_link_tiktok',]);
 
         $tim_niat = $all_klasemen_data->firstWhere('slug', Klasemen::TIM_NIAT_SLUG);
         $tim_satset = $all_klasemen_data->firstWhere('slug', Klasemen::TIM_SATSET_SLUG);
