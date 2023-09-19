@@ -27,28 +27,28 @@ const Envelope = () => {
     return (
         <>
             <header
-                className="absolute left-0 w-full h-screen top-0 to-top to-bottom z-50 bg-cover"
+                className="absolute top-0 left-0 z-50 w-full h-screen overflow-hidden bg-cover to-top to-bottom"
                 style={{
                     backgroundImage: "url(/assets/images/bg-landing.png)",
                 }}
             >
                 {/* logo walls */}
                 <div className="absolute z-30 top-4 right-4">
-                    <img src={wallsLogo} alt="" className="w-12 h-auto" />
+                    <img src={wallsLogo} alt="" className="w-16 h-auto md:w-24 lg:w-16" />
                 </div>
 
                 {/* campaign banner */}
-                <div className="absolute lg:top-8 top-28 sm:top-40 md:top-80 mx-auto">
-                    <img src={campaignBanner} alt="" className="lg:w-[22rem] w-80 sm:w-80 md:w-[22rem]" />
+                <div className="absolute mx-auto lg:top-[6vh] top-[15vh] md:top-[32vh] md:-left-3">
+                    <img src={campaignBanner} alt="" className="lg:w-[22rem] w-80 sm:w-80 md:w-[24rem]" />
                 </div>
 
                 {/* vindes image */}
-                <div className="absolute lg:bottom-0 bottom-0 mx-auto">
+                <div className="absolute bottom-0 mx-auto lg:bottom-0">
                     <img src={vindesImage} alt="" className="w-full" />
                 </div>
 
                 {/* teams banner */}
-                <div className="absolute lg:bottom-24 bottom-36 mx-auto">
+                <div className="absolute mx-auto lg:bottom-24 bottom-36">
                     <img src={teamsBanner} alt="" className="w-full" />
                 </div>
 
@@ -60,8 +60,7 @@ const Envelope = () => {
                         from-1% to-[rgba(246,184,76,1)] to-90% rounded-md shadow-lg"
                     >
                         <p
-                            className="uppercase text-white px-10 py-2 leading-none font-extrabold 
-                        text-lg font-FilsonProBold"
+                            className="px-10 py-2 text-lg font-extrabold leading-none text-white uppercase font-FilsonProBold"
                         >
                             ketuk untuk main
                         </p>
