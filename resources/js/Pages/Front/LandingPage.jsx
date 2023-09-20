@@ -5,7 +5,7 @@ import { Box, Button, Tab, Tabs } from "@mui/material";
 import anime from "animejs";
 
 // images
-const banner = "/assets/images/banner-2.png";
+const banner = "/assets/images/banner-2.webp";
 // icons
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 

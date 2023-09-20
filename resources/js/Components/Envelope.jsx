@@ -4,9 +4,10 @@ import anime from "animejs";
 
 // images
 const coverImage = "/assets/images/bg-landing.png";
-const teamsBanner = "/assets/images/tim-versus.png";
-const vindesImage = "/assets/images/vindes-image.png";
-const campaignBanner = "/assets/images/campaign-banner.png";
+const teamsBanner = "/assets/images/tim-versus-min.png";
+// const vindesImage = "/assets/images/vindes-image.png";
+const vindesCampaignImage = "/assets/images/vindes-campaign-banner.webp";
+// const campaignBanner = "/assets/images/campaign-banner.png";
 const wallsLogo = "/assets/images/walls-logo.png";
 
 const Envelope = () => {
@@ -29,7 +30,7 @@ const Envelope = () => {
             <header
                 className="absolute top-0 left-0 z-50 w-full h-screen overflow-hidden bg-cover to-top to-bottom"
                 style={{
-                    backgroundImage: "url(/assets/images/bg-landing.png)",
+                    backgroundImage: `url(${coverImage})`,
                 }}
             >
                 {/* logo walls */}
@@ -37,14 +38,9 @@ const Envelope = () => {
                     <img src={wallsLogo} alt="" className="w-16 h-auto md:w-24 lg:w-16" />
                 </div>
 
-                {/* campaign banner */}
-                <div className="absolute mx-auto lg:top-[6vh] top-[15vh] md:top-[32vh] md:-left-3">
-                    <img src={campaignBanner} alt="" className="lg:w-[22rem] w-80 sm:w-80 md:w-[24rem]" />
-                </div>
-
                 {/* vindes image */}
                 <div className="absolute bottom-0 mx-auto lg:bottom-0">
-                    <img src={vindesImage} alt="" className="w-full" />
+                    <img src={vindesCampaignImage} alt="" className="w-full" />
                 </div>
 
                 {/* teams banner */}
