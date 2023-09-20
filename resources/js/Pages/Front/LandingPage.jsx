@@ -80,9 +80,9 @@ const LandingPage = ({ tim_niat, tim_satset, challenge }) => {
                     </div>
                 </div>
 
-                <h2 className="mb-4 font-semibold text-center uppercase">
+                {/* <h2 className="mb-4 font-semibold text-center uppercase">
                     update klasemen
-                </h2>
+                </h2> */}
 
                 <div className="grid justify-center grid-cols-2 gap-5 text-center">
                     <div className="">
