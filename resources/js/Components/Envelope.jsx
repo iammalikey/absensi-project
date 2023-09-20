@@ -35,7 +35,7 @@ const Envelope = () => {
             >
                 {/* logo walls */}
                 <div className="absolute z-30 top-4 right-4">
-                    <img src={wallsLogo} alt="" className="w-16 h-auto md:w-24 lg:w-16" />
+                    <img src={wallsLogo} alt="" className="w-16 h-auto" />
                 </div>
 
                 {/* vindes image */}
@@ -52,13 +52,12 @@ const Envelope = () => {
                 <div className="absolute mx-auto my-0 lg:bottom-10 bottom-[6.5rem] flex items-center justify-center w-full">
                     <Button
                         onClick={buttonHandler}
-                        className="button-animation bg-gradient-to-b from-[rgba(242,225,194,1)] 
-                        from-1% to-[rgba(246,184,76,1)] to-90% rounded-md shadow-lg"
+                        className="button-animation bg-gradient-to-b from-[rgba(242,225,194,1)] from-1% to-[rgba(215,214,214,1)] to-90% !rounded-xl shadow-lg"
                     >
                         <p
-                            className="px-10 py-2 text-lg font-extrabold leading-none text-white uppercase font-FilsonProBold"
+                            className="px-8 py-2 text-lg font-bold leading-none text-gray-500 uppercase font-FilsonProBold"
                         >
-                            ketuk untuk main
+                            Tekan Untuk Mulai
                         </p>
                     </Button>
                 </div>

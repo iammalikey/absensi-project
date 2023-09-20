@@ -73,7 +73,7 @@ html {
 }
 
 .tab-shadow-ff {
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px !important;
-    -webkit-box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px !important;
-    -moz-box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px !important;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px !important;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px !important;
+    -moz-box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px !important;
 }

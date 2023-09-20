@@ -6,6 +6,7 @@ import anime from "animejs";
 
 // images
 const banner = "/assets/images/banner-2.webp";
+const wallsLogo = "/assets/images/walls-logo.png";
 // icons
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
@@ -62,6 +63,10 @@ const LandingPage = ({ tim_niat, tim_satset, challenge }) => {
                         }}
                     />
                 </div>
+                {/* logo walls */}
+                <div className="absolute top-3 right-3">
+                    <img src={wallsLogo} alt="" className="w-12 h-auto" />
+                </div>
             </div>
 
             <main className="relative p-3 mx-3 -translate-y-10 bg-white shadow-lg shadow-slate-200 rounded-xl font-FilsonProBold">
@@ -91,19 +96,19 @@ const LandingPage = ({ tim_niat, tim_satset, challenge }) => {
                                 {tim_niat.title}
                             </p>
                             <p
-                                className={`${
-                                    tim_niat.score >= 1000
-                                        ? "text-4xl"
-                                        : "text-6xl"
-                                } font-semibold text-defaultOrange`}
+                                className={`
+                                ${tim_niat.score < 1000 && "text-6xl"} 
+                                ${tim_niat.score >= 1000 && "text-3xl"}
+                                font-semibold text-defaultOrange
+                            `}
                             >
                                 {tim_niat.score}
                             </p>
 
                             <p className="text-xl">orang</p>
                         </div>
-                        <p className="text-xs opacity-70">
-                            telah bergabung <br /> Tim Niat
+                        <p className="text-xs text-gray-500 opacity-70">
+                            telah mendukung <br /> <span className="uppercase">{tim_niat.title}</span>
                         </p>
                     </div>
 
@@ -113,27 +118,27 @@ const LandingPage = ({ tim_niat, tim_satset, challenge }) => {
                                 {tim_satset.title}
                             </p>
                             <p
-                                className={`${
-                                    tim_satset.score >= 1000
-                                        ? "text-4xl"
-                                        : "text-6xl"
-                                } font-semibold text-defaultBlue`}
+                                className={`
+                                    ${tim_satset.score < 1000 && "text-6xl"} 
+                                    ${tim_satset.score >= 1000 && "text-3xl"}
+                                    font-semibold text-defaultBlue
+                                `}
                             >
                                 {tim_satset.score}
                             </p>
                             <p className="text-xl">orang</p>
                         </div>
-                        <p className="text-xs opacity-70">
-                            telah bergabung <br /> Tim Satset
+                        <p className="text-xs text-gray-500 opacity-70">
+                            telah mendukung <br /> <span className="uppercase">{tim_satset.title}</span>
                         </p>
                     </div>
                 </div>
             </main>
 
             <section className="px-3 mb-6">
-                <h2 className="font-semibold text-center uppercase font-FilsonProBold">
+                <h1 className="font-semibold text-center text-gray-800 uppercase font-FilsonProBold">
                     kamu masuk tim mana?
-                </h2>
+                </h1>
                 <Box sx={{ borderBottom: 2, borderColor: 'divider', mb: 2 }}>
                     <Tabs
                     value={value}
@@ -144,12 +149,16 @@ const LandingPage = ({ tim_niat, tim_satset, challenge }) => {
                         '& div': {
                             overflow: 'auto',
                             display: 'flex',
+                            alignItems: 'end',
                             width: '100%',
                             pt:1,
-                        }
+                            '& .MuiTabs-indicator': {
+                                backgroundColor: value === 0 ? '#efaf1d':'#1a89c2',
+                            },
+                        },
                     }}>
-                        <Tab label="Ikut Di Instagram" id="tab-0" aria-controls="tabpanel-0" className={`${value === 0 && '!bg-white !rounded-tr-lg tab-shadow-ff !text-gray-700'} !w-1/2 !grow !font-bold !text-gray-300`} />
-                        <Tab label="Ikut Di Tiktok" id="tab-1" aria-controls="tabpanel-1" className={`${value === 1 && '!bg-white !rounded-tl-lg tab-shadow-ff !text-gray-700'} !w-1/2 !grow !font-bold !text-gray-300`} />
+                        <Tab label="Ikut Di Instagram" id="tab-0" aria-controls="tabpanel-0" className={`${value === 0 && '!bg-white !rounded-tr-lg tab-shadow-ff !text-gray-700'} !w-1/2 !grow !font-bold !text-gray-300 !text-xs !min-h-0 !h-9`} />
+                        <Tab label="Ikut Di Tiktok" id="tab-1" aria-controls="tabpanel-1" className={`${value === 1 && '!bg-white !rounded-tl-lg tab-shadow-ff !text-gray-700'} !w-1/2 !grow !font-bold !text-gray-300 !text-xs !min-h-0 !h-9`} />
                     </Tabs>
                 </Box>
                 <div
@@ -161,12 +170,12 @@ const LandingPage = ({ tim_niat, tim_satset, challenge }) => {
                     {value === 0 && (        
                         <div className="grid grid-cols-2 gap-1.5 gap-y-5">
                             <a href={tim_niat.cta_link_instagram} tabIndex={-1}>
-                                <Button className="!text-white !w-full !h-full !px-8 !bg-gradient-to-b !from-[#f3c558] !to-defaultOrange !rounded-lg !shadow-md !shadow-defaultOrange !text-lg !font-FilsonProBold">
+                                <Button className="!text-white !w-full !h-full !py-2 !bg-gradient-to-b !from-[#f3c558] !to-defaultOrange !rounded-lg !shadow-md !shadow-defaultOrange !text-sm !font-FilsonProBold">
                                     {tim_niat.cta_title_instagram}
                                 </Button>
                             </a>
                             <a href={tim_satset.cta_link_instagram} tabIndex={-1}>
-                                <Button className="!text-white !w-full !h-full !px-8 !bg-gradient-to-b !from-[#f3c558] !to-defaultOrange !rounded-lg !shadow-md !shadow-defaultOrange !text-lg !font-FilsonProBold">
+                                <Button className="!text-white !w-full !h-full !py-2 !bg-gradient-to-b !from-[#67b0d7] !to-[#1a89c2] !rounded-lg !shadow-md !shadow-[#1a89c2] !text-sm !font-FilsonProBold">
                                     {tim_satset.cta_title_instagram}
                                 </Button>
                             </a>
@@ -182,21 +191,26 @@ const LandingPage = ({ tim_niat, tim_satset, challenge }) => {
                     {value === 1 && (        
                         <div className="grid grid-cols-2 gap-1.5 gap-y-5">
                             <a href={tim_niat.cta_link_tiktok} tabIndex={-1}>
-                                <Button className="!text-white !w-full !h-full !px-8 !bg-gradient-to-b !from-[#f3c558] !to-defaultOrange !rounded-lg !shadow-md !shadow-defaultOrange !text-lg !font-FilsonProBold">
+                                <Button className="!text-white !w-full !h-full !py-2 !bg-gradient-to-b !from-[#f3c558] !to-defaultOrange !rounded-lg !shadow-md !shadow-defaultOrange !text-sm !font-FilsonProBold">
                                     {tim_niat.cta_title_tiktok}
                                 </Button>
                             </a>
                             <a href={tim_satset.cta_link_tiktok} tabIndex={-1}>
-                                <Button className="!text-white !w-full !h-full !px-8 !bg-gradient-to-b !from-[#f3c558] !to-defaultOrange !rounded-lg !shadow-md !shadow-defaultOrange !text-lg !font-FilsonProBold">
+                                <Button className="!text-white !w-full !h-full !py-2 !bg-gradient-to-b !from-[#67b0d7] !to-[#1a89c2] !rounded-lg !shadow-md !shadow-[#1a89c2] !text-sm !font-FilsonProBold">
                                     {tim_satset.cta_title_tiktok}
                                 </Button>
                             </a>
                         </div>
                     )}
                 </div>
+
+                <h1 className="font-semibold leading-5 text-center text-gray-800 uppercase mt-7 font-FilsonProBold">
+                    DAPATKAN HADIAH <br /> SENILAI JUTAAN RUPIAH
+                </h1>
+                
                 <div className="mt-5">
                     <a href={challenge.cta_link} className="w-full bg-red-400 !rounded-lg" tabIndex={-1}>
-                        <Button className="!w-full !text-white !bg-defaultBlue !shadow-sm !shadow-defaultBlue !text-lg !font-FilsonProBold">
+                        <Button className="!text-white !w-full !h-full !py-2 !bg-gradient-to-b !from-[#f64242] !to-[#fe0506] !rounded-lg !shadow-md !shadow-[#fe0506] !text-sm !font-FilsonProBold">
                             {challenge.cta_title}
                         </Button>
                     </a>
