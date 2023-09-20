@@ -23,10 +23,10 @@ export default function ErrorPage({ status }) {
   }[status]
 
   return (
-    <div className="bg-image-blur relative min-h-screen">
+    <div className="relative min-h-screen bg-image-blur">
       <div className="min-w-[320px] max-w-md min-h-screen mx-auto bg-white relative shadow-2xl pb-5">
         <main
-          className="absolute left-0 w-full h-screen top-0 to-top to-bottom z-50 bg-cover"
+          className="absolute top-0 left-0 z-50 w-full h-screen bg-cover to-top to-bottom"
           style={{
               backgroundImage: "url(/assets/images/bg-landing.png)",
           }}
@@ -37,23 +37,23 @@ export default function ErrorPage({ status }) {
             </div>
 
             {/* campaign banner */}
-            <div className="relative lg:top-8 top-20 sm:top-40 md:top-80 mx-auto">
+            <div className="relative mx-auto lg:top-[6vh] top-[15vh] md:top-[32vh] md:-left-3">
                 <img src={campaignBanner} alt="" className="lg:w-[22rem] w-80 sm:w-80 md:w-[22rem]" />
-                <div className='absolute top-48 inset-0'>
-                  <h1 className='font-FilsonProBold text-center font-bold text-7xl text-white'>{status}</h1>
-                  <p className='text-center text-white mt-5'>{title}</p>
-                  <p className='text-center text-white px-4 mt-1'>{description}</p>
-                </div>
             </div>
 
             {/* vindes image */}
-            <div className="absolute lg:bottom-0 bottom-0 mx-auto">
+            {/* <div className="absolute bottom-0 mx-auto lg:bottom-0">
               <img src={vindesImage} alt="" className="w-full" />
-            </div>
+            </div> */}
 
             {/* teams banner */}
-            <div className="absolute lg:bottom-24 bottom-36 mx-auto">
-                <img src={teamsBanner} alt="" className="w-full" />
+            <div className="absolute w-full mx-auto -translate-x-1/2 bottom-[30vh] inset-x-1/2">
+                {/* <img src={teamsBanner} alt="" className="w-full" /> */}
+                <div>
+                  <h1 className='font-bold text-center text-white font-FilsonProBold text-7xl'>{status}</h1>
+                  <p className='mt-5 text-center text-white'>{title}</p>
+                  <p className='px-4 mt-1 text-center text-white'>{description}</p>
+                </div>
             </div>
 
             {/* cta */}
@@ -64,8 +64,7 @@ export default function ErrorPage({ status }) {
                     from-1% to-[rgba(246,184,76,1)] to-90% rounded-md shadow-lg"
                 >
                     <p
-                        className="uppercase text-white px-10 py-2 leading-none font-extrabold 
-                    text-lg font-FilsonProBold"
+                        className="px-10 py-2 text-lg font-extrabold leading-none text-white uppercase font-FilsonProBold"
                     >
                         Kembali Ke Halaman Utama
                     </p>
