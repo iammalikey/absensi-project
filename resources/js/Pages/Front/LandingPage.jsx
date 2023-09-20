@@ -204,9 +204,9 @@ const LandingPage = ({ tim_niat, tim_satset, challenge }) => {
                     )}
                 </div>
 
-                <h1 className="font-semibold leading-5 text-center text-gray-800 uppercase mt-7 font-FilsonProBold">
+                <h2 className="font-semibold leading-5 text-center text-gray-800 uppercase mt-7 font-FilsonProBold">
                     DAPATKAN HADIAH <br /> SENILAI JUTAAN RUPIAH
-                </h1>
+                </h2>
                 
                 <div className="mt-5">
                     <a href={challenge.cta_link} className="w-full bg-red-400 !rounded-lg" tabIndex={-1}>
