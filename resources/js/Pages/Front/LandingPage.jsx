@@ -204,21 +204,23 @@ const LandingPage = ({ tim_niat, tim_satset, challenge }) => {
                     )}
                 </div>
                 
-                {value === 0 &&
-                    <>
-                        <h2 className="font-semibold leading-5 text-center text-gray-800 uppercase mt-7 font-FilsonProBold">
-                            DAPATKAN HADIAH <br /> SENILAI JUTAAN RUPIAH
-                        </h2>
-                        
-                        <div className="mt-5">
-                            <a href={challenge.cta_link} className="w-full bg-red-400 !rounded-lg" tabIndex={-1}>
-                                <Button className="!text-white !w-full !h-full !py-2 !bg-gradient-to-b !from-[#f64242] !to-[#fe0506] !rounded-lg !shadow-md !shadow-[#fe0506] !text-sm !font-FilsonProBold">
-                                    {challenge.cta_title}
-                                </Button>
-                            </a>
-                        </div>
-                    </>
-                }
+                <div className="min-h-[6rem] mt-7">
+                    {value === 0 &&
+                        <>
+                            <h2 className="font-semibold leading-5 text-center text-gray-800 uppercase font-FilsonProBold">
+                                DAPATKAN HADIAH <br /> SENILAI JUTAAN RUPIAH
+                            </h2>
+                            
+                            <div className="mt-5">
+                                <a href={challenge.cta_link} className="w-full bg-red-400 !rounded-lg" tabIndex={-1}>
+                                    <Button className="!text-white !w-full !h-full !py-2 !bg-gradient-to-b !from-[#f64242] !to-[#fe0506] !rounded-lg !shadow-md !shadow-[#fe0506] !text-sm !font-FilsonProBold">
+                                        {challenge.cta_title}
+                                    </Button>
+                                </a>
+                            </div>
+                        </>
+                    }
+                </div>
             </section>
         </MainLayout>
     );
