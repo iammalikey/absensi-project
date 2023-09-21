@@ -167,7 +167,7 @@ const LandingPage = ({ tim_niat, tim_satset, challenge }) => {
                     id={`tabpanel-${0}`}
                     aria-labelledby={`tab-${0}`}
                 >
-                    {value === 0 && (        
+                    {value === 0 && (
                         <div className="grid grid-cols-2 gap-1.5 gap-y-5">
                             <a href={tim_niat.cta_link_instagram} tabIndex={-1}>
                                 <Button className="!text-white !w-full !h-full !py-2 !bg-gradient-to-b !from-[#f3c558] !to-defaultOrange !rounded-lg !shadow-md !shadow-defaultOrange !text-sm !font-FilsonProBold">
@@ -203,18 +203,22 @@ const LandingPage = ({ tim_niat, tim_satset, challenge }) => {
                         </div>
                     )}
                 </div>
-
-                <h2 className="font-semibold leading-5 text-center text-gray-800 uppercase mt-7 font-FilsonProBold">
-                    DAPATKAN HADIAH <br /> SENILAI JUTAAN RUPIAH
-                </h2>
                 
-                <div className="mt-5">
-                    <a href={challenge.cta_link} className="w-full bg-red-400 !rounded-lg" tabIndex={-1}>
-                        <Button className="!text-white !w-full !h-full !py-2 !bg-gradient-to-b !from-[#f64242] !to-[#fe0506] !rounded-lg !shadow-md !shadow-[#fe0506] !text-sm !font-FilsonProBold">
-                            {challenge.cta_title}
-                        </Button>
-                    </a>
-                </div>
+                {value === 0 &&
+                    <>
+                        <h2 className="font-semibold leading-5 text-center text-gray-800 uppercase mt-7 font-FilsonProBold">
+                            DAPATKAN HADIAH <br /> SENILAI JUTAAN RUPIAH
+                        </h2>
+                        
+                        <div className="mt-5">
+                            <a href={challenge.cta_link} className="w-full bg-red-400 !rounded-lg" tabIndex={-1}>
+                                <Button className="!text-white !w-full !h-full !py-2 !bg-gradient-to-b !from-[#f64242] !to-[#fe0506] !rounded-lg !shadow-md !shadow-[#fe0506] !text-sm !font-FilsonProBold">
+                                    {challenge.cta_title}
+                                </Button>
+                            </a>
+                        </div>
+                    </>
+                }
             </section>
         </MainLayout>
     );
