@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://walls-feast.kasatmata.xyz/sitemap.xml
+Sitemap: https://timfeastpop.com/sitemap.xml

@@ -3,7 +3,7 @@ import { Button } from "@mui/material";
 import anime from "animejs";
 
 // images
-const coverImage = "/assets/images/bg-landing.png";
+const coverImage = "/assets/images/bg-landing.webp";
 const teamsBanner = "/assets/images/tim-versus-min.png";
 // const vindesImage = "/assets/images/vindes-image.png";
 const vindesCampaignImage = "/assets/images/vindes-campaign-banner.webp";
