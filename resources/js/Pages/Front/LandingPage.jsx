@@ -97,7 +97,7 @@ const LandingPage = ({ tim_niat, tim_satset, challenge }) => {
                             </p>
                             <p
                                 className={`
-                                ${tim_niat.score < 1000 && "text-6xl"} 
+                                ${tim_niat.score < 1000 && "text-3xl"} 
                                 ${tim_niat.score >= 1000 && "text-3xl"}
                                 font-semibold text-defaultOrange
                             `}
@@ -119,7 +119,7 @@ const LandingPage = ({ tim_niat, tim_satset, challenge }) => {
                             </p>
                             <p
                                 className={`
-                                    ${tim_satset.score < 1000 && "text-6xl"} 
+                                    ${tim_satset.score < 1000 && "text-3xl"} 
                                     ${tim_satset.score >= 1000 && "text-3xl"}
                                     font-semibold text-defaultBlue
                                 `}
