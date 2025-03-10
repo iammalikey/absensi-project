@@ -1,0 +1,35 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('attendances', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('slug')->unique();
+            $table->date('clock_in_date')->nullable()->onDelete('set null');
+            $table->time('clock_in');
+            $table->time('clock_out')->nullable();
+            $table->text('clock_in_location');
+            $table->string('category');
+            $table->string('status');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('attendances');
+    }
+};

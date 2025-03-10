@@ -24,16 +24,8 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             UserCmsSeeder::class,
 
-            KlasemenSeeder::class,
-            SettingSeeder::class,
-
-            // DepartmentSeeder::class,
-            // EmployeeSeeder::class,
-            ShiftSeeder::class,
-            AttendanceSeeder::class,
-            LeaveRequestSeeder::class,
-            LogSeeder::class,
-            ApprovalSeeder::class,
+            DivisionSeeder::class,
+            EmployeeSeeder::class,
         ]);
     }
 }

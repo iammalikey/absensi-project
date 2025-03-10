@@ -12,6 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Authenticatable implements HasMedia
 {
@@ -64,20 +65,8 @@ class User extends Authenticatable implements HasMedia
         });
     }
 
-    public function attendance() {
-        return $this->hasMany(Attendance::class);
+    public function employee()
+    {
+        return $this->hasOne(Employee::class);
     }
-
-    public function leaveRequests() {
-        return $this->hasMany(LeaveRequest::class);
-    }
-
-    public function approvals() {
-        return $this->hasMany(Approval::class, 'approved_by');
-    }
-
-    public function logs() {
-        return $this->hasMany(Log::class);
-    }
-
 }

@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('klasemen', function (Blueprint $table) {
+        Schema::create('leave_requests', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('slug')->unique();
-            $table->integer('score');
-            $table->text('cta_title_instagram');
-            $table->text('cta_link_instagram')->nullable();
-            $table->text('cta_title_tiktok');
-            $table->text('cta_link_tiktok')->nullable();
+            $table->date('start_date')->nullable()->onDelete('set null');
+            $table->date('end_date')->nullable()->onDelete('set null');
+            $table->string('category');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('klasemen');
+        Schema::dropIfExists('leave_requests');
     }
 };

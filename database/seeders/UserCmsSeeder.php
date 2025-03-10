@@ -24,6 +24,7 @@ class UserCmsSeeder extends Seeder
         $role_supervisor = Role::firstOrCreate(['name' => 'Supervisor', 'guard_name' => 'cms']);
         $role_employee = Role::firstOrCreate(['name' => 'Employee', 'guard_name' => 'cms']);
 
+<<<<<<< HEAD
         // 🔹 SUPER ADMIN (1)
         $superadmin = User::create([
             'email' => "superadmin@app.com",
@@ -31,48 +32,125 @@ class UserCmsSeeder extends Seeder
             'name' => "Super Admin",
             'password' => Hash::make('superadmin'),
             'role' => 'superadmin'
+=======
+        // Make Role and User as an HR Admin
+        $role_hrd = Role::firstOrCreate([
+            'name' => 'Human Resource',
+            'guard_name' => 'cms'
+>>>>>>> code-malikey
         ]);
         $superadmin->assignRole($role_super);
 
-        // 🔹 HRD (1)
-        $hrd = User::create([
-            'email' => "hrd@app.com",
-            'username' => "hrd",
-            'name' => "HRD Manager",
-            'password' => Hash::make('hrd'),
-            'role' => 'hrd'
+        // tambahin permission disini sesuai module
+        $role_hrd->givePermissionTo([
+            'user management',
+            'permission management',
+            'klasemen management',
+            'klasemen management link',
+            'klasemen management score',
+            'setting management',
+            'attendance management',
+            'leave request management',
+            'employee management',
         ]);
         $hrd->assignRole($role_hrd);
 
-        // 🔹 SUPERVISOR (3)
-        $supervisors = [];
-        for ($i = 1; $i <= 3; $i++) {
-            $supervisors[] = User::create([
-                'email' => "supervisor$i@app.com",
-                'username' => "supervisor$i",
-                'name' => "Supervisor $i",
-                'password' => Hash::make('supervisor'),
-                'role' => 'supervisor',
-            ]);
-            $supervisors[$i - 1]->assignRole($role_supervisor);
-        }
+        $user_hrd = User::create([
+            'email' => 'hrd@app.com',
+            'username' => 'humanresource',
+            'name' => 'Human Resource',
+            'password' => bcrypt('humanresource'),
+        ]);
+        $user_hrd->assignRole($role_hrd);
 
-        // 🔹 EMPLOYEE (20)
-        for ($i = 1; $i <= 20; $i++) {
-            User::create([
-                'email' => "employee$i@app.com",
-                'username' => "employee$i",
-                'name' => "Employee $i",
-                'password' => Hash::make('employee'),
-                'role' => 'employee',
-                // 'nik' => $faker->unique()->numerify('EMP####'),
-                // 'position' => $faker->jobTitle,
-                // 'department' => $faker->randomElement(['IT', 'HR', 'Finance', 'Marketing']),
-                // 'join_date' => $faker->date,
-                // 'salary' => $faker->randomFloat(2, 3000, 10000),
-                // 'emergency_contact' => $faker->phoneNumber,
-                // 'supervisor_id' => $supervisors[array_rand($supervisors)]->id,
-            ])->assignRole($role_employee);
-        }
+
+        // Make Role and User as a supervisor
+        $role_supervisor = Role::firstOrCreate([
+            'name' => 'Supervisor',
+            'guard_name' => 'cms'
+        ]);
+
+        // tambahin permission disini sesuai module
+        $role_supervisor->givePermissionTo([
+            'user management',
+            'permission management',
+            'klasemen management',
+            'klasemen management link',
+            'klasemen management score',
+            'setting management',
+            'attendance management',
+            'leave request management',
+            'employee management',
+        ]);
+
+        $user_supervisor = User::create([
+            'email' => 'supervisor@app.com',
+            'username' => 'supervisor',
+            'name' => 'Supervisor',
+            'password' => bcrypt('supervisor'),
+        ]);
+        $user_supervisor->assignRole($role_supervisor);
+
+
+        // Make Role and User as a employee
+        $role_employee = Role::firstOrCreate([
+            'name' => 'Employee',
+            'guard_name' => 'cms'
+        ]);
+
+        // tambahin permission disini sesuai module
+        $role_employee->givePermissionTo([
+            'user management',
+            'permission management',
+            'klasemen management',
+            'klasemen management link',
+            'klasemen management score',
+            'setting management',
+            'attendance management',
+            'leave request management',
+            'employee management',
+        ]);
+
+        $user_employee1 = User::create([
+            'email' => 'employee1@app.com',
+            'username' => 'employee1',
+            'name' => 'Employee 1',
+            'password' => bcrypt('employee'),
+        ]);
+        $user_employee1->assignRole($role_employee);
+
+        $user_employee2 = User::create([
+            'email' => 'employee2@app.com',
+            'username' => 'employee2',
+            'name' => 'Employee 2',
+            'password' => bcrypt('employee'),
+        ]);
+        $user_employee2->assignRole($role_employee);
+
+        $user_employee3 = User::create([
+            'email' => 'employee3@app.com',
+            'username' => 'employee3',
+            'name' => 'Employee 3',
+            'password' => bcrypt('employee'),
+        ]);
+        $user_employee3->assignRole($role_employee);
+
+        $user_employee4 = User::create([
+            'email' => 'employee4@app.com',
+            'username' => 'employee4',
+            'name' => 'Employee 4',
+            'password' => bcrypt('employee'),
+        ]);
+        $user_employee4->assignRole($role_employee);
+
+        $user_employee5 = User::create([
+            'email' => 'employee5@app.com',
+            'username' => 'employee5',
+            'name' => 'Employee 5',
+            'password' => bcrypt('employee'),
+        ]);
+        $user_employee5->assignRole($role_employee);
+
+
     }
 }
