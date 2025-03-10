@@ -95,6 +95,14 @@ const Sidebar = () => {
                                 url={url}
                             />
                         )}
+                        {hasAnyPermission(["employee management"]) && (
+                            <Item
+                                title="Employee"
+                                to={route("cms.employee.index")}
+                                icon={<ScoreboardIcon />}
+                                url={url}
+                            />
+                        )}
 
                         {/* {hasAnyPermission(["klasemen management"]) && (
                             <Item
@@ -113,7 +121,7 @@ const Sidebar = () => {
                             />
                         )} */}
 
-                        {hasAnyPermission(["shift management"]) && (
+                        {/* {hasAnyPermission(["shift management"]) && (
                             <Item
                                 title="Shift"
                                 to={route("cms.shifts.index")}
@@ -129,7 +137,7 @@ const Sidebar = () => {
                                 icon={<ScheduleIcon />}
                                 url={url}
                             />
-                        )}
+                        )} */}
 
                         {hasAnyPermission(["user management", "role management", "permission management"]) && (
                             <>

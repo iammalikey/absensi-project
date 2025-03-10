@@ -8,6 +8,7 @@ use App\Http\Controllers\Backoffice\Dashboard\DashboardController;
 use App\Http\Controllers\Backoffice\Profile\ChangePasswordController;
 use App\Http\Controllers\Backoffice\Profile\ProfileController;
 use App\Http\Controllers\Backoffice\DivisionController;
+use App\Http\Controllers\Backoffice\EmployeeController;
 use App\Http\Middleware\VerifyRecaptchaToken;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Route;
@@ -206,6 +207,51 @@ if (config("cms.enable") && config("cms.path")) {
          * middleware: [auth:cms, role_or_permission:Super Admin|division management]
          */
         Route::delete('/{division}', [DivisionController::class, 'destroy'])->name('delete');
+      });
+
+      Route::group(['as' => 'employee.', 'prefix' => 'employee', 'middleware' => ['role_or_permission:Super Admin|employee management',]], function () {
+        /**
+         * division index
+         * route: CMS_PATH/access/division
+         * name: cms.access.division.index
+         * middleware: [auth:cms, role_or_permission:Super Admin|division management]
+         */
+        Route::get('/', [EmployeeController::class, 'index'])->name('index');
+        /**
+         * division create
+         * route: CMS_PATH/access/division/create
+         * name: cms.access.division.create
+         * middleware: [auth:cms, role_or_permission:Super Admin|division management]
+         */
+        Route::get('/create', [EmployeeController::class, 'create'])->name('create');
+        /**
+         * division store
+         * route: CMS_PATH/access/division
+         * name: cms.access.division.store
+         * middleware: [auth:cms, role_or_permission:Super Admin|division management]
+         */
+        Route::post('/', [EmployeeController::class, 'store'])->name('store');
+        /**
+         * division edit
+         * route: CMS_PATH/access/division/edit/{division}
+         * name: cms.access.division.edit
+         * middleware: [auth:cms, role_or_permission:Super Admin|division management]
+         */
+        Route::get('/edit/{employee}', [EmployeeController::class, 'edit'])->name('edit');
+        /**
+         * division update
+         * route: CMS_PATH/access/division/edit/{division}
+         * name: cms.access.division.update
+         * middleware: [auth:cms, role_or_permission:Super Admin|division management]
+         */
+        Route::put('/edit/{employee}', [EmployeeController::class, 'update'])->name('update');
+        /**
+         * division delete
+         * route: CMS_PATH/access/division/{division}
+         * name: cms.access.division.delete
+         * middleware: [auth:cms, role_or_permission:Super Admin|division management]
+         */
+        Route::delete('/{employee}', [EmployeeController::class, 'destroy'])->name('delete');
       });
       
     });
