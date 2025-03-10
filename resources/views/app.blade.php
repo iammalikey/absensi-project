@@ -92,6 +92,18 @@
         {{-- <!-- Fonts --> --}}
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link rel="manifest" href="/manifest.json">
+        <!-- Service Worker -->
+        <script>
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('./public/serviceworker.js')
+                .then((registration) => {
+                    console.log("Service Worker registered with scope:", registration.scope);
+                }).catch((error) => {
+                    console.log("Service Worker registration failed:", error);
+                });
+            }
+        </script>
         {{-- <!-- Scripts --> --}}
         @routes
         @viteReactRefresh

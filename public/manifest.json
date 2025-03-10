@@ -1,0 +1,35 @@
+{
+    "name": "Nama Aplikasi",
+    "short_name": "Aplikasi",
+    "description": "Deskripsi singkat aplikasi.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
+    "id": "/",
+    "icons": [
+        {
+            "src": "/assets/images/icons/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/images/icons/icon-192x192.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/assets/images/screenshots/screenshot-1.png",
+            "sizes": "1080x1920",
+            "type": "image/png",
+            "form_factor": "wide"
+        },
+        {
+            "src": "/assets/images/screenshots/screenshot-2.png",
+            "sizes": "1080x1920",
+            "type": "image/png"
+        }
+    ]
+}

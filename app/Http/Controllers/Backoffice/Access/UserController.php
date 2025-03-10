@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backoffice\Access;
 
 use App\Helpers\AlertHelper;
 use App\Helpers\ParseUrlHelper;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller; 
 use App\Http\Requests\Backoffice\Access\UserStoreRequest;
 use App\Http\Requests\Backoffice\Access\UserUpdateRequest;
 use App\Http\Resources\Backoffice\Access\UserEditResource;
@@ -28,7 +28,8 @@ class UserController extends Controller
     public function create()
     {
         return inertia('Backoffice/Access/User/Create', [
-            'roles' => Role::where('name', Role::SUPER_ADMIN)->get(['id', 'name'])
+            // 'roles' => Role::where('name', Role::SUPER_ADMIN)->get(['id', 'name'])
+            'roles' => Role::all(['id', 'name'])
         ]);
     }
 

@@ -26,9 +26,14 @@ class DatabaseSeeder extends Seeder
 
             KlasemenSeeder::class,
             SettingSeeder::class,
-            // CategorySeeder::class,
-            // TagSeeder::class,
-            // PostSeeder::class,
+
+            // DepartmentSeeder::class,
+            // EmployeeSeeder::class,
+            ShiftSeeder::class,
+            AttendanceSeeder::class,
+            LeaveRequestSeeder::class,
+            LogSeeder::class,
+            ApprovalSeeder::class,
         ]);
     }
 }

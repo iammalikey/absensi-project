@@ -29,6 +29,7 @@ class User extends Authenticatable implements HasMedia
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -62,4 +63,21 @@ class User extends Authenticatable implements HasMedia
             return [$pr['name'] => true];
         });
     }
+
+    public function attendance() {
+        return $this->hasMany(Attendance::class);
+    }
+
+    public function leaveRequests() {
+        return $this->hasMany(LeaveRequest::class);
+    }
+
+    public function approvals() {
+        return $this->hasMany(Approval::class, 'approved_by');
+    }
+
+    public function logs() {
+        return $this->hasMany(Log::class);
+    }
+
 }

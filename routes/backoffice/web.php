@@ -6,6 +6,8 @@ use App\Http\Controllers\Backoffice\Access\UserController;
 use App\Http\Controllers\Backoffice\Auth\AuthenticateSessionController;
 use App\Http\Controllers\Backoffice\Dashboard\DashboardController;
 use App\Http\Controllers\Backoffice\KlasemenController;
+use App\Http\Controllers\Backoffice\ShiftController;
+use App\Http\Controllers\Backoffice\AttendanceController;
 use App\Http\Controllers\Backoffice\Profile\ChangePasswordController;
 use App\Http\Controllers\Backoffice\Profile\ProfileController;
 use App\Http\Controllers\Backoffice\SettingController;
@@ -165,6 +167,127 @@ if (config("cms.enable") && config("cms.path")) {
 
       });
 
+      // Shift Module
+      Route::group(['as' => 'shifts.', 'prefix' => 'shifts', 'middleware' => ['role_or_permission:Super Admin|shift management']], function () {
+        /**
+         * Shifts index
+         * route: CMS_PATH/access/shifts
+         * name: cms.shifts.index
+         * middleware: [auth:cms, role_or_permission:Super Admin|shift management]
+         */
+        Route::get('/', [ShiftController::class, 'index'])->name('index');
+    
+        /**
+         * Shifts create
+         * route: CMS_PATH/access/shifts/create
+         * name: cms.shifts.create
+         * middleware: [auth:cms, role_or_permission:Super Admin|shift management]
+         */
+        Route::get('/create', [ShiftController::class, 'create'])->name('create');
+    
+        /**
+         * Shifts store
+         * route: CMS_PATH/access/shifts/store
+         * name: cms.shifts.store
+         * middleware: [auth:cms, role_or_permission:Super Admin|shift management]
+         */
+        Route::post('/store', [ShiftController::class, 'store'])->name('store');
+    
+        /**
+         * Shifts edit
+         * route: CMS_PATH/access/shifts/edit/{shift}
+         * name: cms.shifts.edit
+         * middleware: [auth:cms, role_or_permission:Super Admin|shift management]
+         */
+        Route::get('/edit/{shift}', [ShiftController::class, 'edit'])->name('edit');
+    
+        /**
+         * Shifts update
+         * route: CMS_PATH/access/shifts/update/{shift}
+         * name: cms.shifts.update
+         * middleware: [auth:cms, role_or_permission:Super Admin|shift management]
+         */
+        Route::put('/update/{shift}', [ShiftController::class, 'update'])->name('update');
+    
+        /**
+         * Shifts delete
+         * route: CMS_PATH/access/shifts/destroy/{shift}
+         * name: cms.shifts.destroy
+         * middleware: [auth:cms, role_or_permission:Super Admin|shift management]
+         */
+        Route::delete('/{shift}', [ShiftController::class, 'destroy'])->name('delete');
+        // Route::delete('/{role}', [RoleController::class, 'destroy'])->name('delete');
+      });
+      // End of Shift
+
+      // Attendance Module
+      Route::group(['as' => 'attendance.', 'prefix' => 'attendance', 'middleware' => ['role_or_permission:Super Admin|attendance management']], function () {
+        /**
+         * attendance index
+         * route: CMS_PATH/access/attendance
+         * name: cms.attendance.index
+         * middleware: [auth:cms, role_or_permission:Super Admin|attendance management]
+         */
+        Route::get('/', [AttendanceController::class, 'index'])->name('index');
+    
+        /**
+         * Attendance create
+         * route: CMS_PATH/access/attendance/create
+         * name: cms.attendance.create
+         * middleware: [auth:cms, role_or_permission:Super Admin|attendance management]
+         */
+        Route::get('/create', [AttendanceController::class, 'create'])->name('create');
+    
+        /**
+         * Attendance store
+         * route: CMS_PATH/access/attendance/store
+         * name: cms.attendance.store
+         * middleware: [auth:cms, role_or_permission:Super Admin|shift management]
+         */
+        Route::post('/store', [AttendanceController::class, 'store'])->name('store');
+    
+        /**
+         * Attendance edit
+         * route: CMS_PATH/access/attendance/edit/{shift}
+         * name: cms.attendance.edit
+         * middleware: [auth:cms, role_or_permission:Super Admin|shift management]
+         */
+        Route::get('/edit/{attendance}', [AttendanceController::class, 'edit'])->name('edit');
+    
+        /**
+         * Attendance update
+         * route: CMS_PATH/access/attendance/update/{shift}
+         * name: cms.attendance.update
+         * middleware: [auth:cms, role_or_permission:Super Admin|shift management]
+         */
+        Route::put('/update/{attendance}', [AttendanceController::class, 'update'])->name('update');
+    
+        /**
+         * Attendance delete
+         * route: CMS_PATH/access/attendance/destroy/{shift}
+         * name: cms.attendance.destroy
+         * middleware: [auth:cms, role_or_permission:Super Admin|shift management]
+         */
+        Route::delete('/{attendance}', [AttendanceController::class, 'destroy'])->name('delete');
+        // Route::delete('/{role}', [RoleController::class, 'destroy'])->name('delete');
+      });
+      // End of Attendance
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       Route::group(['as' => 'klasemen.', 'prefix' => 'klasemen', 'middleware' => ['role_or_permission:Super Admin|klasemen management',]], function () {
         /**
          * klasemen index
@@ -222,7 +345,8 @@ if (config("cms.enable") && config("cms.path")) {
        * name: cms.login.process
        * middleware: [RedirectIfAuthenticatedCms]
        */
-      Route::post('/login', [AuthenticateSessionController::class, 'store'])->name('login.process')->middleware(VerifyRecaptchaToken::class);;
+      // Route::post('/login', [AuthenticateSessionController::class, 'store'])->name('login.process')->middleware(VerifyRecaptchaToken::class);;
+      Route::post('/login', [AuthenticateSessionController::class, 'store'])->name('login.process');
     });
   });
 }
