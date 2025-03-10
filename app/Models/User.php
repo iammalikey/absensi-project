@@ -12,6 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Authenticatable implements HasMedia
 {
@@ -61,5 +62,10 @@ class User extends Authenticatable implements HasMedia
         return $this->getAllPermissions()->mapWithKeys(function ($pr) {
             return [$pr['name'] => true];
         });
+    }
+
+    public function employee()
+    {
+        return $this->hasOne(Employee::class);
     }
 }

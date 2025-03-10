@@ -86,8 +86,16 @@ const Sidebar = () => {
                             icon={<HomeOutlinedIcon />}
                             url={url}
                         />
+                        {hasAnyPermission(["division management"]) && (
+                            <Item
+                                title="Division"
+                                to={route("cms.division.index")}
+                                icon={<ScoreboardIcon />}
+                                url={url}
+                            />
+                        )}
 
-                        {hasAnyPermission(["klasemen management"]) && (
+                        {/* {hasAnyPermission(["klasemen management"]) && (
                             <Item
                                 title="Klasemen"
                                 to={route("cms.klasemen.index")}
@@ -102,7 +110,7 @@ const Sidebar = () => {
                                 icon={<VideoSettingsIcon />}
                                 url={url}
                             />
-                        )}
+                        )} */}
 
                         {hasAnyPermission(["user management","role management","permission management",]) && (
                             <>

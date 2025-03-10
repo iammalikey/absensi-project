@@ -45,5 +45,20 @@ class PermissionSeeder extends Seeder
             'name' => 'setting management',
             'guard_name' => 'cms',
         ]);
+
+        Permission::create([
+            'name' => 'attendance management',
+            'guard_name' => 'cms',
+        ]);
+
+        Permission::create([
+            'name' => 'leave request management',
+            'guard_name' => 'cms',
+        ]);
+
+        Permission::create([
+            'name' => 'employee management',
+            'guard_name' => 'cms',
+        ]);
     }
 }

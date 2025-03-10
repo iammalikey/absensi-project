@@ -5,10 +5,9 @@ use App\Http\Controllers\Backoffice\Access\RoleController;
 use App\Http\Controllers\Backoffice\Access\UserController;
 use App\Http\Controllers\Backoffice\Auth\AuthenticateSessionController;
 use App\Http\Controllers\Backoffice\Dashboard\DashboardController;
-use App\Http\Controllers\Backoffice\KlasemenController;
 use App\Http\Controllers\Backoffice\Profile\ChangePasswordController;
 use App\Http\Controllers\Backoffice\Profile\ProfileController;
-use App\Http\Controllers\Backoffice\SettingController;
+use App\Http\Controllers\Backoffice\DivisionController;
 use App\Http\Middleware\VerifyRecaptchaToken;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Route;
@@ -162,49 +161,53 @@ if (config("cms.enable") && config("cms.path")) {
          * middleware: [auth:cms, role_or_permission:Super Admin|permission management]
          */
         Route::get('/permission', [PermissionController::class, 'index'])->name('permission.index')->middleware(['role_or_permission:Super Admin|permission management',]);
-
       });
 
-      Route::group(['as' => 'klasemen.', 'prefix' => 'klasemen', 'middleware' => ['role_or_permission:Super Admin|klasemen management',]], function () {
+      Route::group(['as' => 'division.', 'prefix' => 'division', 'middleware' => ['role_or_permission:Super Admin|division management',]], function () {
         /**
-         * klasemen index
-         * route: CMS_PATH/access/klasemen
-         * name: cms.klasemen.index
-         * middleware: [auth:cms, role_or_permission:Super Admin|klasemen management]
+         * division index
+         * route: CMS_PATH/access/division
+         * name: cms.access.division.index
+         * middleware: [auth:cms, role_or_permission:Super Admin|division management]
          */
-        Route::get('/', [KlasemenController::class, 'index'])->name('index');
+        Route::get('/', [DivisionController::class, 'index'])->name('index');
         /**
-         * klasemen edit
-         * route: CMS_PATH/access/klasemen/edit/{klasemen}
-         * name: cms.klasemen.edit
-         * middleware: [auth:cms, role_or_permission:Super Admin|klasemen management]
+         * division create
+         * route: CMS_PATH/access/division/create
+         * name: cms.access.division.create
+         * middleware: [auth:cms, role_or_permission:Super Admin|division management]
          */
-        Route::get('/edit/{klasemen}', [KlasemenController::class, 'edit'])->name('edit');
+        Route::get('/create', [DivisionController::class, 'create'])->name('create');
         /**
-         * klasemen update
-         * route: CMS_PATH/access/klasemen/edit/{klasemen}
-         * name: cms.klasemen.update
-         * middleware: [auth:cms, role_or_permission:Super Admin|klasemen management]
+         * division store
+         * route: CMS_PATH/access/division
+         * name: cms.access.division.store
+         * middleware: [auth:cms, role_or_permission:Super Admin|division management]
          */
-        Route::put('/edit/{klasemen}', [KlasemenController::class, 'update'])->name('update');
+        Route::post('/', [DivisionController::class, 'store'])->name('store');
+        /**
+         * division edit
+         * route: CMS_PATH/access/division/edit/{division}
+         * name: cms.access.division.edit
+         * middleware: [auth:cms, role_or_permission:Super Admin|division management]
+         */
+        Route::get('/edit/{division}', [DivisionController::class, 'edit'])->name('edit');
+        /**
+         * division update
+         * route: CMS_PATH/access/division/edit/{division}
+         * name: cms.access.division.update
+         * middleware: [auth:cms, role_or_permission:Super Admin|division management]
+         */
+        Route::put('/edit/{division}', [DivisionController::class, 'update'])->name('update');
+        /**
+         * division delete
+         * route: CMS_PATH/access/division/{division}
+         * name: cms.access.division.delete
+         * middleware: [auth:cms, role_or_permission:Super Admin|division management]
+         */
+        Route::delete('/{division}', [DivisionController::class, 'destroy'])->name('delete');
       });
-
-      Route::group(['as' => 'setting.', 'prefix' => 'setting', 'middleware' => ['role_or_permission:Super Admin|setting management',]], function () {
-        /**
-         * setting edit
-         * route: CMS_PATH/access/setting/edit/Setting::CHALLENGE_SLUG
-         * name: cms.setting.edit.challenge
-         * middleware: [auth:cms, role_or_permission:Super Admin|setting management]
-         */
-        Route::get("/edit/".Setting::CHALLENGE_SLUG, [SettingController::class, 'edit'])->name('edit.challenge');
-        /**
-         * setting update
-         * route: CMS_PATH/access/setting/edit/Setting::CHALLENGE_SLUG
-         * name: cms.setting.update.challenge
-         * middleware: [auth:cms, role_or_permission:Super Admin|setting management]
-         */
-        Route::put('/'.Setting::CHALLENGE_SLUG, [SettingController::class, 'update'])->name('update.challenge');
-      });
+      
     });
 
     // auth cms
@@ -222,7 +225,8 @@ if (config("cms.enable") && config("cms.path")) {
        * name: cms.login.process
        * middleware: [RedirectIfAuthenticatedCms]
        */
-      Route::post('/login', [AuthenticateSessionController::class, 'store'])->name('login.process')->middleware(VerifyRecaptchaToken::class);;
+      // Route::post('/login', [AuthenticateSessionController::class, 'store'])->name('login.process')->middleware(VerifyRecaptchaToken::class);;
+      Route::post('/login', [AuthenticateSessionController::class, 'store'])->name('login.process');
     });
   });
 }

@@ -24,11 +24,8 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             UserCmsSeeder::class,
 
-            KlasemenSeeder::class,
-            SettingSeeder::class,
-            // CategorySeeder::class,
-            // TagSeeder::class,
-            // PostSeeder::class,
+            DivisionSeeder::class,
+            EmployeeSeeder::class,
         ]);
     }
 }
