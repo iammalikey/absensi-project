@@ -6,8 +6,6 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
-use Faker\Factory as Faker;
 
 class UserCmsSeeder extends Seeder
 {
@@ -16,30 +14,26 @@ class UserCmsSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = Faker::create();
+        // Make Role and User as a Super Administrator
+        $role_super = Role::firstOrCreate([
+            'name' => 'Super Admin',
+            'guard_name' => 'cms'
+        ]);
 
-        // 🔹 ROLE SETUP
-        $role_super = Role::firstOrCreate(['name' => 'Super Admin', 'guard_name' => 'cms']);
-        $role_hrd = Role::firstOrCreate(['name' => 'HRD', 'guard_name' => 'cms']);
-        $role_supervisor = Role::firstOrCreate(['name' => 'Supervisor', 'guard_name' => 'cms']);
-        $role_employee = Role::firstOrCreate(['name' => 'Employee', 'guard_name' => 'cms']);
+        // super dapat semua permission
+        $user_super = User::create([
+            'email' => 'super@app.com',
+            'username' => 'super',
+            'name' => 'Super Administrator',
+            'password' => bcrypt('super'),
+        ]);
+        $user_super->assignRole($role_super);
 
-<<<<<<< HEAD
-        // 🔹 SUPER ADMIN (1)
-        $superadmin = User::create([
-            'email' => "superadmin@app.com",
-            'username' => "superadmin",
-            'name' => "Super Admin",
-            'password' => Hash::make('superadmin'),
-            'role' => 'superadmin'
-=======
         // Make Role and User as an HR Admin
         $role_hrd = Role::firstOrCreate([
             'name' => 'Human Resource',
             'guard_name' => 'cms'
->>>>>>> code-malikey
         ]);
-        $superadmin->assignRole($role_super);
 
         // tambahin permission disini sesuai module
         $role_hrd->givePermissionTo([
@@ -53,7 +47,6 @@ class UserCmsSeeder extends Seeder
             'leave request management',
             'employee management',
         ]);
-        $hrd->assignRole($role_hrd);
 
         $user_hrd = User::create([
             'email' => 'hrd@app.com',
