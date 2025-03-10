@@ -11,6 +11,13 @@ export default function Index({ divisions }) {
   const handleEdit = (id) => {
     router.get(route("cms.division.edit", { division: id }));
   };
+  // untuk delete modal confirm delete
+  const [openConfirmDelete, setOpenConfirmDelete] = useState(false)
+  const [routeDelete, setRouteDelete] = useState('')
+  const handleDelete = (id) => {
+    setOpenConfirmDelete(true)
+    setRouteDelete(route('cms.division.delete', { division: id }))
+  }
 
   // pagination
   const handleChangePage = (event, newPage) => {
@@ -42,6 +49,16 @@ export default function Index({ divisions }) {
   return (
     <Box m="20px">
       <Header title={`Division Management`} subtitle={`Manage Division`}></Header>
+      <Box display="flex" justifyContent="start" mt="20px" gap="5px">
+        <Button
+            type="submit"
+            color="secondary"
+            variant="contained"
+            onClick={() => router.get(route("cms.division.create"))}
+        >
+            Add New Division
+        </Button>
+      </Box>
       <TableContainer sx={{ maxHeight: "70vh" }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -65,6 +82,9 @@ export default function Index({ divisions }) {
                   <Button onClick={() => handleEdit(item.slug)} color="neutral" variant="contained" className="mt-2">
                     Edit
                   </Button>
+                  <Button onClick={() =>handleDelete(item.slug)} color="danger" variant="contained"  className='mt-2'>
+                    Delete
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
@@ -72,13 +92,18 @@ export default function Index({ divisions }) {
         </Table>
       </TableContainer>
       <TablePagination
-      rowsPerPageOptions={[5, 10, 20, 100]}
-      component="div"
-      count={divisions.meta.total}
-      rowsPerPage={divisions.meta.per_page}
-      page={divisions.meta.current_page - 1}
-      onPageChange={handleChangePage}
-      onRowsPerPageChange={handleChangeRowsPerPage}
+        rowsPerPageOptions={[5, 10, 20, 100]}
+        component="div"
+        count={divisions.meta.total}
+        rowsPerPage={divisions.meta.per_page}
+        page={divisions.meta.current_page - 1}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+      <ConfirmDeleteDialog
+        openConfirmDelete={openConfirmDelete}
+        setOpenConfirmDelete={setOpenConfirmDelete}
+        route={routeDelete}
       />
     </Box>
   );

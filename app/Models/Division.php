@@ -9,13 +9,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Division extends Model
 {
-    use HasFactory;
+    use HasFactory, GenerateSlug;
 
     const TABLE = 'divisions';
     protected $table = self::TABLE;
 
     protected $fillable = [
-        'title'
+        'title',
+        'slug'
     ];
     
     public function getRouteKeyName(){
