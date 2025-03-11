@@ -33,7 +33,6 @@ class EmployeeDetailResource extends JsonResource
                 'avatar' => isset($this->user) ? $this->user->avatar : null,
             ],
             'division' => isset($this->division) ? ['id' => $this->division->id, 'title' => $this->division->title] : null,
-            'created_at' => $this->created_at->format('d M Y H:i'),
         ];
     }
 }

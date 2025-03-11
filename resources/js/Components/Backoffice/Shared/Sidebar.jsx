@@ -104,40 +104,6 @@ const Sidebar = () => {
                             />
                         )}
 
-                        {/* {hasAnyPermission(["klasemen management"]) && (
-                            <Item
-                                title="Klasemen"
-                                to={route("cms.klasemen.index")}
-                                icon={<ScoreboardIcon />}
-                                url={url}
-                            />
-                        )}
-                        {hasAnyPermission(["setting management"]) && (
-                            <Item
-                                title="Setting"
-                                to={route("cms.setting.edit.challenge")}
-                                icon={<VideoSettingsIcon />}
-                                url={url}
-                            />
-                        )} */}
-
-                        {/* {hasAnyPermission(["shift management"]) && (
-                            <Item
-                                title="Shift"
-                                to={route("cms.shifts.index")}
-                                icon={<ScheduleIcon />}
-                                url={url}
-                            />
-                        )}
-
-                        {hasAnyPermission(["attendance management"]) && (
-                            <Item
-                                title="Attendance"
-                                to={route("cms.attendance.index")}
-                                icon={<ScheduleIcon />}
-                                url={url}
-                            />
-                        )} */}
 
                         {hasAnyPermission(["user management", "role management", "permission management"]) && (
                             <>

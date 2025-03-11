@@ -218,13 +218,6 @@ if (config("cms.enable") && config("cms.path")) {
          */
         Route::get('/', [EmployeeController::class, 'index'])->name('index');
         /**
-        * division index
-        * route: CMS_PATH/access/division
-        * name: cms.access.division.index
-        * middleware: [auth:cms, role_or_permission:Super Admin|division management]
-        */
-        Route::get('/{employee}', [EmployeeController::class, 'show'])->name('show');
-        /**
          * division create
          * route: CMS_PATH/access/division/create
          * name: cms.access.division.create
@@ -238,6 +231,15 @@ if (config("cms.enable") && config("cms.path")) {
          * middleware: [auth:cms, role_or_permission:Super Admin|division management]
          */
         Route::post('/', [EmployeeController::class, 'store'])->name('store');
+        /**
+        * division index
+        * route: CMS_PATH/access/division
+        * name: cms.access.division.index
+        * middleware: [auth:cms, role_or_permission:Super Admin|division management]
+        */
+        Route::get('/{employee}', [EmployeeController::class, 'show'])->name('show');
+        
+        
         /**
          * division edit
          * route: CMS_PATH/access/division/edit/{division}

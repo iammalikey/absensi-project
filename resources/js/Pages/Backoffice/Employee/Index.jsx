@@ -20,14 +20,14 @@ import ConfirmDeleteDialog from "@/Components/Backoffice/ConfirmDeleteDialog";
 export default function Index({ employees }) {
     // untuk edit
     const handleEdit = (id) => {
-        router.get(route("cms.access.employee.edit", { employee: id }));
+        router.get(route("cms.employee.edit", { employee: id }));
     };
     // untuk delete modal confirm delete
     const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
     const [routeDelete, setRouteDelete] = useState("");
     const handleDelete = (id) => {
         setOpenConfirmDelete(true);
-        setRouteDelete(route("cms.access.employee.delete", { employee: id }));
+        setRouteDelete(route("cms.employee.delete", { employee: id }));
     };
     // -----------
     // pagination
@@ -55,7 +55,7 @@ export default function Index({ employees }) {
     };
     const handleChangeRowsPerPage = (event) => {
         router.get(
-            route("cms.access.employee.index"),
+            route("cms.employee.index"),
             { size: +event.target.value },
             { preserveScroll: true, preserveState: true }
         );
@@ -70,7 +70,7 @@ export default function Index({ employees }) {
                     type="submit"
                     color="secondary"
                     variant="contained"
-                    onClick={() => router.get(route("cms.access.employee.create"))}
+                    onClick={() => router.get(route("cms.employee.create"))}
                 >
                     Create employee
                 </Button>
