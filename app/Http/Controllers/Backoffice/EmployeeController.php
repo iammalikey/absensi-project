@@ -27,7 +27,8 @@ class EmployeeController extends Controller
 
     public function show($id)
     {
-        $employee = Employee::with(['user', 'division'])->findOrFail($id);
-        return new EmployeeDetailResource($employee);
+        return inertia('Backoffice/Employee/Show', [
+            'employee' => new EmployeeDetailResource(Employee::with(['user', 'division'])->findOrFail($id)),
+        ]);
     }
 }

@@ -42,6 +42,10 @@ class EmployeeSeeder extends Seeder
             'marital_status' => 'lorem ipsum dolor sit amet ',
             'blood_type' => 'lorem ipsum dolor sit amet ',
             'religion' => 'lorem ipsum dolor sit amet ',
+            'address' => 'lorem ipsum dolor sit amet',
+            'postal_code' => '10200',
+            'NIK' => '123456789',
+            'NPWP' => '123456789',
         ]);
         $employee2 = Employee::create([
             'user_id' => $user2->id,
@@ -55,6 +59,10 @@ class EmployeeSeeder extends Seeder
             'marital_status' => 'lorem ipsum dolor sit amet ',
             'blood_type' => 'lorem ipsum dolor sit amet ',
             'religion' => 'lorem ipsum dolor sit amet ',
+            'address' => 'lorem ipsum dolor sit amet',
+            'postal_code' => '10200',
+            'NIK' => '123456789',
+            'NPWP' => '123456789',
         ]);
         $employee3 = Employee::create([
             'user_id' => $user3->id,
@@ -68,6 +76,10 @@ class EmployeeSeeder extends Seeder
             'marital_status' => 'lorem ipsum dolor sit amet ',
             'blood_type' => 'lorem ipsum dolor sit amet ',
             'religion' => 'lorem ipsum dolor sit amet ',
+            'address' => 'lorem ipsum dolor sit amet',
+            'postal_code' => '10200',
+            'NIK' => '123456789',
+            'NPWP' => '123456789',
         ]);
         $employee4 = Employee::create([
             'user_id' => $user4->id,
@@ -81,6 +93,10 @@ class EmployeeSeeder extends Seeder
             'marital_status' => 'lorem ipsum dolor sit amet ',
             'blood_type' => 'lorem ipsum dolor sit amet ',
             'religion' => 'lorem ipsum dolor sit amet ',
+            'address' => 'lorem ipsum dolor sit amet',
+            'postal_code' => '10200',
+            'NIK' => '123456789',
+            'NPWP' => '123456789',
         ]);
         $employee5 = Employee::create([
             'user_id' => $user5->id,
@@ -94,6 +110,10 @@ class EmployeeSeeder extends Seeder
             'marital_status' => 'lorem ipsum dolor sit amet ',
             'blood_type' => 'lorem ipsum dolor sit amet ',
             'religion' => 'lorem ipsum dolor sit amet ',
+            'address' => 'lorem ipsum dolor sit amet',
+            'postal_code' => '10200',
+            'NIK' => '123456789',
+            'NPWP' => '123456789',
         ]);
     }
 }

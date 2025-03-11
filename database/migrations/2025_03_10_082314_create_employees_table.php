@@ -24,6 +24,10 @@ return new class extends Migration
             $table->string('marital_status')->nullable();
             $table->string('blood_type')->nullable();
             $table->string('religion')->nullable();
+            $table->text('address')->nullable();
+            $table->string('postal_code')->nullable();
+            $table->string('nik')->nullable();
+            $table->string('npwp')->nullable();
             $table->timestamps();
         });
     }
