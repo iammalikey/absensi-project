@@ -26,7 +26,8 @@ class AttendanceStoreRequest extends FormRequest
             'date'                  => ['required', 'date'],
             'clock_in'              => ['required', 'date_format:H:i'],
             'clock_out'             => ['required', 'date_format:H:i', 'after:clock_in'],
-            'clock_in_location'     => ['required', 'string', 'max:255'],
+            'clock_in_lat'          => ['required', 'string', 'max:255'],
+            'clock_in_long'         => ['required', 'string', 'max:255'],
             'category'              => ['required', 'string', 'max:255'],
             'status'                => ['required', 'string', 'max:255'],
         ];

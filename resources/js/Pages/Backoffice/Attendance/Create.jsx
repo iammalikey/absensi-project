@@ -21,7 +21,8 @@ export default function Create({ users, categories, statuses }) {
         date: "",
         clock_in: "",
         clock_out: "",
-        clock_in_location: "",
+        clock_in_lat: "",
+        clock_in_long: "",
         category: "",
         status: "",
     });
@@ -135,12 +136,25 @@ export default function Create({ users, categories, statuses }) {
                         fullWidth
                         variant="filled"
                         type="text"
-                        label="clock_in_location"
+                        label="clock_in_lat"
                         onChange={handleChange}
-                        name="clock_in_location"
-                        value={data.clock_in_location}
-                        error={!!errors.clock_in_location}
-                        helperText={errors.clock_in_location}
+                        name="clock_in_lat"
+                        value={data.clock_in_lat}
+                        error={!!errors.clock_in_lat}
+                        helperText={errors.clock_in_lat}
+                        sx={{ gridColumn: "span 2" }}
+                    />
+
+                    <TextField
+                        fullWidth
+                        variant="filled"
+                        type="text"
+                        label="clock_in_long"
+                        onChange={handleChange}
+                        name="clock_in_long"
+                        value={data.clock_in_long}
+                        error={!!errors.clock_in_long}
+                        helperText={errors.clock_in_long}
                         sx={{ gridColumn: "span 2" }}
                     />
                 </Box>

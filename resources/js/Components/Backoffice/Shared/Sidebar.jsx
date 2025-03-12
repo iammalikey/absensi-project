@@ -10,6 +10,7 @@ import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import HomeWorkOutlinedIcon from '@mui/icons-material/HomeWorkOutlined';
 import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
 import ManageHistoryOutlinedIcon from '@mui/icons-material/ManageHistoryOutlined';
+import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
 import BadgeIcon from "@mui/icons-material/Badge";
 import EditOffIcon from "@mui/icons-material/EditOff";
 import ScoreboardIcon from "@mui/icons-material/Scoreboard";
@@ -118,7 +119,7 @@ const Sidebar = () => {
                             <Item
                                 title="log"
                                 to={route("cms.log.index")}
-                                icon={<ManageHistoryOutlinedIcon />}
+                                icon={<BarChartOutlinedIcon />}
                                 url={url}
                             />
                         )}

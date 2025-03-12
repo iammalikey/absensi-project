@@ -15,32 +15,48 @@ import {
 } from "@mui/material";
 import { router } from "@inertiajs/react";
 
-export default function Index({ attendances, selectedMonth }) {
+export default function Index({ attendances, selectedMonth, selectedName }) {
     const [month, setMonth] = useState(selectedMonth);
+    const [name, setName] = useState(selectedName);
 
     const handleFilter = () => {
-        router.get(route("cms.log.index"), { month });
+        router.get(route("cms.log.index"), { month, name });
     };
 
     const handleChangePage = (event, newPage) => {
-        router.get(attendances.links[newPage + 1].url, {}, { preserveScroll: true });
+        router.get(attendances.links[newPage + 1]?.url, {}, { preserveScroll: true });
     };
 
     return (
         <Box m="20px">
             <Header title="Attendance Log" subtitle="Monthly Attendance Report" />
-            
-            {/* Filter Bulan */}
+
+            {/* Filter Bulan & Nama */}
             <Box display="flex" alignItems="center" gap="10px" mb="20px">
                 <TextField
                     type="month"
                     value={month}
                     onChange={(e) => setMonth(e.target.value)}
+                    label="Select Month"
+                />
+                <TextField
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    label="Search by Name"
                 />
                 <Button variant="contained" color="primary" onClick={handleFilter}>
                     Filter
                 </Button>
             </Box>
+
+            <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => window.location.href = route("cms.log.export", { month })}
+            >
+                Export to Excel
+            </Button>
 
             {/* Tabel Attendance */}
             <TableContainer sx={{ maxHeight: "70vh" }}>

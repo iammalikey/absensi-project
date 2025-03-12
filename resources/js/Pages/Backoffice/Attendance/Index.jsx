@@ -82,7 +82,7 @@ export default function Index({ attendances }) {
                             <TableCell>Clock In Date</TableCell>
                             <TableCell>Clock In</TableCell>
                             <TableCell>Clock Out</TableCell>
-                            <TableCell>Clock In Location</TableCell>
+                            <TableCell>Category</TableCell>
                             <TableCell>Status</TableCell>
                             <TableCell align="center">Action</TableCell>
                         </TableRow>
@@ -101,7 +101,7 @@ export default function Index({ attendances }) {
                                 <TableCell>{attendance.date}</TableCell>
                                 <TableCell>{attendance.clock_in}</TableCell>
                                 <TableCell>{attendance.clock_out}</TableCell>
-                                <TableCell>{attendance.clock_in_location}</TableCell>
+                                <TableCell>{attendance.category}</TableCell>
                                 <TableCell>{attendance.status}</TableCell>
                                 <TableCell align="center" className="!space-x-2">
                                     <Button

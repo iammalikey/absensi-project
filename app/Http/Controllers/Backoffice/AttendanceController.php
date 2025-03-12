@@ -32,7 +32,7 @@ class AttendanceController extends Controller
         // return inertia('Backoffice/Employee/Create');
         return inertia('Backoffice/Attendance/Create', [
             'users' => User::select('id', 'name')->get(),
-            'categories' => ['WFH', 'WFO'],
+            'categories' => ['WFH', 'WFO', 'Anual Leave', 'MIA'],
             'statuses' => ['Pending', 'Approved', 'Rejected'],
         ]);
 
@@ -75,7 +75,7 @@ class AttendanceController extends Controller
         return inertia('Backoffice/Attendance/Edit', [
             'attendance' => new AttendanceEditResource($attendance->load('user')),
             'users' => User::get(['id', 'name']),
-            'categories' => ['WFH', 'WFO'],
+            'categories' => ['WFH', 'WFO', 'Anual Leave', 'MIA'],
             'statuses' => ['Pending', 'Approved', 'Rejected'],
         ]);
     }

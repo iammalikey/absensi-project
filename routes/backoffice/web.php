@@ -317,8 +317,8 @@ if (config("cms.enable") && config("cms.path")) {
 
       Route::group(['as' => 'log.', 'prefix' => 'log', 'middleware' => ['role_or_permission:Super Admin|log management']], function () {
         Route::get('/', [LogController::class, 'index'])->name('index');
+        Route::get('/log/export', [LogController::class, 'export'])->name('export');
       });
-      // Route::get('/log/export', [LogController::class, 'export'])->name('export');
 
     });
 
