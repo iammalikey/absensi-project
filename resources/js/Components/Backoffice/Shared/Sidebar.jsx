@@ -114,6 +114,14 @@ const Sidebar = () => {
                                 url={url}
                             />
                         )}
+                        {hasAnyPermission(["log management"]) && (
+                            <Item
+                                title="log"
+                                to={route("cms.log.index")}
+                                icon={<ManageHistoryOutlinedIcon />}
+                                url={url}
+                            />
+                        )}
 
 
                         {hasAnyPermission(["user management", "role management", "permission management"]) && (

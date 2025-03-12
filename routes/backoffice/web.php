@@ -10,6 +10,7 @@ use App\Http\Controllers\Backoffice\Profile\ProfileController;
 use App\Http\Controllers\Backoffice\DivisionController;
 use App\Http\Controllers\Backoffice\EmployeeController;
 use App\Http\Controllers\Backoffice\AttendanceController;
+use App\Http\Controllers\Backoffice\LogController;
 use App\Http\Middleware\VerifyRecaptchaToken;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Route;
@@ -313,6 +314,25 @@ if (config("cms.enable") && config("cms.path")) {
         */
         // Route::get('/{attendance}', [AttendanceController::class, 'show'])->name('show');
       });
+
+      Route::group(['as' => 'log.', 'prefix' => 'log', 'middleware' => ['role_or_permission:Super Admin|log management',]], function () {
+        /**
+         * log index
+         * route: CMS_PATH/access/log
+         * name: cms.access.log.index
+         * middleware: [auth:cms, role_or_permission:Super Admin|log management]
+         */
+        Route::get('/', [LogController::class, 'index'])->name('index');
+        /**
+         * log create
+         * route: CMS_PATH/access/log/create
+         * name: cms.access.log.create
+         * middleware: [auth:cms, role_or_permission:Super Admin|log management]
+         */
+        Route::get('/{user}', [LogController::class, 'show'])->name('show');
+        
+      });
+
     });
 
     // auth cms
