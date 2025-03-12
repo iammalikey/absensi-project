@@ -7,6 +7,9 @@ import { tokens } from "@/theme.js";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import HomeWorkOutlinedIcon from '@mui/icons-material/HomeWorkOutlined';
+import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
+import ManageHistoryOutlinedIcon from '@mui/icons-material/ManageHistoryOutlined';
 import BadgeIcon from "@mui/icons-material/Badge";
 import EditOffIcon from "@mui/icons-material/EditOff";
 import ScoreboardIcon from "@mui/icons-material/Scoreboard";
@@ -70,8 +73,8 @@ const Sidebar = () => {
                     >
                         {!isCollapsed && (
                             <Box display="flex" justifyContent="space-between" alignItems="center" ml="15px">
-                                <div onClick={(e) => { e.stopPropagation(); router.get(route("landing")); }} className="w-max aspect-[11/4] bg-white p-1 rounded-md">
-                                    <img src="/assets/images/walls-logo.png" alt="walls logo" className='object-contain w-full h-full' />
+                                <div onClick={(e) => { e.stopPropagation(); router.get(route("landing")); }} className="w-max aspect-[11/4] mx-auto my-0 bg-white p-1 rounded-md">
+                                    <img src="/assets/images/concrete-logo.png" alt="concrete logo" className='object-contain w-full h-full' />
                                 </div>
                                 <IconButton>
                                     <MenuOutlinedIcon />
@@ -91,7 +94,7 @@ const Sidebar = () => {
                             <Item
                                 title="Division"
                                 to={route("cms.division.index")}
-                                icon={<ScoreboardIcon />}
+                                icon={<HomeWorkOutlinedIcon />}
                                 url={url}
                             />
                         )}
@@ -99,7 +102,7 @@ const Sidebar = () => {
                             <Item
                                 title="Employee"
                                 to={route("cms.employee.index")}
-                                icon={<ScoreboardIcon />}
+                                icon={<GroupOutlinedIcon />}
                                 url={url}
                             />
                         )}
@@ -107,7 +110,7 @@ const Sidebar = () => {
                             <Item
                                 title="Attendance"
                                 to={route("cms.attendance.index")}
-                                icon={<ScoreboardIcon />}
+                                icon={<ManageHistoryOutlinedIcon />}
                                 url={url}
                             />
                         )}

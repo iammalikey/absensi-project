@@ -73,8 +73,10 @@ class AttendanceController extends Controller
     public function edit(Attendance $attendance)
     {
         return inertia('Backoffice/Attendance/Edit', [
-            'attendance' => new AttendanceEditResource(Attendance::with(['user'])->firstOrFail()),
-                'users' => User::get(['id', 'name'])
+            'attendance' => new AttendanceEditResource($attendance->load('user')),
+            'users' => User::get(['id', 'name']),
+            'categories' => ['WFH', 'WFO'],
+            'statuses' => ['Pending', 'Approved', 'Rejected'],
         ]);
     }
 
@@ -82,14 +84,16 @@ class AttendanceController extends Controller
     {
         try {
             DB::beginTransaction();
-    
-            $attendance = new Attendance();
+            $user = User::findOrFail($request->user_id);
+            // $attendance = new Attendance();
             $attendance->user_id = $request->user_id;
             $attendance->date = $request->date;
+            $attendance->slug = Str::slug($user->name) . '-' . $user->id . '-' . Carbon::parse($request->date)->format('Y-m-d');
             $attendance->clock_in = $request->date . ' ' . $request->clock_in . ':00';
             $attendance->clock_out = $request->clock_out ? $request->date . ' ' . $request->clock_out . ':00' : null; 
             $attendance->clock_in_location = $request->clock_in_location ?? null;
             $attendance->status = $request->status ?? 'Pending';
+            $attendance->category = $request->category;
             $attendance->save();
     
             DB::commit();
@@ -102,6 +106,23 @@ class AttendanceController extends Controller
             DB::rollBack();
             Log::error($th);
     
+            return back()->withErrors([trans('server.500')], 500);
+        }
+    }
+
+    public function destroy(Attendance $attendance){
+        try {
+            DB::beginTransaction();
+            $attendance->delete();
+            DB::commit();
+
+            return back()->with('alert', ['type' => AlertHelper::ALERT_SUCCESS, 'message' =>trans('success.crud_delete', ['type' => "Attendance $attendance->name"])]);
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            // throw $th;
+            Log::error($th);
+
             return back()->withErrors([trans('server.500')], 500);
         }
     }
