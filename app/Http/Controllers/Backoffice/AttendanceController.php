@@ -14,42 +14,46 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Helpers\AlertHelper;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class AttendanceController extends Controller
 {
     public function index()
     {
-
-        $attendances = Attendance::with('user')->latest()->get();
-    
         return inertia('Backoffice/Attendance/Index', [
-            'attendances' => AttendanceIndexResource::collection(Attendance::latest()->paginate(request()->size ?? 10))
+            'attendances' => AttendanceIndexResource::collection(Attendance::with(['user'])->paginate(request()->size ?? 10))
         ]);
     }
 
     public function create()
     {
-        $users = User::all();
-        $shifts = Shift::all();
-        return inertia ('Backoffice/Attendance/Create',[
-            'users' => $users,
-            'shifts' => $shifts
+        // dd("Create method accessed!");
+        // return inertia('Backoffice/Employee/Create');
+        return inertia('Backoffice/Attendance/Create', [
+            'users' => User::select('id', 'name')->get(),
+            'categories' => ['WFH', 'WFO'],
+            'statuses' => ['Pending', 'Approved', 'Rejected'],
         ]);
+
     }
 
     public function store(AttendanceStoreRequest $request)
     {
         try {
             DB::beginTransaction();
+
+            $user = User::findOrFail($request->user_id);
     
             $attendance = new Attendance();
             $attendance->user_id = $request->user_id;
-            $attendance->shift_id = $request->shift_id;
             $attendance->date = $request->date;
+            $attendance->slug = Str::slug($user->name) . '-' . $user->id . '-' . Carbon::parse($request->date)->format('Y-m-d');
             $attendance->clock_in = $request->date . ' ' . $request->clock_in . ':00';
             $attendance->clock_out = $request->clock_out ? $request->date . ' ' . $request->clock_out . ':00' : null; 
             $attendance->clock_in_location = $request->clock_in_location ?? null;
             $attendance->status = $request->status ?? 'Pending';
+            $attendance->category = $request->category;
             $attendance->save();
     
             DB::commit();

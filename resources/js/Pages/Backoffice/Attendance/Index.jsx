@@ -17,25 +17,25 @@ import { router } from "@inertiajs/react";
 import { getUrlSearchParameter } from "@/Utils/helper";
 import ConfirmDeleteDialog from "@/Components/Backoffice/ConfirmDeleteDialog";
 
-export default function Index({ employees }) {
+export default function Index({ attendances }) {
     // untuk edit
     const handleEdit = (id) => {
-        router.get(route("cms.employee.edit", { employee: id }));
+        router.get(route("cms.attendance.edit", { attendance: id }));
     };
     // untuk delete modal confirm delete
     const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
     const [routeDelete, setRouteDelete] = useState("");
     const handleDelete = (id) => {
         setOpenConfirmDelete(true);
-        setRouteDelete(route("cms.employee.delete", { employee: id }));
+        setRouteDelete(route("cms.attendance.delete", { attendance: id }));
     };
     // -----------
     // pagination
     const handleChangePage = (event, newPage) => {
         console.log(newPage);
-        employees.meta.current_page < newPage + 1
+        attendances.meta.current_page < newPage + 1
             ? router.get(
-                  employees.links.next,
+                  attendances.links.next,
                   {
                       ...(getUrlSearchParameter("size") && {
                           size: getUrlSearchParameter("size"),
@@ -44,7 +44,7 @@ export default function Index({ employees }) {
                   { preserveScroll: true, preserveState: true }
               )
             : router.get(
-                  employees.links.prev,
+                  attendances.links.prev,
                   {
                       ...(getUrlSearchParameter("size") && {
                           size: getUrlSearchParameter("size"),
@@ -55,7 +55,7 @@ export default function Index({ employees }) {
     };
     const handleChangeRowsPerPage = (event) => {
         router.get(
-            route("cms.employee.index"),
+            route("cms.attendance.index"),
             { size: +event.target.value },
             { preserveScroll: true, preserveState: true }
         );
@@ -63,57 +63,52 @@ export default function Index({ employees }) {
     // -----------
     return (
         <Box m="20px">
-            <Header title={`Employee Management`} subtitle={`Manage Employee`}></Header>
+            <Header title={`attendance Management`} subtitle={`Manage attendance`}></Header>
             <Box display="flex" justifyContent="start" mt="20px" gap="5px">
                 <Button
                     type="submit"
                     color="secondary"
                     variant="contained"
-                    onClick={() => router.get(route("cms.employee.create"))}
+                    onClick={() => router.get(route("cms.attendance.create"))}
                 >
-                    Create employee
+                    Create attendance
                 </Button>
             </Box>
             <TableContainer sx={{ maxHeight: "70vh" }}>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Avatar</TableCell>
                             <TableCell>Name</TableCell>
-                            <TableCell>Email</TableCell>
-                            <TableCell>Division</TableCell>
+                            <TableCell>Clock In Date</TableCell>
+                            <TableCell>Clock In</TableCell>
+                            <TableCell>Clock Out</TableCell>
+                            <TableCell>Clock In Location</TableCell>
+                            <TableCell>Status</TableCell>
                             <TableCell align="center">Action</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {employees.data.map((employee, index) => (
+                        {attendances.data.map((attendance, index) => (
                             <TableRow
-                                key={`${employee.name} ${index}`}
+                                key={`${attendance.name} ${index}`}
                                 sx={{
                                     "&:last-child td, &:last-child th": {
                                         border: 0,
                                     },
                                 }}
                             >
-                                <TableCell>
-                                    <Avatar
-                                        sx={{
-                                            width: 50,
-                                            height: 50,
-                                            cursor: "pointer",
-                                        }}
-                                        src={employee.user.avatar}
-                                    />
-                                </TableCell>
-                                <TableCell>{employee.full_name}</TableCell>
-                                <TableCell>{employee.user.email}</TableCell>
-                                <TableCell>{employee.division.title}</TableCell>
+                                <TableCell>{attendance.user.name}</TableCell>
+                                <TableCell>{attendance.date}</TableCell>
+                                <TableCell>{attendance.clock_in}</TableCell>
+                                <TableCell>{attendance.clock_out}</TableCell>
+                                <TableCell>{attendance.clock_in_location}</TableCell>
+                                <TableCell>{attendance.status}</TableCell>
                                 <TableCell align="center" className="!space-x-2">
                                     <Button
                                         color="neutral"
                                         variant="contained"
                                         onClick={() =>
-                                            handleEdit(employee.slug)
+                                            handleEdit(attendance.slug)
                                         }
                                         className="mt-2"
                                     >
@@ -123,20 +118,11 @@ export default function Index({ employees }) {
                                         color="danger"
                                         variant="contained"
                                         onClick={() =>
-                                            handleDelete(employee.slug)
+                                            handleDelete(attendance.slug)
                                         }
                                         className="mt-2"
                                     >
                                         Delete
-                                    </Button>
-                                    <Button
-                                        color="info"
-                                        variant="contained"
-                                        onClick={() =>
-                                            router.get(route("cms.employee.show", { employee: employee.id }))
-                                        }
-                                    >
-                                        View Detail
                                     </Button>
                                 </TableCell>
                             </TableRow>
@@ -147,9 +133,9 @@ export default function Index({ employees }) {
             <TablePagination
                 rowsPerPageOptions={[5, 10, 20, 100]}
                 component="div"
-                count={employees.meta.total}
-                rowsPerPage={employees.meta.per_page}
-                page={employees.meta.current_page - 1}
+                count={attendances.meta.total}
+                rowsPerPage={attendances.meta.per_page}
+                page={attendances.meta.current_page - 1}
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
             />
@@ -162,4 +148,4 @@ export default function Index({ employees }) {
     );
 }
 
-Index.layout = (page) => <Backend children={page} title="Employee Management" />;
+Index.layout = (page) => <Backend children={page} title="attendance Management" />;

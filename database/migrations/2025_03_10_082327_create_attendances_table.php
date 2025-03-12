@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('slug')->unique();
-            $table->date('clock_in_date')->nullable()->onDelete('set null');
+            $table->date('date')->nullable()->onDelete('set null');
             $table->time('clock_in');
             $table->time('clock_out')->nullable();
             $table->text('clock_in_location');

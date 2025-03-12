@@ -6,24 +6,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\GenerateSlug;
 
-class Employee extends Model
+class Attendance extends Model
 {
     use HasFactory, GenerateSlug;
 
-    const TABLE = 'employees';
+    const TABLE = 'attendances';
     protected $table = self::TABLE;
 
     protected $fillable = [
         'user_id',
         'slug',
-        'full_name',
-        'phone',
-        'place_of_birth',
-        'date_of_birth',
-        'gender',
-        'marital_status',
-        'blood_type',
-        'religion'
+        'date',
+        'clock_in',
+        'clock_out',
+        'clock_in_location',
+        'category',
+        'status',
     ];
     
     public function getRouteKeyName(){
@@ -33,10 +31,5 @@ class Employee extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function division()
-    {
-        return $this->belongsTo(Division::class);
     }
 }

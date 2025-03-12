@@ -9,6 +9,7 @@ use App\Http\Controllers\Backoffice\Profile\ChangePasswordController;
 use App\Http\Controllers\Backoffice\Profile\ProfileController;
 use App\Http\Controllers\Backoffice\DivisionController;
 use App\Http\Controllers\Backoffice\EmployeeController;
+use App\Http\Controllers\Backoffice\AttendanceController;
 use App\Http\Middleware\VerifyRecaptchaToken;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Route;
@@ -63,7 +64,7 @@ if (config("cms.enable") && config("cms.path")) {
          */
         Route::put('/', [ProfileController::class, 'update'])->name('update');
       });
-
+      // ACCESS ROUTE
       Route::group(['as' => 'access.', 'prefix' => 'access',], function () {
         Route::group(['as' => 'user.', 'prefix' => 'user', 'middleware' => ['role_or_permission:Super Admin|user management',]], function () {
           /**
@@ -163,7 +164,7 @@ if (config("cms.enable") && config("cms.path")) {
          */
         Route::get('/permission', [PermissionController::class, 'index'])->name('permission.index')->middleware(['role_or_permission:Super Admin|permission management',]);
       });
-
+      // DIVISION ROUTE
       Route::group(['as' => 'division.', 'prefix' => 'division', 'middleware' => ['role_or_permission:Super Admin|division management',]], function () {
         /**
          * division index
@@ -208,7 +209,7 @@ if (config("cms.enable") && config("cms.path")) {
          */
         Route::delete('/{division}', [DivisionController::class, 'destroy'])->name('delete');
       });
-
+      // EMPLOYEE ROUTE
       Route::group(['as' => 'employee.', 'prefix' => 'employee', 'middleware' => ['role_or_permission:Super Admin|employee management',]], function () {
         /**
          * division index
@@ -232,15 +233,6 @@ if (config("cms.enable") && config("cms.path")) {
          */
         Route::post('/', [EmployeeController::class, 'store'])->name('store');
         /**
-        * division index
-        * route: CMS_PATH/access/division
-        * name: cms.access.division.index
-        * middleware: [auth:cms, role_or_permission:Super Admin|division management]
-        */
-        Route::get('/{employee}', [EmployeeController::class, 'show'])->name('show');
-        
-        
-        /**
          * division edit
          * route: CMS_PATH/access/division/edit/{division}
          * name: cms.access.division.edit
@@ -261,8 +253,66 @@ if (config("cms.enable") && config("cms.path")) {
          * middleware: [auth:cms, role_or_permission:Super Admin|division management]
          */
         Route::delete('/{employee}', [EmployeeController::class, 'destroy'])->name('delete');
+        /**
+        * division index
+        * route: CMS_PATH/access/division
+        * name: cms.access.division.index
+        * middleware: [auth:cms, role_or_permission:Super Admin|division management]
+        */
+        Route::get('/{employee}', [EmployeeController::class, 'show'])->name('show');
       });
-      
+      // ATTENDANCE ROUTE
+      Route::group(['as' => 'attendance.', 'prefix' => 'attendance', 'middleware' => ['role_or_permission:Super Admin|attendance management',]], function () {
+        /**
+         * Attendance index
+         * route: CMS_PATH/access/attendance
+         * name: cms.access.attendance.index
+         * middleware: [auth:cms, role_or_permission:Super Admin|attendance management]
+         */
+        Route::get('/', [AttendanceController::class, 'index'])->name('index');
+        /**
+         * Attendance create
+         * route: CMS_PATH/access/attendance/create
+         * name: cms.access.attendance.create
+         * middleware: [auth:cms, role_or_permission:Super Admin|attendance management]
+         */
+        Route::get('/create', [AttendanceController::class, 'create'])->name('create');
+        /**
+         * Attendance store
+         * route: CMS_PATH/access/attendance
+         * name: cms.access.attendance.store
+         * middleware: [auth:cms, role_or_permission:Super Admin|attendance management]
+         */
+        Route::post('/', [AttendanceController::class, 'store'])->name('store');
+        /**
+         * Attendance edit
+         * route: CMS_PATH/access/attendance/edit/{attendance}
+         * name: cms.access.attendance.edit
+         * middleware: [auth:cms, role_or_permission:Super Admin|attendance management]
+         */
+        Route::get('/edit/{attendance}', [AttendanceController::class, 'edit'])->name('edit');
+        /**
+         * Attendance update
+         * route: CMS_PATH/access/attendance/edit/{attendance}
+         * name: cms.access.attendance.update
+         * middleware: [auth:cms, role_or_permission:Super Admin|attendance management]
+         */
+        Route::put('/edit/{attendance}', [AttendanceController::class, 'update'])->name('update');
+        /**
+         * Attendance delete
+         * route: CMS_PATH/access/attendance/{attendance}
+         * name: cms.access.attendance.delete
+         * middleware: [auth:cms, role_or_permission:Super Admin|attendance management]
+         */
+        Route::delete('/{attendance}', [AttendanceController::class, 'destroy'])->name('delete');
+        /**
+        * Attendance show
+        * route: CMS_PATH/access/attendance
+        * name: cms.access.attendance.show
+        * middleware: [auth:cms, role_or_permission:Super Admin|attendance management]
+        */
+        // Route::get('/{attendance}', [AttendanceController::class, 'show'])->name('show');
+      });
     });
 
     // auth cms

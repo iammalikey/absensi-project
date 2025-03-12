@@ -13,6 +13,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable implements HasMedia
 {
@@ -68,5 +69,10 @@ class User extends Authenticatable implements HasMedia
     public function employee()
     {
         return $this->hasOne(Employee::class);
+    }
+
+    public function attendance()
+    {
+        return $this->hasMany(Attendance::class);
     }
 }

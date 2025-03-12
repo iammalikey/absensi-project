@@ -11,7 +11,7 @@ class EmployeeUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,18 @@ class EmployeeUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'user_id' => 'required|exists:users,id',
+            'division_id' => 'required|exists:divisions,id',
+            'full_name' => 'required|string|max:255',
+            'place_of_birth' => 'required|string|max:255',
+            'date_of_birth' => 'required|date',
+            'blood_type' => 'nullable|string|max:3',
+            'address' => 'required|string',
+            'nik' => 'required|string|max:16|unique:employees,nik,' . $this->employee->id,
+            'npwp' => 'nullable|string|max:20|unique:employees,npwp,' . $this->employee->id,
+            'postal_code' => 'nullable|string|max:10',
+            'marital_status' => 'required|string|in:Single,Married,Divorced,Widowed',
+            'religion' => 'required|string|in:Islam,Christian,Hindu,Buddhist,Others',
         ];
     }
 }

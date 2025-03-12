@@ -1,45 +1,36 @@
 import { useForm } from "@inertiajs/react";
 import {
-    Avatar,
     Box,
     Button,
-    Chip,
-    FormControl,
-    FormHelperText,
-    InputLabel,
-    MenuItem,
-    Select,
     TextField,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem,
     useMediaQuery,
 } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import Backend from "@/Layouts/Backoffice/Backend";
 import Header from "@/components/Backoffice/Header";
-import { createUrlImage } from "@/Utils/helper";
 
-export default function Edit({ employee, user, division }) {
+export default function Edit({ employee, users, divisions, maritalStatuses, religions }) {
     const isNonMobile = useMediaQuery("(min-width:600px)");
 
-    const { data, setData, reset, errors, post } = useForm({
+    const { data, setData, errors, post } = useForm({
+        user_id: employee.data.user_id,
+        division_id: employee.data.division_id,
         full_name: employee.data.full_name,
-        phone: employee.data.phone,
         place_of_birth: employee.data.place_of_birth,
         date_of_birth: employee.data.date_of_birth,
-        gender: employee.data.gender,
-        marital_status: employee.data.marital_status,
-        religion: employee.data.religion,
         blood_type: employee.data.blood_type,
         address: employee.data.address,
-        postal_code: employee.data.postal_code,
         nik: employee.data.nik,
         npwp: employee.data.npwp,
-        avatar: employee.data.user?.avatar,
-        email: employee.data.user?.email,
-        division: employee.data.division?.title,
+        postal_code: employee.data.postal_code,
+        marital_status: employee.data.marital_status,
+        religion: employee.data.religion,
         _method: "put",
     });
-    // buat tampung file avatar
-    const [avatarUrl, setAvatarUrl] = useState(user.data.avatar);
 
     const handleChange = (e) => {
         setData((prevData) => ({
@@ -48,19 +39,12 @@ export default function Edit({ employee, user, division }) {
         }));
     };
 
-    const handleChangeImage = (e) => {
-        setData((prevData) => ({
-            ...prevData,
-            [e.target.name]: e.target.files[0],
-        }));
-    };
-
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault(); 
         post(route("cms.employee.update", { employee: employee.data.slug }), {
             preserveScroll: true,
             preserveState: true,
-            onSuccess: (page) => {
+            onSuccess: () => {
                 // reset()
             },
         });
@@ -68,10 +52,7 @@ export default function Edit({ employee, user, division }) {
 
     return (
         <Box m="20px">
-            <Header
-                title={`Edit User`}
-                subtitle={`Edit user ${user.data.name}`}
-            />
+            <Header title="Edit Employee" subtitle={`Edit Employee ${data.full_name}`} />
             <form onSubmit={handleSubmit}>
                 <Box
                     display="grid"
@@ -83,126 +64,207 @@ export default function Edit({ employee, user, division }) {
                         },
                     }}
                 >
-                    <Box
-                        display="flex"
-                        justifyContent="center"
-                        sx={{ gridColumn: "span 4" }}
-                    >
-                        <label htmlFor="avatar_upload" tabIndex={0}>
-                            <Avatar
-                                sx={{
-                                    width: 100,
-                                    height: 100,
-                                    cursor: "pointer",
-                                }}
-                                src={avatarUrl}
-                            />
-                            <input
-                                tabIndex={1}
-                                type="file"
-                                id="avatar_upload"
-                                hidden
-                                onInput={(e) => {
-                                    handleChangeImage(e);
-                                    setAvatarUrl(createUrlImage(e));
-                                }}
-                                name="avatar"
-                                accept="image/png"
-                            />
-                        </label>
-                    </Box>
-                    
+                    {/* Select User */}
+                    <FormControl variant="filled" sx={{ gridColumn: "span 4" }} error={!!errors.user_id}>
+                        <InputLabel id="user-label">Select User</InputLabel>
+                        <Select
+                            labelId="user-label"
+                            id="user_id"
+                            value={data.user_id}
+                            name="user_id"
+                            onChange={handleChange}
+                            renderValue={(selected) => {
+                                // Cari user berdasarkan user_id yang terpilih
+                                const selectedUser = users.find(user => user.id === selected);
+                                return selectedUser ? selectedUser.name : "Select User";
+                            }}
+                        >
+                            {users && users.map((user) => (
+                        <MenuItem key={user.id} value={user.id}>
+                            {user.name}
+                        </MenuItem>
+                    ))}
+                        </Select>
+                        {!!errors.user_id && (
+                            <FormHelperText error={!!errors.user_id}>{errors.user_id}</FormHelperText>
+                        )}
+                    </FormControl>
+
+
+
+                    {/* Select Division */}
+                    <FormControl variant="filled" sx={{ gridColumn: "span 4" }} error={!!errors.division_id}>
+                        <InputLabel id="user-label">Select Division</InputLabel>
+                        <Select
+                            labelId="user-label"
+                            id="division_id"
+                            value={data.division_id}
+                            name="division_id"
+                            onChange={handleChange}
+                            renderValue={(selected) => {
+                                // Cari user berdasarkan division_id yang terpilih
+                                const selectedDivision = divisions.find(division => division.id === selected);
+                                return selectedDivision ? selectedDivision.title : "Select User";
+                            }}
+                        >
+                            {divisions && divisions.map((division) => (
+                        <MenuItem key={division.id} value={division.id}>
+                            {division.title}
+                        </MenuItem>
+                    ))}
+                        </Select>
+                        {!!errors.division_id && (
+                            <FormHelperText error={!!errors.division_id}>{errors.division_id}</FormHelperText>
+                        )}
+                    </FormControl>
+
+                    {/* Marital Status */}
+                    <FormControl variant="filled" sx={{ gridColumn: "span 4" }} error={!!errors.marital_status}>
+                        <InputLabel id="marital-status-label">Marital Status</InputLabel>
+                        <Select
+                            labelId="marital-status-label"
+                            id="marital_status"
+                            value={data.marital_status}
+                            name="marital_status"
+                            onChange={handleChange}
+                            renderValue={(selected) => selected || "Select Marital Status"} // Menampilkan nilai terpilih
+                        >
+                            {Array.isArray(maritalStatuses) && maritalStatuses.map((status) => (
+                                <MenuItem key={status} value={status}>
+                                    {status}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                        {!!errors.marital_status && (
+                            <FormHelperText>{errors.marital_status}</FormHelperText>
+                        )}
+                    </FormControl>
+
+
+                    {/* Religion */}
+                    <FormControl variant="filled" sx={{ gridColumn: "span 4" }} error={!!errors.religion}>
+                        <InputLabel id="marital-status-label">Religion</InputLabel>
+                        <Select
+                            labelId="marital-status-label"
+                            id="religion"
+                            value={data.religion}
+                            name="religion"
+                            onChange={handleChange}
+                            renderValue={(selected) => selected || "Select Marital Status"} // Menampilkan nilai terpilih
+                        >
+                            {Array.isArray(religions) && religions.map((status) => (
+                                <MenuItem key={status} value={status}>
+                                    {status}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                        {!!errors.religion && (
+                            <FormHelperText>{errors.religion}</FormHelperText>
+                        )}
+                    </FormControl>
+
+                    {/* Other Fields */}
                     <TextField
                         fullWidth
                         variant="filled"
                         type="text"
-                        label="Username (optional, if doesn't fill, will be generated by name)"
+                        label="Full Name"
                         onChange={handleChange}
-                        name="username"
-                        value={data.username}
-                        error={!!errors.username}
-                        helperText={errors.username}
+                        name="full_name"
+                        value={data.full_name}
+                        error={!!errors.full_name}
+                        helperText={errors.full_name}
                         sx={{ gridColumn: "span 2" }}
                     />
                     <TextField
                         fullWidth
                         variant="filled"
                         type="text"
-                        label="Email"
+                        label="Place of Birth"
                         onChange={handleChange}
-                        name="email"
-                        value={data.email}
-                        error={!!errors.email}
-                        helperText={errors.email}
+                        name="place_of_birth"
+                        value={data.place_of_birth}
+                        error={!!errors.place_of_birth}
+                        helperText={errors.place_of_birth}
+                        sx={{ gridColumn: "span 2" }}
+                    />
+                    <TextField
+                        fullWidth
+                        variant="filled"
+                        type="date"
+                        label="Date of Birth"
+                        onChange={handleChange}
+                        name="date_of_birth"
+                        value={data.date_of_birth}
+                        InputLabelProps={{ shrink: true }}
+                        error={!!errors.date_of_birth}
+                        helperText={errors.date_of_birth}
+                        sx={{ gridColumn: "span 2" }}
+                    />
+                    <TextField
+                        fullWidth
+                        variant="filled"
+                        type="text"
+                        label="Blood Type"
+                        onChange={handleChange}
+                        name="blood_type"
+                        value={data.blood_type}
+                        error={!!errors.blood_type}
+                        helperText={errors.blood_type}
+                        sx={{ gridColumn: "span 2" }}
+                    />
+                    <TextField
+                        fullWidth
+                        variant="filled"
+                        type="text"
+                        label="Address"
+                        onChange={handleChange}
+                        name="address"
+                        multiline
+                        rows={3}
+                        value={data.address}
+                        error={!!errors.address}
+                        helperText={errors.address}
                         sx={{ gridColumn: "span 4" }}
                     />
                     <TextField
                         fullWidth
                         variant="filled"
-                        type="password"
-                        label="Change Password"
+                        type="text"
+                        label="NIK"
                         onChange={handleChange}
-                        name="password"
-                        error={!!errors.password}
-                        helperText={errors.password}
-                        sx={{ gridColumn: "span 4" }}
+                        name="nik"
+                        value={data.nik}
+                        error={!!errors.nik}
+                        helperText={errors.nik}
+                        sx={{ gridColumn: "span 2" }}
                     />
                     <TextField
                         fullWidth
                         variant="filled"
-                        type="password"
-                        label="Change Password Confirmation"
+                        type="text"
+                        label="NPWP"
                         onChange={handleChange}
-                        name="password_confirmation"
-                        error={!!errors.password_confirmation}
-                        helperText={errors.password_confirmation}
-                        sx={{ gridColumn: "span 4" }}
+                        name="npwp"
+                        value={data.npwp}
+                        error={!!errors.npwp}
+                        helperText={errors.npwp}
+                        sx={{ gridColumn: "span 2" }}
                     />
-                    <FormControl
+                    <TextField
+                        fullWidth
                         variant="filled"
-                        sx={{ gridColumn: "span 4" }}
-                        error={!!errors.roles}
-                    >
-                        <InputLabel id="roles-label" variant="filled">
-                            Select Roles
-                        </InputLabel>
-                        <Select
-                            labelId="roles-label"
-                            id="roles"
-                            multiple
-                            value={data.roles}
-                            name="roles"
-                            onChange={handleChange}
-                            renderValue={(selected) => (
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        flexWrap: "wrap",
-                                        gap: 0.5,
-                                    }}
-                                >
-                                    {selected.map((value) => (
-                                        <Chip key={value} label={value} />
-                                    ))}
-                                </Box>
-                            )}
-                        >
-                            {roles.map((role, index) => (
-                                <MenuItem
-                                    key={role.id + role.name}
-                                    value={role.name}
-                                >
-                                    {role.name}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                        {!!errors.roles && (
-                            <FormHelperText error={!!errors.roles}>
-                                {errors.roles}
-                            </FormHelperText>
-                        )}
-                    </FormControl>
+                        type="text"
+                        label="Postal Code"
+                        onChange={handleChange}
+                        name="postal_code"
+                        value={data.postal_code}
+                        error={!!errors.postal_code}
+                        helperText={errors.postal_code}
+                        sx={{ gridColumn: "span 2" }}
+                    />
                 </Box>
+
                 <Box display="flex" justifyContent="end" mt="20px">
                     <Button type="submit" color="secondary" variant="contained">
                         Submit
@@ -213,4 +275,4 @@ export default function Edit({ employee, user, division }) {
     );
 }
 
-Edit.layout = (page) => <Backend children={page} title="Edit User" />;
+Edit.layout = (page) => <Backend children={page} title="Edit Employee" />;

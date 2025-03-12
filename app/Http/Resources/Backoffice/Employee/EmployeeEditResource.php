@@ -24,16 +24,18 @@ class EmployeeEditResource extends JsonResource
             'gender' => $this->gender,
             'marital_status' => $this->marital_status,
             'blood_type' => $this->blood_type,
-            'religion' => $this->religion,
+            'religion' => $this->religion, 
             'address' => $this->address,
             'postal_code' => $this->postal_code,
             'nik' => $this->nik,
             'npwp' => $this->npwp,
-            'user' => [
-                'email' => isset($this->user) ? $this->user->email : null,
-                'avatar' => isset($this->user) ? $this->user->avatar : null,
-            ],
-            'division' => isset($this->division) ? ['id' => $this->division->id, 'title' => $this->division->title] : null,
+            'user_id' => $this->user_id,
+            'division_id' => $this->division_id,
+            // 'user' => [
+            //     'email' => isset($this->user) ? $this->user->email : null,
+            //     'avatar' => isset($this->user) ? $this->user->avatar : null,
+            // ],
+            // 'division' => isset($this->division) ? ['id' => $this->division->id, 'title' => $this->division->title] : null,
         ];
     }
 }

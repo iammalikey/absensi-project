@@ -46,42 +46,105 @@ class EmployeeController extends Controller
     }
 
     public function store(EmployeeStoreRequest $request)
-{
-    // Log::info('Store function accessed');
-    // dd('Request sampai ke store');
-    try {
-        DB::beginTransaction();
+    {
+        // Log::info('Store function accessed');
+        // dd('Request sampai ke store');
+        try {
+            DB::beginTransaction();
 
-        $employee = new Employee();
-        $employee->user_id = $request->user_id;
-        $employee->division_id = $request->division_id;
-        $employee->marital_status = $request->marital_status;
-        $employee->religion = $request->religion;
-        $employee->full_name = $request->full_name;
-        $employee->slug = (new Employee)->uniqueSlug($request->full_name);
-        $employee->place_of_birth = $request->place_of_birth;
-        $employee->date_of_birth = $request->date_of_birth;
-        $employee->blood_type = $request->blood_type;
-        $employee->address = $request->address;
-        $employee->nik = $request->nik;
-        $employee->npwp = $request->npwp;
-        $employee->postal_code = $request->postal_code;
-        $employee->save();
+            $employee = new Employee();
+            $employee->user_id = $request->user_id;
+            $employee->division_id = $request->division_id;
+            $employee->marital_status = $request->marital_status;
+            $employee->religion = $request->religion;
+            $employee->full_name = $request->full_name;
+            $employee->slug = (new Employee)->uniqueSlug($request->full_name);
+            $employee->place_of_birth = $request->place_of_birth;
+            $employee->date_of_birth = $request->date_of_birth;
+            $employee->blood_type = $request->blood_type;
+            $employee->address = $request->address;
+            $employee->nik = $request->nik;
+            $employee->npwp = $request->npwp;
+            $employee->postal_code = $request->postal_code;
+            $employee->save();
 
-        DB::commit();
+            DB::commit();
 
-        return redirect()->route('cms.employee.index')->with('alert', [
-            'type' => AlertHelper::ALERT_SUCCESS,
-            'message' => trans('success.crud_create', ['type' => "Employee $employee->full_name"]),
-        ]);
+            return redirect()->route('cms.employee.index')->with('alert', [
+                'type' => AlertHelper::ALERT_SUCCESS,
+                'message' => trans('success.crud_create', ['type' => "Employee $employee->full_name"]),
+            ]);
 
-    } catch (\Throwable $th) {
-        DB::rollBack();
-        Log::error($th);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            Log::error($th);
 
-        return back()->withErrors([trans('server.500')], 500);
+            return back()->withErrors([trans('server.500')], 500);
+        }
     }
-}
 
+    public function edit(Employee $employee)
+    {
+        return inertia('Backoffice/Employee/Edit', [
+            'employee' => new EmployeeEditResource($employee),
+            'users' => User::select('id', 'name')->get(),
+            'divisions' => Division::select('id', 'title')->get(),
+            'maritalStatuses' => ['Single', 'Married', 'Divorced', 'Widowed'],
+            'religions' => ['Islam', 'Christian', 'Hindu', 'Buddhist', 'Others'],
+        ]);
+        
+    }
 
+    public function update(EmployeeUpdateRequest $request, Employee $employee)
+    {
+        try {
+            DB::beginTransaction();
+
+            // Update employee data
+            $employee->update([
+                'user_id' => $request->user_id,
+                'division_id' => $request->division_id,
+                'full_name' => $request->full_name,
+                'place_of_birth' => $request->place_of_birth,
+                'date_of_birth' => $request->date_of_birth,
+                'blood_type' => $request->blood_type,
+                'address' => $request->address,
+                'nik' => $request->nik,
+                'npwp' => $request->npwp,
+                'postal_code' => $request->postal_code,
+                'marital_status' => $request->marital_status,
+                'religion' => $request->religion,
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('cms.employee.index')->with('alert', [
+                'type' => AlertHelper::ALERT_SUCCESS,
+                'message' => trans('success.crud_update', ['type' => "Employee $employee->full_name"])
+            ]);
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            Log::error($th);
+
+            return back()->withErrors([trans('server.500')], 500);
+        }
+    }
+
+    public function destroy(Employee $employee){
+        try {
+            DB::beginTransaction();
+            $employee->delete();
+            DB::commit();
+
+            return back()->with('alert', ['type' => AlertHelper::ALERT_SUCCESS, 'message' =>trans('success.crud_delete', ['type' => "Employee $employee->full_name"])]);
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            // throw $th;
+            Log::error($th);
+
+            return back()->withErrors([trans('server.500')], 500);
+        }
+    }
 }

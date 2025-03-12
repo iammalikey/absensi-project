@@ -103,6 +103,14 @@ const Sidebar = () => {
                                 url={url}
                             />
                         )}
+                        {hasAnyPermission(["attendance management"]) && (
+                            <Item
+                                title="Attendance"
+                                to={route("cms.attendance.index")}
+                                icon={<ScoreboardIcon />}
+                                url={url}
+                            />
+                        )}
 
 
                         {hasAnyPermission(["user management", "role management", "permission management"]) && (
