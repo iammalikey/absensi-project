@@ -28,7 +28,8 @@ class AttendanceSeeder extends Seeder
             'slug' => Str::slug($user1->name) . '-' . $user1->id . '-' . Carbon::parse('2025-01-01')->format('Y-m-d'),
             'clock_in' => '08:00:00',
             'clock_out' => '16:00:00',
-            'clock_in_location' => 'lorem ipsum dolor sit amet ',
+            'clock_in_lat' => '39.19750',
+            'clock_in_long' => '9.90157',
             'category' => 'WFO',
             'status' => 'Approved',
         ]);
@@ -39,7 +40,8 @@ class AttendanceSeeder extends Seeder
             'slug' => Str::slug($user1->name) . '-' . $user1->id . '-' . Carbon::parse('2025-01-02')->format('Y-m-d'),
             'clock_in' => '08:00:00',
             'clock_out' => '16:00:00',
-            'clock_in_location' => 'lorem ipsum dolor sit amet ',
+            'clock_in_lat' => '39.19750',
+            'clock_in_long' => '9.90157',
             'category' => 'WFO',
             'status' => 'Approved',
         ]);
@@ -50,7 +52,8 @@ class AttendanceSeeder extends Seeder
             'slug' => Str::slug($user2->name) . '-' . $user2->id . '-' . Carbon::parse('2025-01-01')->format('Y-m-d'),
             'clock_in' => '08:00:00',
             'clock_out' => '16:00:00',
-            'clock_in_location' => 'lorem ipsum dolor sit amet ',
+            'clock_in_lat' => '10.86042',
+            'clock_in_long' => '106.98617',
             'category' => 'WFH',
             'status' => 'Approved',
         ]);
@@ -61,7 +64,8 @@ class AttendanceSeeder extends Seeder
             'slug' => Str::slug($user2->name) . '-' . $user2->id . '-' . Carbon::parse('2025-01-02')->format('Y-m-d'),
             'clock_in' => '08:00:00',
             'clock_out' => '16:00:00',
-            'clock_in_location' => 'lorem ipsum dolor sit amet ',
+            'clock_in_lat' => '6.74759',
+            'clock_in_long' => '-162.90709',
             'category' => 'WFO',
             'status' => 'Approved',
         ]);

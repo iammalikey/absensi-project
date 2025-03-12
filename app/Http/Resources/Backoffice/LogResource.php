@@ -17,7 +17,14 @@ class LogResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'attendance_count' => $this->attendances_count
+            'attendance_count' => $this->attendance_count,
+            'attendance' => isset($this->attendance) ? $this->attendance->map(function ($att) {
+                return [
+                    'clock_in_lat' => isset($att->clock_in_lat) ? $att->clock_in_lat : 'No Data',
+                    'clock_in_long' => isset($att->clock_in_long) ? $att->clock_in_long : 'No Data',
+                ];
+            }) : [],
         ];
+        
     }
 }

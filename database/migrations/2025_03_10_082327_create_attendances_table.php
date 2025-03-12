@@ -18,7 +18,8 @@ return new class extends Migration
             $table->date('date')->nullable()->onDelete('set null');
             $table->time('clock_in');
             $table->time('clock_out')->nullable();
-            $table->text('clock_in_location');
+            $table->text('clock_in_lat');
+            $table->text('clock_in_long');
             $table->string('category');
             $table->string('status');
             $table->timestamps();
