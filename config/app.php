@@ -187,4 +187,8 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 
+    'office_lat' => env('OFFICE_LAT', '-6.236957951847612'),
+    'office_long' => env('OFFICE_LONG', '106.84869370858686'),
+
+
 ];

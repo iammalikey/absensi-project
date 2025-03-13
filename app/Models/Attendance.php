@@ -19,7 +19,8 @@ class Attendance extends Model
         'date',
         'clock_in',
         'clock_out',
-        'clock_in_location',
+        'clock_in_lat',
+        'clock_in_long',
         'category',
         'status',
     ];
@@ -31,5 +32,16 @@ class Attendance extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function scopeWithDistance($query, $officeLat, $officeLong)
+    {
+        return $query->select('*')
+            ->selectRaw("
+                (6371 * acos(
+                    cos(radians(?)) * cos(radians(clock_in_lat)) * 
+                    cos(radians(clock_in_long) - radians(?)) + 
+                    sin(radians(?)) * sin(radians(clock_in_lat))
+                )) AS distance", [$officeLat, $officeLong, $officeLat]);
     }
 }

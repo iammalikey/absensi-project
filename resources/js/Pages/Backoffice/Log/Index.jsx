@@ -53,38 +53,42 @@ export default function Index({ attendances, selectedMonth, selectedName }) {
             <Button
                 variant="contained"
                 color="secondary"
-                onClick={() => window.location.href = route("cms.log.export", { month })}
+                onClick={() => window.location.href = route("cms.log.export", { month, name })}
             >
                 Export to Excel
             </Button>
 
+
             {/* Tabel Attendance */}
             <TableContainer sx={{ maxHeight: "70vh" }}>
                 <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Employee</TableCell>
-                            <TableCell>Date</TableCell>
-                            <TableCell>Clock In</TableCell>
-                            <TableCell>Clock Out</TableCell>
-                            <TableCell>Clock In Location</TableCell>
-                            <TableCell>Status</TableCell>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Employee</TableCell>
+                        <TableCell>Date</TableCell>
+                        <TableCell>Clock In</TableCell>
+                        <TableCell>Clock Out</TableCell>
+                        {/* <TableCell>Clock In Location</TableCell> */}
+                        <TableCell>Radius (KM)</TableCell>
+                        <TableCell>Status</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {attendances.data.map((attendance) => (
+                        <TableRow key={attendance.id}>
+                            <TableCell>{attendance.user.name}</TableCell>
+                            <TableCell>{attendance.date}</TableCell>
+                            <TableCell>{attendance.clock_in}</TableCell>
+                            <TableCell>{attendance.clock_out || "-"}</TableCell>
+                            {/* <TableCell>
+                                {attendance.clock_in_lat}, {attendance.clock_in_long}
+                            </TableCell> */}
+                            <TableCell>{attendance.distance.toFixed(2)} KM</TableCell>
+                            <TableCell>{attendance.status}</TableCell>
                         </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {attendances.data.map((attendance) => (
-                            <TableRow key={attendance.id}>
-                                <TableCell>{attendance.user.name}</TableCell>
-                                <TableCell>{attendance.date}</TableCell>
-                                <TableCell>{attendance.clock_in}</TableCell>
-                                <TableCell>{attendance.clock_out || "-"}</TableCell>
-                                <TableCell>
-                                    {attendance.clock_in_lat}, {attendance.clock_in_long}
-                                </TableCell>
-                                <TableCell>{attendance.status}</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
+                    ))}
+                </TableBody>
+
                 </Table>
             </TableContainer>
 

@@ -15,12 +15,22 @@ class LogController extends Controller
 {
     public function index(Request $request)
     {
-        $month = $request->query('month', now()->format('Y-m')); // Default bulan ini
-        $name = $request->query('name', ''); // Filter nama
-        $dateRange = explode('-', $month); // Ambil tahun & bulan
+        $month = $request->query('month', now()->format('Y-m'));
+        $name = $request->query('name', '');
+        $dateRange = explode('-', $month);
 
-        // Query attendance dengan filter bulan & nama user
+        // Ambil lokasi kantor dari config
+        $officeLat = config('app.office_lat');
+        $officeLong = config('app.office_long');
+
         $attendances = Attendance::with('user')
+            ->select('attendances.*')
+            ->selectRaw("
+                (6371 * acos(
+                    cos(radians(?)) * cos(radians(clock_in_lat)) * 
+                    cos(radians(clock_in_long) - radians(?)) + 
+                    sin(radians(?)) * sin(radians(clock_in_lat))
+                )) AS distance", [$officeLat, $officeLong, $officeLat])
             ->whereYear('date', $dateRange[0])
             ->whereMonth('date', $dateRange[1])
             ->when($name, function ($query) use ($name) {
@@ -42,8 +52,10 @@ class LogController extends Controller
 
     public function export(Request $request)
     {
-        $month = $request->query('month', date('Y-m'));
+        $month = $request->query('month', now()->format('Y-m'));
+        $name = $request->query('name', ''); // Ambil filter nama jika ada
 
-        return Excel::download(new LogsExport($month), "attendance_logs_{$month}.xlsx");
+        return Excel::download(new LogsExport($month, $name), "attendance_log_{$month}.xlsx");
     }
+
 }
