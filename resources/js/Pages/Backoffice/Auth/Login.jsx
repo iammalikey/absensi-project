@@ -66,11 +66,14 @@ function Login({ nama }) {
                 <div>
                     <Link
                         // href={route("home")}
-                        className="block w-36 aspect-[11/4] bg-white p-1 rounded-md"
+                        className="block w-72 aspect-[11/4] p-1 rounded-md"
                     >
-                        <img src="/assets/images/walls-logo.png" alt="walls logo" className='object-contain w-full h-full'/>
+                        <img src="/assets/images/concrete-logo.png" alt="concrete logo" className='object-contain w-full h-full'/>
                     </Link>
-                    <p className="mt-1 text-white">Content Management System</p>
+                    <div className="flex flex-col items-center mt-5 justify-center">
+                    <p className="text-2xl text-white">CONCRETE CLOCK IN</p>
+                    <p className="text-xl text-white">CONTENT MANAGEMENT SYSTEM</p>
+                    </div>
                 </div>
             </div>
             <div className="flex items-center justify-center w-full lg:w-1/2">
