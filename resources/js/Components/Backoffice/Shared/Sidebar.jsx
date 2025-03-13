@@ -117,7 +117,7 @@ const Sidebar = () => {
                         )}
                         {hasAnyPermission(["log management"]) && (
                             <Item
-                                title="log"
+                                title="Log"
                                 to={route("cms.log.index")}
                                 icon={<BarChartOutlinedIcon />}
                                 url={url}

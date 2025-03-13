@@ -16,11 +16,11 @@ class AttendanceSeeder extends Seeder
      */
     public function run(): void
     {
-        $user1 = User::where('name', 'Employee 1')->first();
-        $user2 = User::where('name', 'Employee 2')->first();
-        $user3 = User::where('name', 'Employee 3')->first();
-        $user4 = User::where('name', 'Employee 4')->first();
-        $user5 = User::where('name', 'Employee 5')->first();
+        $user1 = User::where('name', 'Ahmad Setiawan')->first();
+        $user2 = User::where('name', 'Siti Nurhaliza')->first();
+        $user3 = User::where('name', 'Budi Santoso')->first();
+        $user4 = User::where('name', 'Indah Permatasari')->first();
+        $user5 = User::where('name', 'Rizky Ramadhan')->first();
 
         $attendance1 = Attendance::create([
             'user_id' => $user1->id,

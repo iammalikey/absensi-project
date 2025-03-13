@@ -107,7 +107,7 @@ class UserCmsSeeder extends Seeder
         $user_employee1 = User::create([
             'email' => 'employee1@app.com',
             'username' => 'employee1',
-            'name' => 'Employee 1',
+            'name' => 'Ahmad Setiawan',
             'password' => bcrypt('employee'),
         ]);
         $user_employee1->assignRole($role_employee);
@@ -115,7 +115,7 @@ class UserCmsSeeder extends Seeder
         $user_employee2 = User::create([
             'email' => 'employee2@app.com',
             'username' => 'employee2',
-            'name' => 'Employee 2',
+            'name' => 'Siti Nurhaliza',
             'password' => bcrypt('employee'),
         ]);
         $user_employee2->assignRole($role_employee);
@@ -123,7 +123,7 @@ class UserCmsSeeder extends Seeder
         $user_employee3 = User::create([
             'email' => 'employee3@app.com',
             'username' => 'employee3',
-            'name' => 'Employee 3',
+            'name' => 'Budi Santoso',
             'password' => bcrypt('employee'),
         ]);
         $user_employee3->assignRole($role_employee);
@@ -131,7 +131,7 @@ class UserCmsSeeder extends Seeder
         $user_employee4 = User::create([
             'email' => 'employee4@app.com',
             'username' => 'employee4',
-            'name' => 'Employee 4',
+            'name' => 'Indah Permatasari',
             'password' => bcrypt('employee'),
         ]);
         $user_employee4->assignRole($role_employee);
@@ -139,7 +139,7 @@ class UserCmsSeeder extends Seeder
         $user_employee5 = User::create([
             'email' => 'employee5@app.com',
             'username' => 'employee5',
-            'name' => 'Employee 5',
+            'name' => 'Rizky Ramadhan',
             'password' => bcrypt('employee'),
         ]);
         $user_employee5->assignRole($role_employee);
