@@ -13,6 +13,9 @@ class Attendance extends Model
     const TABLE = 'attendances';
     protected $table = self::TABLE;
 
+    const STATUS_APPROVED = 'Approved';
+    const STATUS_NEED_APPROVE = 'Need Approve';
+
     protected $fillable = [
         'user_id',
         'slug',

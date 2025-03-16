@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Backoffice\Auth;
+namespace App\Http\Requests\Auth;
 
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
@@ -37,11 +37,11 @@ class LoginRequest extends FormRequest
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function authenticate(): void
+    public function authenticate(string $guard = ''): void
     {
         $this->ensureIsNotRateLimited();
 
-        if (!Auth::guard('cms')->attempt($this->only('email', 'password'))) {
+        if (!Auth::guard($guard)->attempt($this->only('email', 'password'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
