@@ -24,10 +24,9 @@ class AttendanceSeeder extends Seeder
 
         $attendance1 = Attendance::create([
             'user_id' => $user1->id,
-            'date' => Carbon::parse('2025-01-01'),
             'slug' => Str::slug($user1->name) . '-' . $user1->id . '-' . Carbon::parse('2025-01-01')->format('Y-m-d'),
-            'clock_in' => '08:00:00',
-            'clock_out' => '16:00:00',
+            'clock_in' => Carbon::parse('2025-01-02 08:00:00')->format('Y-m-d H:i:s'),
+            'clock_out' => Carbon::parse('2025-01-02 16:00:00')->format('Y-m-d H:i:s'),
             'clock_in_lat' => '39.19750',
             'clock_in_long' => '9.90157',
             'category' => 'WFO',
@@ -36,10 +35,9 @@ class AttendanceSeeder extends Seeder
 
         $attendance2 = Attendance::create([
             'user_id' => $user1->id,
-            'date' => Carbon::parse('2025-01-02'),
             'slug' => Str::slug($user1->name) . '-' . $user1->id . '-' . Carbon::parse('2025-01-02')->format('Y-m-d'),
-            'clock_in' => '08:00:00',
-            'clock_out' => '16:00:00',
+            'clock_in' => Carbon::parse('2025-01-02 08:00:00')->format('Y-m-d H:i:s'),
+            'clock_out' => Carbon::parse('2025-01-02 16:00:00')->format('Y-m-d H:i:s'),
             'clock_in_lat' => '39.19750',
             'clock_in_long' => '9.90157',
             'category' => 'WFO',
@@ -48,10 +46,9 @@ class AttendanceSeeder extends Seeder
 
         $attendance3 = Attendance::create([
             'user_id' => $user2->id,
-            'date' => Carbon::parse('2025-01-01'),
             'slug' => Str::slug($user2->name) . '-' . $user2->id . '-' . Carbon::parse('2025-01-01')->format('Y-m-d'),
-            'clock_in' => '08:00:00',
-            'clock_out' => '16:00:00',
+            'clock_in' => Carbon::parse('2025-01-02 08:00:00')->format('Y-m-d H:i:s'),
+            'clock_out' => Carbon::parse('2025-01-02 16:00:00')->format('Y-m-d H:i:s'),
             'clock_in_lat' => '10.86042',
             'clock_in_long' => '106.98617',
             'category' => 'WFH',
@@ -60,10 +57,9 @@ class AttendanceSeeder extends Seeder
 
         $attendance4 = Attendance::create([
             'user_id' => $user2->id,
-            'date' => Carbon::parse('2025-01-02'),
             'slug' => Str::slug($user2->name) . '-' . $user2->id . '-' . Carbon::parse('2025-01-02')->format('Y-m-d'),
-            'clock_in' => '08:00:00',
-            'clock_out' => '16:00:00',
+            'clock_in' => Carbon::parse('2025-01-02 08:00:00')->format('Y-m-d H:i:s'),
+            'clock_out' => Carbon::parse('2025-01-02 16:00:00')->format('Y-m-d H:i:s'),
             'clock_in_lat' => '6.74759',
             'clock_in_long' => '-162.90709',
             'category' => 'WFO',

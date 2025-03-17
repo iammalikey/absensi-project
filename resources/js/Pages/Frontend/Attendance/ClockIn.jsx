@@ -40,14 +40,19 @@ const ClockIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const now = new Date();
+    const formattedDateTime = now.toISOString().slice(0, 19).replace('T', ' '); // "YYYY-MM-DD HH:mm:ss"
+
     const data = {
-      status,
-      date_time: currentDateTime,
-      latitude: position ? position[0] : null,
-      longitude: position ? position[1] : null,
+        status,
+        clock_in: formattedDateTime,
+        latitude: position ? position[0] : null,
+        longitude: position ? position[1] : null,
     };
+
     router.post('/attendance/clockin', data);
   };
+
 
   return (
     <div className="min-h-screen p-4 bg-gray-100">
@@ -55,7 +60,7 @@ const ClockIn = () => {
         <h1 className="mb-4 text-2xl font-bold">Attendance Clock In</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-gray-700">Status</label>
+            <label className="block text-gray-700">Category</label>
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value)}

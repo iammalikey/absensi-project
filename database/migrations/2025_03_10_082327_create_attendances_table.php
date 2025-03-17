@@ -15,13 +15,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('slug')->unique();
-            $table->date('date')->nullable()->onDelete('set null');
-            $table->time('clock_in');
-            $table->time('clock_out')->nullable();
-            $table->text('clock_in_lat');
-            $table->text('clock_in_long');
-            $table->string('category');
-            $table->string('status');
+            $table->dateTime('clock_in')->nullable();
+            $table->dateTime('clock_out')->nullable();
+            $table->text('clock_in_lat')->nullable();
+            $table->text('clock_in_long')->nullable();
+            $table->string('category')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }
