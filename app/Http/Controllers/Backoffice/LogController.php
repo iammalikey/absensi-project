@@ -31,14 +31,14 @@ class LogController extends Controller
                     cos(radians(clock_in_long) - radians(?)) + 
                     sin(radians(?)) * sin(radians(clock_in_lat))
                 )) AS distance", [$officeLat, $officeLong, $officeLat])
-            ->whereYear('date', $dateRange[0])
-            ->whereMonth('date', $dateRange[1])
+            ->whereYear('clock_in', $dateRange[0]) // 🔹 Filter Tahun dari clock_in
+            ->whereMonth('clock_in', $dateRange[1]) // 🔹 Filter Bulan dari clock_in
             ->when($name, function ($query) use ($name) {
                 $query->whereHas('user', function ($subQuery) use ($name) {
                     $subQuery->where('name', 'like', "%{$name}%");
                 });
             })
-            ->orderBy('date', 'desc')
+            ->orderBy('clock_in', 'desc')
             ->paginate(10)
             ->withQueryString();
 
@@ -47,15 +47,22 @@ class LogController extends Controller
             'selectedMonth' => $month,
             'selectedName' => $name,
         ]);
+
     }
 
 
     public function export(Request $request)
     {
+        $request->validate([
+            'month' => 'nullable|date_format:Y-m',
+            'name' => 'nullable|string',
+        ]);
+
         $month = $request->query('month', now()->format('Y-m'));
-        $name = $request->query('name', ''); // Ambil filter nama jika ada
+        $name = $request->query('name', '');
 
         return Excel::download(new LogsExport($month, $name), "attendance_log_{$month}.xlsx");
     }
+
 
 }

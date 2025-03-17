@@ -23,7 +23,7 @@ class AttendanceController extends Controller
     {
         // Validasi input
         $validated = $request->validate([
-            'status' => 'required|in:WFO,WFH',
+            'category' => 'required|in:WFO,WFH',
             'clock_in' => 'required|date_format:Y-m-d H:i:s',
             'latitude' => 'required|numeric|between:-90,90',
             'longitude' => 'required|numeric|between:-180,180',
@@ -44,8 +44,8 @@ class AttendanceController extends Controller
             'clock_in' => $dateTime->format('Y-m-d H:i:s'),
             'clock_in_lat' => $validated['latitude'],
             'clock_in_long' => $validated['longitude'],
-            'category' => 'Clock In',
-            'status' => $validated['status'],
+            'status' => 'Clock In',
+            'category' => $validated['category'],
         ];
 
         // Simpan ke database
@@ -54,7 +54,9 @@ class AttendanceController extends Controller
 
 
         // Return response JSON
-        return response()->json(['message' => 'Clock In success', 'data' => $attendance]);
+        // return response()->json(['message' => 'Clock In success', 'data' => $attendance]);
+        return redirect()->back()->with('message', 'Clock In berhasil!');
+
     }
 
 
@@ -94,7 +96,8 @@ class AttendanceController extends Controller
             'clock_out_long' => $request->longitude,
         ]);
 
-        return response()->json(['message' => 'Clock Out successful', 'data' => $attendance]);
+        // return response()->json(['message' => 'Clock Out successful', 'data' => $attendance]);
+        return redirect()->back()->with('message', 'Clock Out berhasil!');
     }
 
 }

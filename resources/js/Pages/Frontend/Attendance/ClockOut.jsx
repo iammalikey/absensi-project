@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { router } from '@inertiajs/react';
 import MainLayout from '@/Layouts/Frontend/MainLayout';
+import Swal from "sweetalert2";
 
 // Fix default icon issues with Leaflet in React
 delete L.Icon.Default.prototype._getIconUrl;
@@ -47,7 +48,23 @@ const ClockOut = () => {
       longitude: position ? position[1] : null,
     };
 
-    router.post("/attendance/clockout", data);
+    router.post("/attendance/clockout", data, {
+      preserveScroll: true,
+      onSuccess: (page) => {
+        Swal.fire({
+          title: "Clock Out Berhasil!",
+          text: page.props.flash.message || "Berhasil Clock Out!",
+          icon: "success",
+        });
+      },
+      onError: (errors) => {
+        Swal.fire({
+          title: "Gagal Clock Out",
+          text: errors.message || "Terjadi kesalahan saat Clock Out!",
+          icon: "error",
+        });
+      },
+    });
   };
 
   return (
@@ -66,7 +83,7 @@ const ClockOut = () => {
           </div>
           <button
             type="submit"
-            className="w-full px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600"
+            className="w-full px-4 py-2 text-white bg-gray-500 rounded hover:bg-gray-600"
           >
             Clock Out
           </button>

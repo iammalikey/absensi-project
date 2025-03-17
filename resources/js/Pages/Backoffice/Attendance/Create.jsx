@@ -28,11 +28,21 @@ export default function Create({ users, categories, statuses }) {
     });
 
     const handleChange = (e) => {
+        let { name, value } = e.target;
+    
+        // Jika field adalah clock_in atau clock_out, ubah ke format Y-m-d H:i:s
+        if (name === "clock_in" || name === "clock_out") {
+            const date = new Date(value);
+            value = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")} ${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}:00`;
+        }
+    
         setData((prevData) => ({
             ...prevData,
-            [e.target.name]: e.target.value,
+            [name]: value,
         }));
     };
+    
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -78,7 +88,7 @@ export default function Create({ users, categories, statuses }) {
                         </Select>
                     </FormControl>
 
-                    {/* Marital Status */}
+                    {/* Status */}
                     <FormControl fullWidth variant="filled" sx={{ gridColumn: "span 2" }}>
                         <InputLabel>Status</InputLabel>
                         <Select name="status" value={data.status} onChange={handleChange}>
@@ -93,20 +103,7 @@ export default function Create({ users, categories, statuses }) {
                     <TextField
                         fullWidth
                         variant="filled"
-                        type="date"
-                        label="Date"
-                        onChange={handleChange}
-                        name="date"
-                        value={data.date}
-                        InputLabelProps={{ shrink: true }}
-                        error={!!errors.date}
-                        helperText={errors.date}
-                        sx={{ gridColumn: "span 2" }}
-                    />
-                    <TextField
-                        fullWidth
-                        variant="filled"
-                        type="time"
+                        type="datetime-local" // Ubah menjadi datetime-local
                         label="Clock In"
                         onChange={handleChange}
                         name="clock_in"
@@ -116,12 +113,11 @@ export default function Create({ users, categories, statuses }) {
                         helperText={errors.clock_in}
                         sx={{ gridColumn: "span 2" }}
                     />
-
                     
                     <TextField
                         fullWidth
                         variant="filled"
-                        type="time"
+                        type="datetime-local" // Ubah menjadi datetime-local
                         label="Clock Out"
                         onChange={handleChange}
                         name="clock_out"
@@ -131,6 +127,7 @@ export default function Create({ users, categories, statuses }) {
                         helperText={errors.clock_out}
                         sx={{ gridColumn: "span 2" }}
                     />
+
 
                     <TextField
                         fullWidth

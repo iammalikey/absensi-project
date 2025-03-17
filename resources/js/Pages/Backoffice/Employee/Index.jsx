@@ -17,7 +17,7 @@ import { router } from "@inertiajs/react";
 import { getUrlSearchParameter } from "@/Utils/helper";
 import ConfirmDeleteDialog from "@/Components/Backoffice/ConfirmDeleteDialog";
 
-export default function Index({ employees }) {
+export default function Index({ employees, user }) {
     // untuk edit
     const handleEdit = (id) => {
         router.get(route("cms.employee.edit", { employee: id }));
@@ -65,14 +65,16 @@ export default function Index({ employees }) {
         <Box m="20px">
             <Header title={`Employee Management`} subtitle={`Manage Employee`}></Header>
             <Box display="flex" justifyContent="start" mt="20px" gap="5px">
-                <Button
-                    type="submit"
-                    color="secondary"
-                    variant="contained"
-                    onClick={() => router.get(route("cms.employee.create"))}
-                >
-                    Create employee
-                </Button>
+                {(user.role.includes("Super Admin") || user.role.includes("Human Resource")) && (
+                    <Button
+                        type="submit"
+                        color="secondary"
+                        variant="contained"
+                        onClick={() => router.get(route("cms.employee.create"))}
+                    >
+                        Create employee
+                    </Button>
+                )}
             </Box>
             <TableContainer sx={{ maxHeight: "70vh" }}>
                 <Table stickyHeader aria-label="sticky table">
@@ -109,35 +111,41 @@ export default function Index({ employees }) {
                                 <TableCell>{employee.user.email}</TableCell>
                                 <TableCell>{employee.division.title}</TableCell>
                                 <TableCell align="center" className="!space-x-2">
-                                    <Button
-                                        color="neutral"
-                                        variant="contained"
-                                        onClick={() =>
-                                            handleEdit(employee.slug)
-                                        }
-                                        className="mt-2"
-                                    >
-                                        Edit
-                                    </Button>
-                                    <Button
-                                        color="danger"
-                                        variant="contained"
-                                        onClick={() =>
-                                            handleDelete(employee.slug)
-                                        }
-                                        className="mt-2"
-                                    >
-                                        Delete
-                                    </Button>
-                                    <Button
-                                        color="info"
-                                        variant="contained"
-                                        onClick={() =>
-                                            router.get(route("cms.employee.show", { employee: employee.id }))
-                                        }
-                                    >
-                                        View Detail
-                                    </Button>
+                                    {(user.role.includes("Super Admin") || user.role.includes("Human Resource")) && (
+                                        <Button
+                                            color="neutral"
+                                            variant="contained"
+                                            onClick={() =>
+                                                handleEdit(employee.slug)
+                                            }
+                                            className="mt-2"
+                                        >
+                                            Edit
+                                        </Button>
+                                    )}
+                                    {(user.role.includes("Super Admin")) && (
+                                        <Button
+                                            color="danger"
+                                            variant="contained"
+                                            onClick={() =>
+                                                handleDelete(employee.slug)
+                                            }
+                                            className="mt-2"
+                                        >
+                                            Delete
+                                        </Button>
+                                    )}
+                                    {(user.role.includes("Super Admin") || user.role.includes("Human Resource") || user.role.includes("Supervisor")) && (
+                                        <Button
+                                            color="info"
+                                            variant="contained"
+                                            onClick={() =>
+                                                router.get(route("cms.employee.show", { employee: employee.id }))
+                                            }
+                                        >
+                                            View Detail
+                                        </Button>
+                                    )}
                                 </TableCell>
                             </TableRow>
                         ))}

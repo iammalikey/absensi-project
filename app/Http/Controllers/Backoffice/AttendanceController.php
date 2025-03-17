@@ -22,7 +22,10 @@ class AttendanceController extends Controller
     public function index()
     {
         return inertia('Backoffice/Attendance/Index', [
-            'attendances' => AttendanceIndexResource::collection(Attendance::with(['user'])->paginate(request()->size ?? 10))
+            'attendances' => AttendanceIndexResource::collection(Attendance::with(['user'])->paginate(request()->size ?? 10)),
+            'user' => [
+                'role' => auth()->user()->roles->pluck('name'), // Jika pakai Spatie
+            ],
         ]);
     }
 
@@ -32,8 +35,8 @@ class AttendanceController extends Controller
         // return inertia('Backoffice/Employee/Create');
         return inertia('Backoffice/Attendance/Create', [
             'users' => User::select('id', 'name')->get(),
-            'categories' => ['WFH', 'WFO', 'Anual Leave', 'MIA'],
-            'statuses' => ['Pending', 'Approved', 'Rejected'],
+            'categories' => ['WFH', 'WFO'],
+            'statuses' => ['Need Approve', 'Approved'],
         ]);
 
     }
@@ -47,12 +50,12 @@ class AttendanceController extends Controller
     
             $attendance = new Attendance();
             $attendance->user_id = $request->user_id;
-            $attendance->date = $request->date;
             $attendance->slug = Str::slug($user->name) . '-' . $user->id . '-' . Carbon::parse($request->date)->format('Y-m-d');
-            $attendance->clock_in = $request->date . ' ' . $request->clock_in . ':00';
-            $attendance->clock_out = $request->clock_out ? $request->date . ' ' . $request->clock_out . ':00' : null; 
-            $attendance->clock_in_location = $request->clock_in_location ?? null;
-            $attendance->status = $request->status ?? 'Pending';
+            $attendance->clock_in = $request->clock_in;
+            $attendance->clock_out = $request->clock_out ?: null; 
+            $attendance->clock_in_lat = $request->clock_in_lat ?? null;
+            $attendance->clock_in_long = $request->clock_in_long ?? null;
+            $attendance->status = $request->status ?? 'Need Approve';
             $attendance->category = $request->category;
             $attendance->save();
     
@@ -75,27 +78,28 @@ class AttendanceController extends Controller
         return inertia('Backoffice/Attendance/Edit', [
             'attendance' => new AttendanceEditResource($attendance->load('user')),
             'users' => User::get(['id', 'name']),
-            'categories' => ['WFH', 'WFO', 'Anual Leave', 'MIA'],
-            'statuses' => ['Pending', 'Approved', 'Rejected'],
+            'categories' => ['WFH', 'WFO'],
+            'statuses' => ['Need Approve', 'Approved'],
         ]);
     }
 
     public function update(AttendanceUpdateRequest $request, Attendance $attendance)
     {
+        // dd("Masuk ke update"); 
         try {
             DB::beginTransaction();
             $user = User::findOrFail($request->user_id);
             // $attendance = new Attendance();
             $attendance->user_id = $request->user_id;
-            $attendance->date = $request->date;
             $attendance->slug = Str::slug($user->name) . '-' . $user->id . '-' . Carbon::parse($request->date)->format('Y-m-d');
-            $attendance->clock_in = $request->date . ' ' . $request->clock_in . ':00';
-            $attendance->clock_out = $request->clock_out ? $request->date . ' ' . $request->clock_out . ':00' : null; 
-            $attendance->clock_in_location = $request->clock_in_location ?? null;
-            $attendance->status = $request->status ?? 'Pending';
+            $attendance->clock_in = $request->clock_in;
+            $attendance->clock_out = $request->clock_out ?: null; 
+            $attendance->clock_in_lat = $request->clock_in_lat ?? null;
+            $attendance->clock_in_long = $request->clock_in_long ?? null;
+            $attendance->status = $request->status ?? 'Need Approve';
             $attendance->category = $request->category;
             $attendance->save();
-    
+
             DB::commit();
     
             return redirect()->route('cms.attendance.index')->with('alert', [

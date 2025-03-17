@@ -60,5 +60,10 @@ class PermissionSeeder extends Seeder
             'name' => 'employee management',
             'guard_name' => 'cms',
         ]);
+
+        Permission::create([
+            'name' => 'log management',
+            'guard_name' => 'cms',
+        ]);
     }
 }

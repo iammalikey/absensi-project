@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { router } from '@inertiajs/react';
 import MainLayout from '@/Layouts/Frontend/MainLayout';
+import Swal from 'sweetalert2';
 
 // Fix default icon issues with Leaflet in React
 delete L.Icon.Default.prototype._getIconUrl;
@@ -14,7 +15,7 @@ L.Icon.Default.mergeOptions({
 });
 
 const ClockIn = () => {
-  const [status, setStatus] = useState('WFH');
+  const [category, setCategory] = useState('WFH');
   const [currentDateTime, setCurrentDateTime] = useState('');
   const [position, setPosition] = useState(null);
 
@@ -44,13 +45,29 @@ const ClockIn = () => {
     const formattedDateTime = now.toISOString().slice(0, 19).replace('T', ' '); // "YYYY-MM-DD HH:mm:ss"
 
     const data = {
-        status,
+        category,
         clock_in: formattedDateTime,
         latitude: position ? position[0] : null,
         longitude: position ? position[1] : null,
     };
 
-    router.post('/attendance/clockin', data);
+    router.post("/attendance/clockin", data, {
+      preserveScroll: true,
+      onSuccess: (page) => {
+        Swal.fire({
+          title: "Clock In Berhasil!",
+          text: page.props.flash.message || "Berhasil Clock In!",
+          icon: "success",
+        });
+      },
+      onError: (errors) => {
+        Swal.fire({
+          title: "Gagal Clock In",
+          text: errors.message || "Terjadi kesalahan saat Clock In!",
+          icon: "error",
+        });
+      },
+    });
   };
 
 
@@ -62,9 +79,9 @@ const ClockIn = () => {
           <div className="mb-4">
             <label className="block text-gray-700">Category</label>
             <select
-              value={status}
-              onChange={(e) => setStatus(e.target.value)}
-              className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500"
             >
               <option value="WFH">WFH</option>
               <option value="WFO">WFO</option>
@@ -76,7 +93,7 @@ const ClockIn = () => {
               type="text"
               value={currentDateTime}
               disabled
-              className="block w-full mt-1 bg-gray-100 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+              className="block w-full mt-1 bg-gray-100 border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500"
             />
           </div>
           <div className="mb-4">
@@ -101,7 +118,7 @@ const ClockIn = () => {
           </div>
           <button
             type="submit"
-            className="w-full px-4 py-2 text-white bg-indigo-500 rounded hover:bg-indigo-600"
+            className="w-full px-4 py-2 text-white bg-gray-500 rounded hover:bg-gray-600"
           >
             Clock In
           </button>

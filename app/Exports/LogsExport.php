@@ -19,31 +19,42 @@ class LogsExport implements FromView, ShouldAutoSize
     }
 
     public function view(): View
-{
-    $dateRange = explode('-', $this->month);
+    {
+        $dateRange = explode('-', $this->month);
 
-    // Koordinat lokasi kantor
-    $officeLat = -6.200000; // Ganti dengan latitude kantor
-    $officeLong = 106.816666; // Ganti dengan longitude kantor
+        // Pastikan format bulan benar (YYYY-MM)
+        if (count($dateRange) !== 2) {
+            abort(400, 'Format bulan tidak valid. Gunakan format YYYY-MM.');
+        }
 
-    // Query attendance dengan filter bulan, nama, dan perhitungan jarak
-    $attendances = Attendance::with('user')
-        ->whereYear('date', $dateRange[0])
-        ->whereMonth('date', $dateRange[1])
-        ->when($this->name, function ($query) {
-            $query->whereHas('user', function ($subQuery) {
-                $subQuery->where('name', 'like', "%{$this->name}%");
-            });
-        })
-        ->withDistance($officeLat, $officeLong) // Tambahkan perhitungan jarak
-        ->orderBy('date', 'desc')
-        ->get();
+        // Koordinat lokasi kantor
+        $officeLat = -6.200000; // Ganti dengan latitude kantor
+        $officeLong = 106.816666; // Ganti dengan longitude kantor
 
-    return view('exports.logs', [
-        'attendances' => $attendances,
-        'month' => $this->month,
-        'name' => $this->name
-    ]);
-}
+        // Query attendance dengan filter bulan, nama, dan perhitungan jarak
+        $attendances = Attendance::with('user')
+            ->whereYear('clock_in', $dateRange[0])
+            ->whereMonth('clock_in', $dateRange[1])
+            ->when($this->name, function ($query) {
+                $query->whereHas('user', function ($subQuery) {
+                    $subQuery->where('name', 'like', "%{$this->name}%");
+                });
+            })
+            ->select('attendances.*')
+            ->selectRaw("
+                (6371 * acos(
+                    cos(radians(?)) * cos(radians(clock_in_lat)) * 
+                    cos(radians(clock_in_long) - radians(?)) + 
+                    sin(radians(?)) * sin(radians(clock_in_lat))
+                )) AS distance", [$officeLat, $officeLong, $officeLat])
+            ->orderBy('clock_in', 'desc')
+            ->get();
+
+        return view('exports.logs', [
+            'attendances' => $attendances,
+            'month' => $this->month,
+            'name' => $this->name
+        ]);
+    }
 
 }

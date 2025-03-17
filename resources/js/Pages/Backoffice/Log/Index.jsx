@@ -65,10 +65,8 @@ export default function Index({ attendances, selectedMonth, selectedName }) {
                 <TableHead>
                     <TableRow>
                         <TableCell>Employee</TableCell>
-                        <TableCell>Date</TableCell>
                         <TableCell>Clock In</TableCell>
                         <TableCell>Clock Out</TableCell>
-                        {/* <TableCell>Clock In Location</TableCell> */}
                         <TableCell>Radius (KM)</TableCell>
                         <TableCell>Status</TableCell>
                     </TableRow>
@@ -77,12 +75,8 @@ export default function Index({ attendances, selectedMonth, selectedName }) {
                     {attendances.data.map((attendance) => (
                         <TableRow key={attendance.id}>
                             <TableCell>{attendance.user.name}</TableCell>
-                            <TableCell>{attendance.date}</TableCell>
                             <TableCell>{attendance.clock_in}</TableCell>
                             <TableCell>{attendance.clock_out || "-"}</TableCell>
-                            {/* <TableCell>
-                                {attendance.clock_in_lat}, {attendance.clock_in_long}
-                            </TableCell> */}
                             <TableCell>{attendance.distance.toFixed(2)} KM</TableCell>
                             <TableCell>{attendance.status}</TableCell>
                         </TableRow>

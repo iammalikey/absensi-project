@@ -18,7 +18,6 @@ export default function Edit({ attendance, users, categories, statuses }) {
 
     const { data, setData, reset, errors, post } = useForm({
         user_id: attendance.data.user_id,
-        date: attendance.data.date,
         clock_in: attendance.data.clock_in,
         clock_out: attendance.data.clock_out,
         clock_in_lat: attendance.data.clock_in_lat,
@@ -29,11 +28,20 @@ export default function Edit({ attendance, users, categories, statuses }) {
     });
 
     const handleChange = (e) => {
+        let { name, value } = e.target;
+    
+        // Jika field adalah clock_in atau clock_out, ubah ke format Y-m-d H:i:s
+        if (name === "clock_in" || name === "clock_out") {
+            const date = new Date(value);
+            value = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")} ${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}:00`;
+        }
+    
         setData((prevData) => ({
             ...prevData,
-            [e.target.name]: e.target.value,
+            [name]: value,
         }));
     };
+    
 
     const handleSubmit = (e) => {
         e.preventDefault(); 
@@ -133,44 +141,31 @@ export default function Edit({ attendance, users, categories, statuses }) {
                     <TextField
                         fullWidth
                         variant="filled"
-                        type="date"
-                        label="Date"
-                        onChange={handleChange}
-                        name="date"
-                        value={data.date}
-                        InputLabelProps={{ shrink: true }}
-                        error={!!errors.date}
-                        helperText={errors.date}
-                        sx={{ gridColumn: "span 2" }}
-                    />
-                    <TextField
-                        fullWidth
-                        variant="filled"
-                        type="time"
+                        type="datetime-local"
                         label="Clock In"
                         onChange={handleChange}
                         name="clock_in"
-                        value={data.clock_in}
+                        value={data.clock_in ? data.clock_in.replace(" ", "T").slice(0, 16) : ""} // Konversi untuk tampilan input
                         InputLabelProps={{ shrink: true }}
                         error={!!errors.clock_in}
                         helperText={errors.clock_in}
                         sx={{ gridColumn: "span 2" }}
                     />
 
-                    
                     <TextField
                         fullWidth
                         variant="filled"
-                        type="time"
+                        type="datetime-local"
                         label="Clock Out"
                         onChange={handleChange}
                         name="clock_out"
-                        value={data.clock_out}
+                        value={data.clock_out ? data.clock_out.replace(" ", "T").slice(0, 16) : ""} // Konversi untuk tampilan input
                         InputLabelProps={{ shrink: true }}
                         error={!!errors.clock_out}
                         helperText={errors.clock_out}
                         sx={{ gridColumn: "span 2" }}
                     />
+
 
                     <TextField
                         fullWidth

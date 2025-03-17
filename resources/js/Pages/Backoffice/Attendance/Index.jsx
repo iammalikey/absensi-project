@@ -17,7 +17,7 @@ import { router } from "@inertiajs/react";
 import { getUrlSearchParameter } from "@/Utils/helper";
 import ConfirmDeleteDialog from "@/Components/Backoffice/ConfirmDeleteDialog";
 
-export default function Index({ attendances }) {
+export default function Index({ attendances, user }) {
     // untuk edit
     const handleEdit = (id) => {
         router.get(route("cms.attendance.edit", { attendance: id }));
@@ -65,6 +65,7 @@ export default function Index({ attendances }) {
         <Box m="20px">
             <Header title={`attendance Management`} subtitle={`Manage attendance`}></Header>
             <Box display="flex" justifyContent="start" mt="20px" gap="5px">
+            {(user.role.includes("Super Admin") || user.role.includes("Human Resource")) && (
                 <Button
                     type="submit"
                     color="secondary"
@@ -73,13 +74,13 @@ export default function Index({ attendances }) {
                 >
                     Create attendance
                 </Button>
+            )}
             </Box>
             <TableContainer sx={{ maxHeight: "70vh" }}>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
                             <TableCell>Name</TableCell>
-                            <TableCell>Clock In Date</TableCell>
                             <TableCell>Clock In</TableCell>
                             <TableCell>Clock Out</TableCell>
                             <TableCell>Category</TableCell>
@@ -98,12 +99,12 @@ export default function Index({ attendances }) {
                                 }}
                             >
                                 <TableCell>{attendance.user.name}</TableCell>
-                                <TableCell>{attendance.date}</TableCell>
                                 <TableCell>{attendance.clock_in}</TableCell>
                                 <TableCell>{attendance.clock_out}</TableCell>
                                 <TableCell>{attendance.category}</TableCell>
                                 <TableCell>{attendance.status}</TableCell>
                                 <TableCell align="center" className="!space-x-2">
+                                    {(user.role.includes("Super Admin") || user.role.includes("Human Resource")) && (
                                     <Button
                                         color="neutral"
                                         variant="contained"
@@ -114,6 +115,8 @@ export default function Index({ attendances }) {
                                     >
                                         Edit
                                     </Button>
+                                    )}
+                                    {(user.role.includes("Super Admin")) && (
                                     <Button
                                         color="danger"
                                         variant="contained"
@@ -124,6 +127,7 @@ export default function Index({ attendances }) {
                                     >
                                         Delete
                                     </Button>
+                                    )}
                                 </TableCell>
                             </TableRow>
                         ))}

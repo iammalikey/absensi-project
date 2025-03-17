@@ -21,7 +21,10 @@ class EmployeeController extends Controller
     public function index()
     {
         return inertia('Backoffice/Employee/Index', [
-            'employees' => EmployeeIndexResource::collection(Employee::with(['user','division'])->paginate(request()->size ?? 10))
+            'employees' => EmployeeIndexResource::collection(Employee::with(['user','division'])->paginate(request()->size ?? 10)),
+            'user' => [
+                'role' => auth()->user()->roles->pluck('name'), // Jika pakai Spatie
+            ],
         ]);
     }
 

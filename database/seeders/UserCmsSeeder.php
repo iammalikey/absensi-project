@@ -37,14 +37,8 @@ class UserCmsSeeder extends Seeder
 
         // tambahin permission disini sesuai module
         $role_hrd->givePermissionTo([
-            'user management',
-            'permission management',
-            'klasemen management',
-            'klasemen management link',
-            'klasemen management score',
-            'setting management',
+            'log management',
             'attendance management',
-            'leave request management',
             'employee management',
         ]);
 
@@ -65,14 +59,7 @@ class UserCmsSeeder extends Seeder
 
         // tambahin permission disini sesuai module
         $role_supervisor->givePermissionTo([
-            'user management',
-            'permission management',
-            'klasemen management',
-            'klasemen management link',
-            'klasemen management score',
-            'setting management',
             'attendance management',
-            'leave request management',
             'employee management',
         ]);
 
