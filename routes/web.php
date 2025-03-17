@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/backoffice/web.php';
 
+Route::get('/', function () {
+  return redirect()->route('login');
+});
+
 Route::middleware(['guest'])->group(function () {
   Route::get('/login', [AuthController::class, 'login'])->name('login');
   Route::post('/login', [AuthController::class, 'store'])->name('login.store');
