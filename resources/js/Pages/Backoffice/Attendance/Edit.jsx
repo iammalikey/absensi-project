@@ -29,33 +29,44 @@ export default function Edit({ attendance, users, categories, statuses }) {
 
     const handleChange = (e) => {
         let { name, value } = e.target;
-    
+
         // Jika field adalah clock_in atau clock_out, ubah ke format Y-m-d H:i:s
         if (name === "clock_in" || name === "clock_out") {
             const date = new Date(value);
-            value = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")} ${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}:00`;
+            value = `${date.getFullYear()}-${String(
+                date.getMonth() + 1
+            ).padStart(2, "0")}-${String(date.getDate()).padStart(
+                2,
+                "0"
+            )} ${String(date.getHours()).padStart(2, "0")}:${String(
+                date.getMinutes()
+            ).padStart(2, "0")}:00`;
         }
-    
+
         setData((prevData) => ({
             ...prevData,
             [name]: value,
         }));
     };
-    
 
     const handleSubmit = (e) => {
-        e.preventDefault(); 
-        post(route("cms.attendance.update", { attendance: attendance.data.slug }), {
-            preserveScroll: true,
-            preserveState: true,
-            onSuccess: () => {
-                // reset()
-            },
-        });
+        e.preventDefault();
+        post(
+            route("cms.attendance.update", {
+                attendance: attendance.data.slug,
+            }),
+            {
+                preserveScroll: true,
+                preserveState: true,
+                onSuccess: () => {
+                    // reset()
+                },
+            }
+        );
     };
     return (
         <Box m="20px">
-            <Header title="Edit attendance" subtitle="Edit New attendance Data" />
+            <Header title="Edit Absensi" subtitle="Edit Data Absensi Baru" />
             <form onSubmit={handleSubmit}>
                 <Box
                     display="grid"
@@ -68,7 +79,11 @@ export default function Edit({ attendance, users, categories, statuses }) {
                     }}
                 >
                     {/* Select User */}
-                    <FormControl variant="filled" sx={{ gridColumn: "span 4" }} error={!!errors.user_id}>
+                    <FormControl
+                        variant="filled"
+                        sx={{ gridColumn: "span 4" }}
+                        error={!!errors.user_id}
+                    >
                         <InputLabel id="user-label">Select User</InputLabel>
                         <Select
                             labelId="user-label"
@@ -78,37 +93,53 @@ export default function Edit({ attendance, users, categories, statuses }) {
                             onChange={handleChange}
                             renderValue={(selected) => {
                                 // Cari user berdasarkan user_id yang terpilih
-                                const selectedUser = users.find(user => user.id === selected);
-                                return selectedUser ? selectedUser.name : "Select User";
+                                const selectedUser = users.find(
+                                    (user) => user.id === selected
+                                );
+                                return selectedUser
+                                    ? selectedUser.name
+                                    : "Pilih Pengguna";
                             }}
                         >
-                            {users && users.map((user) => (
-                        <MenuItem key={user.id} value={user.id}>
-                            {user.name}
-                        </MenuItem>
-                    ))}
+                            {users &&
+                                users.map((user) => (
+                                    <MenuItem key={user.id} value={user.id}>
+                                        {user.name}
+                                    </MenuItem>
+                                ))}
                         </Select>
                         {!!errors.user_id && (
-                            <FormHelperText error={!!errors.user_id}>{errors.user_id}</FormHelperText>
+                            <FormHelperText error={!!errors.user_id}>
+                                {errors.user_id}
+                            </FormHelperText>
                         )}
                     </FormControl>
 
                     {/* Select Category */}
-                    <FormControl variant="filled" sx={{ gridColumn: "span 4" }} error={!!errors.category}>
-                        <InputLabel id="marital-status-label">Category</InputLabel>
+                    <FormControl
+                        variant="filled"
+                        sx={{ gridColumn: "span 4" }}
+                        error={!!errors.category}
+                    >
+                        <InputLabel id="marital-status-label">
+                            Category
+                        </InputLabel>
                         <Select
                             labelId="marital-status-label"
                             id="category"
                             value={data.category}
                             name="category"
                             onChange={handleChange}
-                            renderValue={(selected) => selected || "Select Category"} // Menampilkan nilai terpilih
+                            renderValue={(selected) =>
+                                selected || "Select Category"
+                            } // Menampilkan nilai terpilih
                         >
-                            {Array.isArray(categories) && categories.map((category) => (
-                                <MenuItem key={category} value={category}>
-                                    {category}
-                                </MenuItem>
-                            ))}
+                            {Array.isArray(categories) &&
+                                categories.map((category) => (
+                                    <MenuItem key={category} value={category}>
+                                        {category}
+                                    </MenuItem>
+                                ))}
                         </Select>
                         {!!errors.category && (
                             <FormHelperText>{errors.category}</FormHelperText>
@@ -116,21 +147,30 @@ export default function Edit({ attendance, users, categories, statuses }) {
                     </FormControl>
 
                     {/* Select Category */}
-                    <FormControl variant="filled" sx={{ gridColumn: "span 4" }} error={!!errors.status}>
-                        <InputLabel id="marital-status-label">Status</InputLabel>
+                    <FormControl
+                        variant="filled"
+                        sx={{ gridColumn: "span 4" }}
+                        error={!!errors.status}
+                    >
+                        <InputLabel id="marital-status-label">
+                            Status
+                        </InputLabel>
                         <Select
                             labelId="marital-status-label"
                             id="status"
                             value={data.status}
                             name="status"
                             onChange={handleChange}
-                            renderValue={(selected) => selected || "Select status"} // Menampilkan nilai terpilih
+                            renderValue={(selected) =>
+                                selected || "Select status"
+                            } // Menampilkan nilai terpilih
                         >
-                            {Array.isArray(statuses) && statuses.map((status) => (
-                                <MenuItem key={status} value={status}>
-                                    {status}
-                                </MenuItem>
-                            ))}
+                            {Array.isArray(statuses) &&
+                                statuses.map((status) => (
+                                    <MenuItem key={status} value={status}>
+                                        {status}
+                                    </MenuItem>
+                                ))}
                         </Select>
                         {!!errors.status && (
                             <FormHelperText>{errors.status}</FormHelperText>
@@ -145,7 +185,11 @@ export default function Edit({ attendance, users, categories, statuses }) {
                         label="Clock In"
                         onChange={handleChange}
                         name="clock_in"
-                        value={data.clock_in ? data.clock_in.replace(" ", "T").slice(0, 16) : ""} // Konversi untuk tampilan input
+                        value={
+                            data.clock_in
+                                ? data.clock_in.replace(" ", "T").slice(0, 16)
+                                : ""
+                        } // Konversi untuk tampilan input
                         InputLabelProps={{ shrink: true }}
                         error={!!errors.clock_in}
                         helperText={errors.clock_in}
@@ -159,13 +203,16 @@ export default function Edit({ attendance, users, categories, statuses }) {
                         label="Clock Out"
                         onChange={handleChange}
                         name="clock_out"
-                        value={data.clock_out ? data.clock_out.replace(" ", "T").slice(0, 16) : ""} // Konversi untuk tampilan input
+                        value={
+                            data.clock_out
+                                ? data.clock_out.replace(" ", "T").slice(0, 16)
+                                : ""
+                        } // Konversi untuk tampilan input
                         InputLabelProps={{ shrink: true }}
                         error={!!errors.clock_out}
                         helperText={errors.clock_out}
                         sx={{ gridColumn: "span 2" }}
                     />
-
 
                     <TextField
                         fullWidth

@@ -44,8 +44,8 @@ export default function Edit({ role, permissions }) {
     return (
         <Box m="20px">
             <Header
-                title={`Edit Role`}
-                subtitle={`Edit new role ${role.data.name}`}
+                title={`Edit Jabatan`}
+                subtitle={`Edit Jabatan Baru ${role.data.name}`}
             />
             <form onSubmit={handleSubmit}>
                 <Box
@@ -76,7 +76,7 @@ export default function Edit({ role, permissions }) {
                         error={!!errors.permissions}
                     >
                         <InputLabel id="permissions-label" variant="filled">
-                            Select Roles
+                            Pilih Jabatan
                         </InputLabel>
                         <Select
                             labelId="permissions-label"

@@ -13,7 +13,12 @@ import React from "react";
 import Backend from "@/Layouts/Backoffice/Backend";
 import Header from "@/components/Backoffice/Header";
 
-export default function Create({ users, divisions, maritalStatuses, religions }) {
+export default function Create({
+    users,
+    divisions,
+    maritalStatuses,
+    religions,
+}) {
     const isNonMobile = useMediaQuery("(min-width:600px)");
 
     const { data, setData, reset, errors, post } = useForm({
@@ -51,7 +56,10 @@ export default function Create({ users, divisions, maritalStatuses, religions })
 
     return (
         <Box m="20px">
-            <Header title="Create Employee" subtitle="Create New Employee Data" />
+            <Header
+                title="Buat Data Pegawai Baru"
+                subtitle="Data Pegawai Baru"
+            />
             <form onSubmit={handleSubmit}>
                 <Box
                     display="grid"
@@ -64,45 +72,91 @@ export default function Create({ users, divisions, maritalStatuses, religions })
                     }}
                 >
                     {/* Select User */}
-                    <FormControl fullWidth variant="filled" sx={{ gridColumn: "span 2" }}>
-                        <InputLabel>User</InputLabel>
-                        <Select name="user_id" value={data.user_id} onChange={handleChange}>
+                    <FormControl
+                        fullWidth
+                        variant="filled"
+                        sx={{ gridColumn: "span 2" }}
+                    >
+                        <InputLabel>Pengguna</InputLabel>
+                        <Select
+                            name="user_id"
+                            value={data.user_id}
+                            onChange={handleChange}
+                        >
                             {users.map((user) => (
-                                <MenuItem key={user.id} value={user.id}>{user.name}</MenuItem>
+                                <MenuItem key={user.id} value={user.id}>
+                                    {user.name}
+                                </MenuItem>
                             ))}
                         </Select>
                     </FormControl>
 
                     {/* Select Division */}
-                    <FormControl fullWidth variant="filled" sx={{ gridColumn: "span 2" }}>
-                        <InputLabel>Division</InputLabel>
-                        <Select name="division_id" value={data.division_id} onChange={handleChange}>
+                    <FormControl
+                        fullWidth
+                        variant="filled"
+                        sx={{ gridColumn: "span 2" }}
+                    >
+                        <InputLabel>Divisi</InputLabel>
+                        <Select
+                            name="division_id"
+                            value={data.division_id}
+                            onChange={handleChange}
+                        >
                             {divisions.map((division) => (
-                                <MenuItem key={division.id} value={division.id}>{division.title}</MenuItem>
+                                <MenuItem key={division.id} value={division.id}>
+                                    {division.title}
+                                </MenuItem>
                             ))}
                         </Select>
                     </FormControl>
 
                     {/* Marital Status */}
-                    <FormControl fullWidth variant="filled" sx={{ gridColumn: "span 2" }}>
-                        <InputLabel>Marital Status</InputLabel>
-                        <Select name="marital_status" value={data.marital_status} onChange={handleChange}>
+                    <FormControl
+                        fullWidth
+                        variant="filled"
+                        sx={{ gridColumn: "span 2" }}
+                    >
+                        <InputLabel>Status Perkawinan</InputLabel>
+                        <Select
+                            name="marital_status"
+                            value={data.marital_status}
+                            onChange={handleChange}
+                        >
                             {maritalStatuses.map((status) => (
-                                <MenuItem key={status} value={status}>{status}</MenuItem>
+                                <MenuItem key={status} value={status}>
+                                    {status}
+                                </MenuItem>
                             ))}
                         </Select>
-                        {errors.marital_status && <p className="text-red-500">{errors.marital_status}</p>}
+                        {errors.marital_status && (
+                            <p className="text-red-500">
+                                {errors.marital_status}
+                            </p>
+                        )}
                     </FormControl>
 
                     {/* Religion */}
-                    <FormControl fullWidth variant="filled" sx={{ gridColumn: "span 2" }}>
+                    <FormControl
+                        fullWidth
+                        variant="filled"
+                        sx={{ gridColumn: "span 2" }}
+                    >
                         <InputLabel>Religion</InputLabel>
-                        <Select name="religion" value={data.religion} onChange={handleChange}>
+                        <Select
+                            name="religion"
+                            value={data.religion}
+                            onChange={handleChange}
+                        >
                             {religions.map((religion) => (
-                                <MenuItem key={religion} value={religion}>{religion}</MenuItem>
+                                <MenuItem key={religion} value={religion}>
+                                    {religion}
+                                </MenuItem>
                             ))}
                         </Select>
-                        {errors.religion && <p className="text-red-500">{errors.religion}</p>}
+                        {errors.religion && (
+                            <p className="text-red-500">{errors.religion}</p>
+                        )}
                     </FormControl>
 
                     {/* Other Fields */}

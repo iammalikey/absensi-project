@@ -63,16 +63,20 @@ export default function Index({ employees, user }) {
     // -----------
     return (
         <Box m="20px">
-            <Header title={`Employee Management`} subtitle={`Manage Employee`}></Header>
+            <Header
+                title={`Kelola Pegawai`}
+                subtitle={`Kelola Data Pegawai`}
+            ></Header>
             <Box display="flex" justifyContent="start" mt="20px" gap="5px">
-                {(user.role.includes("Super Admin") || user.role.includes("Human Resource")) && (
+                {(user.role.includes("Super Admin") ||
+                    user.role.includes("Human Resource")) && (
                     <Button
                         type="submit"
                         color="secondary"
                         variant="contained"
                         onClick={() => router.get(route("cms.employee.create"))}
                     >
-                        Create employee
+                        Buat Data Pegawai Baru
                     </Button>
                 )}
             </Box>
@@ -83,7 +87,7 @@ export default function Index({ employees, user }) {
                             <TableCell>Avatar</TableCell>
                             <TableCell>Name</TableCell>
                             <TableCell>Email</TableCell>
-                            <TableCell>Division</TableCell>
+                            <TableCell>Divisi</TableCell>
                             <TableCell align="center">Action</TableCell>
                         </TableRow>
                     </TableHead>
@@ -110,8 +114,14 @@ export default function Index({ employees, user }) {
                                 <TableCell>{employee.full_name}</TableCell>
                                 <TableCell>{employee.user.email}</TableCell>
                                 <TableCell>{employee.division.title}</TableCell>
-                                <TableCell align="center" className="!space-x-2">
-                                    {(user.role.includes("Super Admin") || user.role.includes("Human Resource")) && (
+                                <TableCell
+                                    align="center"
+                                    className="!space-x-2"
+                                >
+                                    {(user.role.includes("Super Admin") ||
+                                        user.role.includes(
+                                            "Human Resource"
+                                        )) && (
                                         <Button
                                             color="neutral"
                                             variant="contained"
@@ -123,7 +133,7 @@ export default function Index({ employees, user }) {
                                             Edit
                                         </Button>
                                     )}
-                                    {(user.role.includes("Super Admin")) && (
+                                    {user.role.includes("Super Admin") && (
                                         <Button
                                             color="danger"
                                             variant="contained"
@@ -135,12 +145,18 @@ export default function Index({ employees, user }) {
                                             Delete
                                         </Button>
                                     )}
-                                    {(user.role.includes("Super Admin") || user.role.includes("Human Resource") || user.role.includes("Supervisor")) && (
+                                    {(user.role.includes("Super Admin") ||
+                                        user.role.includes("Human Resource") ||
+                                        user.role.includes("Supervisor")) && (
                                         <Button
                                             color="info"
                                             variant="contained"
                                             onClick={() =>
-                                                router.get(route("cms.employee.show", { employee: employee.id }))
+                                                router.get(
+                                                    route("cms.employee.show", {
+                                                        employee: employee.id,
+                                                    })
+                                                )
                                             }
                                         >
                                             View Detail
@@ -170,4 +186,6 @@ export default function Index({ employees, user }) {
     );
 }
 
-Index.layout = (page) => <Backend children={page} title="Employee Management" />;
+Index.layout = (page) => (
+    <Backend children={page} title="Employee Management" />
+);

@@ -1,5 +1,5 @@
 import { useForm } from "@inertiajs/react";
-import { Box, Button, TextField, useMediaQuery, } from "@mui/material";
+import { Box, Button, TextField, useMediaQuery } from "@mui/material";
 import React from "react";
 import Backend from "@/Layouts/Backoffice/Backend";
 import Header from "@/components/Backoffice/Header";
@@ -14,7 +14,10 @@ export default function Edit({ division }) {
     });
 
     const handleChange = (e) => {
-        setData((prevData) => ({...prevData, [e.target.name]: e.target.value,}));
+        setData((prevData) => ({
+            ...prevData,
+            [e.target.name]: e.target.value,
+        }));
     };
 
     const handleSubmit = (e) => {
@@ -22,14 +25,13 @@ export default function Edit({ division }) {
         post(route("cms.division.update", { division: division.data.slug }), {
             preserveScroll: true,
             preserveState: true,
-            onSuccess: (page) => {
-            },
+            onSuccess: (page) => {},
         });
     };
 
     return (
         <Box m="20px">
-            <Header title={`Edit Division`} subtitle={`Edit Division ${division.data.title}`}/>
+            <Header title={`Edit Divisi`} subtitle={`${division.data.title}`} />
             <form onSubmit={handleSubmit}>
                 <Box
                     display="grid"
@@ -45,7 +47,7 @@ export default function Edit({ division }) {
                         fullWidth
                         variant="filled"
                         type="text"
-                        label="Title"
+                        label="Nama Divisi"
                         onChange={handleChange}
                         name="title"
                         value={data.title}

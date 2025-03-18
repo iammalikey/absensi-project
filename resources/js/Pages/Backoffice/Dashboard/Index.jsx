@@ -61,14 +61,12 @@ const Index = (props) => {
     return (
         <Box sx={{ m: "20px" }}>
             <Header
-                title={`Welcome Back ${user.name}`}
-                subtitle={`Your Role ${user.role.map(
-                    (role, index) => role.name
-                )}`}
+                title={`Selamat Datang Kembali, ${user.name}`}
+                subtitle={`${user.role.map((role, index) => role.name)}`}
             ></Header>
 
             <Typography variant="h2" sx={{ fontSize: 25 }} gutterBottom>
-                Dashbboard
+                Dashboard
             </Typography>
 
             {hasAnyPermission([
@@ -90,7 +88,7 @@ const Index = (props) => {
                             sx={{ fontSize: 25, mt: 5 }}
                             gutterBottom
                         >
-                            User, Permission, Role Management
+                            Pengguna, Perizinan, Kelola Jabatan
                         </Typography>
                         <Stack
                             direction={"row"}
@@ -123,7 +121,7 @@ const Index = (props) => {
                                                     color="text.secondary"
                                                 >
                                                     <ManageAccountsIcon />{" "}
-                                                    <span>Users</span>
+                                                    <span>Pengguna</span>
                                                 </Typography>
                                                 <Typography
                                                     sx={{ fontSize: 20 }}
@@ -156,7 +154,7 @@ const Index = (props) => {
                                                     color="text.secondary"
                                                 >
                                                     <BadgeIcon />{" "}
-                                                    <span>Roles</span>
+                                                    <span>Jabatan</span>
                                                 </Typography>
                                                 <Typography
                                                     sx={{ fontSize: 20 }}
@@ -196,7 +194,7 @@ const Index = (props) => {
                                                     color="text.secondary"
                                                 >
                                                     <EditOffIcon />{" "}
-                                                    <span>Permissions</span>
+                                                    <span>Perizinan</span>
                                                 </Typography>
                                                 <Typography
                                                     sx={{
@@ -221,13 +219,13 @@ const Index = (props) => {
 
             {/* Jika Belum Memiliki Permission */}
             {!hasAnyPermission([
-                'user management',
-                'permission management',
-                'role management',
-                'klasemen management',
-                'klasemen management link',
-                'klasemen management score',
-                'setting management',
+                "user management",
+                "permission management",
+                "role management",
+                "klasemen management",
+                "klasemen management link",
+                "klasemen management score",
+                "setting management",
             ]) && (
                 <Typography
                     color={colors.redAccent[500]}
@@ -235,7 +233,8 @@ const Index = (props) => {
                     sx={{ fontSize: 22 }}
                     align="center"
                 >
-                    Anda Belum Memiliki Permission Untuk Management Pada System CMS Ini.
+                    Anda Belum Memiliki Perizinan Untuk Management Pada System
+                    CMS Ini.
                 </Typography>
             )}
         </Box>

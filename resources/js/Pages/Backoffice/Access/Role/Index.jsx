@@ -63,7 +63,7 @@ export default function Index({ roles }) {
 
     return (
         <Box m="20px">
-            <Header title={`Role Management`} subtitle={`Manage role`}></Header>
+            <Header title={`Kelola Jabatan`} subtitle={`Atur Jabatan`}></Header>
             <Box display="flex" justifyContent="start" mt="20px" gap="5px">
                 <Button
                     type="submit"
@@ -71,7 +71,7 @@ export default function Index({ roles }) {
                     variant="contained"
                     onClick={() => router.get(route("cms.access.role.create"))}
                 >
-                    Create Role
+                    Buat Jabatan Baru
                 </Button>
             </Box>
             <TableContainer sx={{ maxHeight: "70vh" }}>

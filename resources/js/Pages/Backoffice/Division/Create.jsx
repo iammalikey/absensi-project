@@ -1,10 +1,5 @@
 import { useForm } from "@inertiajs/react";
-import {
-    Box,
-    Button,
-    TextField,
-    useMediaQuery,
-} from "@mui/material";
+import { Box, Button, TextField, useMediaQuery } from "@mui/material";
 import React, { useState } from "react";
 import Backend from "@/Layouts/Backoffice/Backend";
 import Header from "@/components/Backoffice/Header";
@@ -13,7 +8,7 @@ export default function Create() {
     const isNonMobile = useMediaQuery("(min-width:600px)");
 
     const { data, setData, reset, errors, post } = useForm({
-        title: ""
+        title: "",
     });
     const handleChange = (e) => {
         setData((prevData) => ({
@@ -35,7 +30,10 @@ export default function Create() {
 
     return (
         <Box m="20px">
-            <Header title={`Create New Data Division`} subtitle={`Create New Data Division`} />
+            <Header
+                title={`Buat Data Divisi Baru`}
+                subtitle={`Data Divisi Baru`}
+            />
             <form onSubmit={handleSubmit}>
                 <Box
                     display="grid"
@@ -51,7 +49,7 @@ export default function Create() {
                         fullWidth
                         variant="filled"
                         type="text"
-                        label="Title"
+                        label="Nama Divisi"
                         onChange={handleChange}
                         name="title"
                         value={data.title}
@@ -70,4 +68,6 @@ export default function Create() {
     );
 }
 
-Create.layout = (page) => <Backend children={page} title="Create New Data Division" />;
+Create.layout = (page) => (
+    <Backend children={page} title="Create New Data Division" />
+);

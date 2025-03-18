@@ -1,5 +1,12 @@
 import { useForm } from "@inertiajs/react";
-import { Box, Avatar, Typography, useMediaQuery, Container, Divider } from "@mui/material";
+import {
+    Box,
+    Avatar,
+    Typography,
+    useMediaQuery,
+    Container,
+    Divider,
+} from "@mui/material";
 import React from "react";
 import Header from "@/components/Backoffice/Header";
 import Backend from "@/Layouts/Backoffice/Backend";
@@ -27,7 +34,10 @@ export default function Show({ employee }) {
 
     return (
         <Box m="20px">
-            <Header title="Employee Detail" subtitle={`${data.full_name}'s Detail`} />
+            <Header
+                title="Detail Pegawai"
+                subtitle={`${data.full_name} Detail`}
+            />
 
             <Box display="flex" alignItems="center" gap="50px" mb="40px">
                 <Avatar
@@ -39,68 +49,103 @@ export default function Show({ employee }) {
                 />
                 <Container maxWidth="md">
                     <Divider textAlign="left">Personal Data</Divider>
-                    <Box display="grid" gridTemplateColumns="100px auto" gap="20px" mt="20px">
+                    <Box
+                        display="grid"
+                        gridTemplateColumns="100px auto"
+                        gap="20px"
+                        mt="20px"
+                    >
                         <Typography variant="subtitle2" color="textSecondary">
                             Name
                         </Typography>
-                        <Typography variant="body1">:&nbsp;&nbsp;&nbsp;&nbsp;{data.full_name}</Typography>
-                        <Typography variant="subtitle2" color="textSecondary">
-                            Place of Birth
+                        <Typography variant="body1">
+                            :&nbsp;&nbsp;&nbsp;&nbsp;{data.full_name}
                         </Typography>
-                        <Typography variant="body1">:&nbsp;&nbsp;&nbsp;&nbsp;{data.place_of_birth}</Typography>
                         <Typography variant="subtitle2" color="textSecondary">
-                            Date of Birth
+                            Tempat Lahir
                         </Typography>
-                        <Typography variant="body1">:&nbsp;&nbsp;&nbsp;&nbsp;{data.date_of_birth}</Typography>
+                        <Typography variant="body1">
+                            :&nbsp;&nbsp;&nbsp;&nbsp;{data.place_of_birth}
+                        </Typography>
                         <Typography variant="subtitle2" color="textSecondary">
-                            Marital Status
+                            Tanggal Lahir
                         </Typography>
-                        <Typography variant="body1">:&nbsp;&nbsp;&nbsp;&nbsp;{data.marital_status}</Typography>
+                        <Typography variant="body1">
+                            :&nbsp;&nbsp;&nbsp;&nbsp;{data.date_of_birth}
+                        </Typography>
                         <Typography variant="subtitle2" color="textSecondary">
-                            Religion
+                            Status Perkawinan
                         </Typography>
-                        <Typography variant="body1">:&nbsp;&nbsp;&nbsp;&nbsp;{data.religion}</Typography>
+                        <Typography variant="body1">
+                            :&nbsp;&nbsp;&nbsp;&nbsp;{data.marital_status}
+                        </Typography>
                         <Typography variant="subtitle2" color="textSecondary">
-                            Blood Type
+                            Agama
                         </Typography>
-                        <Typography variant="body1">:&nbsp;&nbsp;&nbsp;&nbsp;{data.blood_type}</Typography>
+                        <Typography variant="body1">
+                            :&nbsp;&nbsp;&nbsp;&nbsp;{data.religion}
+                        </Typography>
+                        <Typography variant="subtitle2" color="textSecondary">
+                            Type Darah
+                        </Typography>
+                        <Typography variant="body1">
+                            :&nbsp;&nbsp;&nbsp;&nbsp;{data.blood_type}
+                        </Typography>
                     </Box>
                 </Container>
             </Box>
             <Divider textAlign="left">Identity & Address</Divider>
-            <Box display="grid" gridTemplateColumns="100px auto" gap="20px" mt="20px">
+            <Box
+                display="grid"
+                gridTemplateColumns="100px auto"
+                gap="20px"
+                mt="20px"
+            >
                 <Typography variant="subtitle2" color="textSecondary">
                     Division:
                 </Typography>
-                <Typography variant="body1">:&nbsp;&nbsp;&nbsp;&nbsp;{data.division}</Typography>
+                <Typography variant="body1">
+                    :&nbsp;&nbsp;&nbsp;&nbsp;{data.division}
+                </Typography>
                 <Typography variant="subtitle2" color="textSecondary">
                     Phone:
                 </Typography>
-                <Typography variant="body1">:&nbsp;&nbsp;&nbsp;&nbsp;{data.phone}</Typography>
+                <Typography variant="body1">
+                    :&nbsp;&nbsp;&nbsp;&nbsp;{data.phone}
+                </Typography>
                 <Typography variant="subtitle2" color="textSecondary">
                     Email:
                 </Typography>
-                <Typography variant="body1">:&nbsp;&nbsp;&nbsp;&nbsp;{data.email}</Typography>
+                <Typography variant="body1">
+                    :&nbsp;&nbsp;&nbsp;&nbsp;{data.email}
+                </Typography>
                 <Typography variant="subtitle2" color="textSecondary">
                     Address :
                 </Typography>
-                <Typography variant="body1">:&nbsp;&nbsp;&nbsp;&nbsp;{data.address}</Typography>
+                <Typography variant="body1">
+                    :&nbsp;&nbsp;&nbsp;&nbsp;{data.address}
+                </Typography>
                 <Typography variant="subtitle2" color="textSecondary">
                     Postal Code :
                 </Typography>
-                <Typography variant="body1">:&nbsp;&nbsp;&nbsp;&nbsp;{data.postal_code}</Typography>
+                <Typography variant="body1">
+                    :&nbsp;&nbsp;&nbsp;&nbsp;{data.postal_code}
+                </Typography>
                 <Typography variant="subtitle2" color="textSecondary">
                     NIK :
                 </Typography>
-                <Typography variant="body1">:&nbsp;&nbsp;&nbsp;&nbsp;{data.nik}</Typography>
+                <Typography variant="body1">
+                    :&nbsp;&nbsp;&nbsp;&nbsp;{data.nik}
+                </Typography>
                 <Typography variant="subtitle2" color="textSecondary">
                     NPWP :
                 </Typography>
-                <Typography variant="body1">:&nbsp;&nbsp;&nbsp;&nbsp;{data.npwp}</Typography>
+                <Typography variant="body1">
+                    :&nbsp;&nbsp;&nbsp;&nbsp;{data.npwp}
+                </Typography>
             </Box>
 
             {/* Layout Seperti Tabel Tanpa Garis */}
-            
         </Box>
     );
 }

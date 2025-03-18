@@ -24,12 +24,19 @@ export default function Index({ attendances, selectedMonth, selectedName }) {
     };
 
     const handleChangePage = (event, newPage) => {
-        router.get(attendances.links[newPage + 1]?.url, {}, { preserveScroll: true });
+        router.get(
+            attendances.links[newPage + 1]?.url,
+            {},
+            { preserveScroll: true }
+        );
     };
 
     return (
         <Box m="20px">
-            <Header title="Attendance Log" subtitle="Monthly Attendance Report" />
+            <Header
+                title="Laporan Absensi"
+                subtitle="Laporan Bulanan Absensi"
+            />
 
             {/* Filter Bulan & Nama */}
             <Box display="flex" alignItems="center" gap="10px" mb="20px">
@@ -37,15 +44,19 @@ export default function Index({ attendances, selectedMonth, selectedName }) {
                     type="month"
                     value={month}
                     onChange={(e) => setMonth(e.target.value)}
-                    label="Select Month"
+                    label="Pilih Bulan  "
                 />
                 <TextField
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    label="Search by Name"
+                    label="Cari Berdasarkan Nama"
                 />
-                <Button variant="contained" color="primary" onClick={handleFilter}>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleFilter}
+                >
                     Filter
                 </Button>
             </Box>
@@ -53,36 +64,43 @@ export default function Index({ attendances, selectedMonth, selectedName }) {
             <Button
                 variant="contained"
                 color="secondary"
-                onClick={() => window.location.href = route("cms.log.export", { month, name })}
+                onClick={() =>
+                    (window.location.href = route("cms.log.export", {
+                        month,
+                        name,
+                    }))
+                }
             >
                 Export to Excel
             </Button>
 
-
             {/* Tabel Attendance */}
             <TableContainer sx={{ maxHeight: "70vh" }}>
                 <Table stickyHeader aria-label="sticky table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Employee</TableCell>
-                        <TableCell>Clock In</TableCell>
-                        <TableCell>Clock Out</TableCell>
-                        <TableCell>Radius (KM)</TableCell>
-                        <TableCell>Status</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {attendances.data.map((attendance) => (
-                        <TableRow key={attendance.id}>
-                            <TableCell>{attendance.user.name}</TableCell>
-                            <TableCell>{attendance.clock_in}</TableCell>
-                            <TableCell>{attendance.clock_out || "-"}</TableCell>
-                            <TableCell>{attendance.distance.toFixed(2)} KM</TableCell>
-                            <TableCell>{attendance.status}</TableCell>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Pegawai</TableCell>
+                            <TableCell>Clock In</TableCell>
+                            <TableCell>Clock Out</TableCell>
+                            <TableCell>Radius (KM)</TableCell>
+                            <TableCell>Status</TableCell>
                         </TableRow>
-                    ))}
-                </TableBody>
-
+                    </TableHead>
+                    <TableBody>
+                        {attendances.data.map((attendance) => (
+                            <TableRow key={attendance.id}>
+                                <TableCell>{attendance.user.name}</TableCell>
+                                <TableCell>{attendance.clock_in}</TableCell>
+                                <TableCell>
+                                    {attendance.clock_out || "-"}
+                                </TableCell>
+                                <TableCell>
+                                    {attendance.distance.toFixed(2)} KM
+                                </TableCell>
+                                <TableCell>{attendance.status}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
                 </Table>
             </TableContainer>
 

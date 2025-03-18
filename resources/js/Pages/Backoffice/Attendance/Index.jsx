@@ -63,18 +63,21 @@ export default function Index({ attendances, user }) {
     // -----------
     return (
         <Box m="20px">
-            <Header title={`attendance Management`} subtitle={`Manage attendance`}></Header>
+            <Header title={`Kelola Absensi`} subtitle={`Atur Absensi`}></Header>
             <Box display="flex" justifyContent="start" mt="20px" gap="5px">
-            {(user.role.includes("Super Admin") || user.role.includes("Human Resource")) && (
-                <Button
-                    type="submit"
-                    color="secondary"
-                    variant="contained"
-                    onClick={() => router.get(route("cms.attendance.create"))}
-                >
-                    Create attendance
-                </Button>
-            )}
+                {(user.role.includes("Super Admin") ||
+                    user.role.includes("Human Resource")) && (
+                    <Button
+                        type="submit"
+                        color="secondary"
+                        variant="contained"
+                        onClick={() =>
+                            router.get(route("cms.attendance.create"))
+                        }
+                    >
+                        Buat Absensi Baru
+                    </Button>
+                )}
             </Box>
             <TableContainer sx={{ maxHeight: "70vh" }}>
                 <Table stickyHeader aria-label="sticky table">
@@ -103,30 +106,36 @@ export default function Index({ attendances, user }) {
                                 <TableCell>{attendance.clock_out}</TableCell>
                                 <TableCell>{attendance.category}</TableCell>
                                 <TableCell>{attendance.status}</TableCell>
-                                <TableCell align="center" className="!space-x-2">
-                                    {(user.role.includes("Super Admin") || user.role.includes("Human Resource")) && (
-                                    <Button
-                                        color="neutral"
-                                        variant="contained"
-                                        onClick={() =>
-                                            handleEdit(attendance.slug)
-                                        }
-                                        className="mt-2"
-                                    >
-                                        Edit
-                                    </Button>
+                                <TableCell
+                                    align="center"
+                                    className="!space-x-2"
+                                >
+                                    {(user.role.includes("Super Admin") ||
+                                        user.role.includes(
+                                            "Human Resource"
+                                        )) && (
+                                        <Button
+                                            color="neutral"
+                                            variant="contained"
+                                            onClick={() =>
+                                                handleEdit(attendance.slug)
+                                            }
+                                            className="mt-2"
+                                        >
+                                            Edit
+                                        </Button>
                                     )}
-                                    {(user.role.includes("Super Admin")) && (
-                                    <Button
-                                        color="danger"
-                                        variant="contained"
-                                        onClick={() =>
-                                            handleDelete(attendance.slug)
-                                        }
-                                        className="mt-2"
-                                    >
-                                        Delete
-                                    </Button>
+                                    {user.role.includes("Super Admin") && (
+                                        <Button
+                                            color="danger"
+                                            variant="contained"
+                                            onClick={() =>
+                                                handleDelete(attendance.slug)
+                                            }
+                                            className="mt-2"
+                                        >
+                                            Delete
+                                        </Button>
                                     )}
                                 </TableCell>
                             </TableRow>
@@ -152,4 +161,6 @@ export default function Index({ attendances, user }) {
     );
 }
 
-Index.layout = (page) => <Backend children={page} title="attendance Management" />;
+Index.layout = (page) => (
+    <Backend children={page} title="attendance Management" />
+);

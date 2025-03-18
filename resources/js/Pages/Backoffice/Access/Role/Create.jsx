@@ -43,7 +43,7 @@ export default function Create({ permissions }) {
 
     return (
         <Box m="20px">
-            <Header title={`Create Role`} subtitle={`Create new role`} />
+            <Header title={`Buat Jabatan`} subtitle={`Buat Jabatan Baru`} />
             <form onSubmit={handleSubmit}>
                 <Box
                     display="grid"
@@ -73,7 +73,7 @@ export default function Create({ permissions }) {
                         error={!!errors.permissions}
                     >
                         <InputLabel id="permissions-label" variant="filled">
-                            Select Roles
+                            Pilih Jabatan
                         </InputLabel>
                         <Select
                             labelId="permissions-label"

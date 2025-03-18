@@ -64,7 +64,10 @@ export default function Index({ users }) {
 
     return (
         <Box m="20px">
-            <Header title={`User Management`} subtitle={`Manage user`}></Header>
+            <Header
+                title={`Kelola Pengguna`}
+                subtitle={`Atur Pengguna`}
+            ></Header>
             <Box display="flex" justifyContent="start" mt="20px" gap="5px">
                 <Button
                     type="submit"
@@ -72,7 +75,7 @@ export default function Index({ users }) {
                     variant="contained"
                     onClick={() => router.get(route("cms.access.user.create"))}
                 >
-                    Create User
+                    Buat Pengguna Baru
                 </Button>
             </Box>
             <TableContainer sx={{ maxHeight: "70vh" }}>
@@ -111,12 +114,12 @@ export default function Index({ users }) {
                                 <TableCell>{user.email}</TableCell>
                                 <TableCell>{user.username}</TableCell>
                                 <TableCell align="center">
-                                    {user.role.map((role) =>
-                                    <>
-                                        <span key={role}>{role}</span>
-                                        <br />
-                                    </>
-                                    )}
+                                    {user.role.map((role) => (
+                                        <>
+                                            <span key={role}>{role}</span>
+                                            <br />
+                                        </>
+                                    ))}
                                 </TableCell>
                                 <TableCell align="right" className="!space-x-2">
                                     <Button

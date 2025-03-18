@@ -13,7 +13,13 @@ import React from "react";
 import Backend from "@/Layouts/Backoffice/Backend";
 import Header from "@/components/Backoffice/Header";
 
-export default function Edit({ employee, users, divisions, maritalStatuses, religions }) {
+export default function Edit({
+    employee,
+    users,
+    divisions,
+    maritalStatuses,
+    religions,
+}) {
     const isNonMobile = useMediaQuery("(min-width:600px)");
 
     const { data, setData, errors, post } = useForm({
@@ -40,7 +46,7 @@ export default function Edit({ employee, users, divisions, maritalStatuses, reli
     };
 
     const handleSubmit = (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
         post(route("cms.employee.update", { employee: employee.data.slug }), {
             preserveScroll: true,
             preserveState: true,
@@ -52,7 +58,7 @@ export default function Edit({ employee, users, divisions, maritalStatuses, reli
 
     return (
         <Box m="20px">
-            <Header title="Edit Employee" subtitle={`Edit Employee ${data.full_name}`} />
+            <Header title="Edit Pegawai" subtitle={`Edit ${data.full_name}`} />
             <form onSubmit={handleSubmit}>
                 <Box
                     display="grid"
@@ -65,8 +71,12 @@ export default function Edit({ employee, users, divisions, maritalStatuses, reli
                     }}
                 >
                     {/* Select User */}
-                    <FormControl variant="filled" sx={{ gridColumn: "span 4" }} error={!!errors.user_id}>
-                        <InputLabel id="user-label">Select User</InputLabel>
+                    <FormControl
+                        variant="filled"
+                        sx={{ gridColumn: "span 4" }}
+                        error={!!errors.user_id}
+                    >
+                        <InputLabel id="user-label">Pilih Pengguna</InputLabel>
                         <Select
                             labelId="user-label"
                             id="user_id"
@@ -75,26 +85,35 @@ export default function Edit({ employee, users, divisions, maritalStatuses, reli
                             onChange={handleChange}
                             renderValue={(selected) => {
                                 // Cari user berdasarkan user_id yang terpilih
-                                const selectedUser = users.find(user => user.id === selected);
-                                return selectedUser ? selectedUser.name : "Select User";
+                                const selectedUser = users.find(
+                                    (user) => user.id === selected
+                                );
+                                return selectedUser
+                                    ? selectedUser.name
+                                    : "Select User";
                             }}
                         >
-                            {users && users.map((user) => (
-                        <MenuItem key={user.id} value={user.id}>
-                            {user.name}
-                        </MenuItem>
-                    ))}
+                            {users &&
+                                users.map((user) => (
+                                    <MenuItem key={user.id} value={user.id}>
+                                        {user.name}
+                                    </MenuItem>
+                                ))}
                         </Select>
                         {!!errors.user_id && (
-                            <FormHelperText error={!!errors.user_id}>{errors.user_id}</FormHelperText>
+                            <FormHelperText error={!!errors.user_id}>
+                                {errors.user_id}
+                            </FormHelperText>
                         )}
                     </FormControl>
 
-
-
                     {/* Select Division */}
-                    <FormControl variant="filled" sx={{ gridColumn: "span 4" }} error={!!errors.division_id}>
-                        <InputLabel id="user-label">Select Division</InputLabel>
+                    <FormControl
+                        variant="filled"
+                        sx={{ gridColumn: "span 4" }}
+                        error={!!errors.division_id}
+                    >
+                        <InputLabel id="user-label">Pilih Divisi</InputLabel>
                         <Select
                             labelId="user-label"
                             id="division_id"
@@ -103,60 +122,87 @@ export default function Edit({ employee, users, divisions, maritalStatuses, reli
                             onChange={handleChange}
                             renderValue={(selected) => {
                                 // Cari user berdasarkan division_id yang terpilih
-                                const selectedDivision = divisions.find(division => division.id === selected);
-                                return selectedDivision ? selectedDivision.title : "Select User";
+                                const selectedDivision = divisions.find(
+                                    (division) => division.id === selected
+                                );
+                                return selectedDivision
+                                    ? selectedDivision.title
+                                    : "Select User";
                             }}
                         >
-                            {divisions && divisions.map((division) => (
-                        <MenuItem key={division.id} value={division.id}>
-                            {division.title}
-                        </MenuItem>
-                    ))}
+                            {divisions &&
+                                divisions.map((division) => (
+                                    <MenuItem
+                                        key={division.id}
+                                        value={division.id}
+                                    >
+                                        {division.title}
+                                    </MenuItem>
+                                ))}
                         </Select>
                         {!!errors.division_id && (
-                            <FormHelperText error={!!errors.division_id}>{errors.division_id}</FormHelperText>
+                            <FormHelperText error={!!errors.division_id}>
+                                {errors.division_id}
+                            </FormHelperText>
                         )}
                     </FormControl>
 
                     {/* Marital Status */}
-                    <FormControl variant="filled" sx={{ gridColumn: "span 4" }} error={!!errors.marital_status}>
-                        <InputLabel id="marital-status-label">Marital Status</InputLabel>
+                    <FormControl
+                        variant="filled"
+                        sx={{ gridColumn: "span 4" }}
+                        error={!!errors.marital_status}
+                    >
+                        <InputLabel id="marital-status-label">
+                            Status Perkawinan
+                        </InputLabel>
                         <Select
                             labelId="marital-status-label"
                             id="marital_status"
                             value={data.marital_status}
                             name="marital_status"
                             onChange={handleChange}
-                            renderValue={(selected) => selected || "Select Marital Status"} // Menampilkan nilai terpilih
+                            renderValue={(selected) =>
+                                selected || "Select Marital Status"
+                            } // Menampilkan nilai terpilih
                         >
-                            {Array.isArray(maritalStatuses) && maritalStatuses.map((status) => (
-                                <MenuItem key={status} value={status}>
-                                    {status}
-                                </MenuItem>
-                            ))}
+                            {Array.isArray(maritalStatuses) &&
+                                maritalStatuses.map((status) => (
+                                    <MenuItem key={status} value={status}>
+                                        {status}
+                                    </MenuItem>
+                                ))}
                         </Select>
                         {!!errors.marital_status && (
-                            <FormHelperText>{errors.marital_status}</FormHelperText>
+                            <FormHelperText>
+                                {errors.marital_status}
+                            </FormHelperText>
                         )}
                     </FormControl>
 
-
                     {/* Religion */}
-                    <FormControl variant="filled" sx={{ gridColumn: "span 4" }} error={!!errors.religion}>
-                        <InputLabel id="marital-status-label">Religion</InputLabel>
+                    <FormControl
+                        variant="filled"
+                        sx={{ gridColumn: "span 4" }}
+                        error={!!errors.religion}
+                    >
+                        <InputLabel id="marital-status-label">Agama</InputLabel>
                         <Select
                             labelId="marital-status-label"
                             id="religion"
                             value={data.religion}
                             name="religion"
                             onChange={handleChange}
-                            renderValue={(selected) => selected || "Select Marital Status"} // Menampilkan nilai terpilih
+                            renderValue={(selected) =>
+                                selected || "Select Marital Status"
+                            } // Menampilkan nilai terpilih
                         >
-                            {Array.isArray(religions) && religions.map((status) => (
-                                <MenuItem key={status} value={status}>
-                                    {status}
-                                </MenuItem>
-                            ))}
+                            {Array.isArray(religions) &&
+                                religions.map((status) => (
+                                    <MenuItem key={status} value={status}>
+                                        {status}
+                                    </MenuItem>
+                                ))}
                         </Select>
                         {!!errors.religion && (
                             <FormHelperText>{errors.religion}</FormHelperText>
@@ -180,7 +226,7 @@ export default function Edit({ employee, users, divisions, maritalStatuses, reli
                         fullWidth
                         variant="filled"
                         type="text"
-                        label="Place of Birth"
+                        label="Tempat Tanggal Lahir"
                         onChange={handleChange}
                         name="place_of_birth"
                         value={data.place_of_birth}
@@ -192,7 +238,7 @@ export default function Edit({ employee, users, divisions, maritalStatuses, reli
                         fullWidth
                         variant="filled"
                         type="date"
-                        label="Date of Birth"
+                        label="Tanggal Lahir"
                         onChange={handleChange}
                         name="date_of_birth"
                         value={data.date_of_birth}
@@ -205,7 +251,7 @@ export default function Edit({ employee, users, divisions, maritalStatuses, reli
                         fullWidth
                         variant="filled"
                         type="text"
-                        label="Blood Type"
+                        label="Type Darah"
                         onChange={handleChange}
                         name="blood_type"
                         value={data.blood_type}
@@ -217,7 +263,7 @@ export default function Edit({ employee, users, divisions, maritalStatuses, reli
                         fullWidth
                         variant="filled"
                         type="text"
-                        label="Address"
+                        label="Alamat"
                         onChange={handleChange}
                         name="address"
                         multiline
