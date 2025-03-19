@@ -85,7 +85,7 @@ export default function Index({ employees, user }) {
                     <TableHead>
                         <TableRow>
                             <TableCell>Avatar</TableCell>
-                            <TableCell>Name</TableCell>
+                            <TableCell>Nama</TableCell>
                             <TableCell>Email</TableCell>
                             <TableCell>Divisi</TableCell>
                             <TableCell align="center">Action</TableCell>
